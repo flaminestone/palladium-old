@@ -29,11 +29,11 @@ gem 'twitter-bootstrap-rails'
 gem 'devise' #auth
 gem 'simple_token_authentication', '~> 1.0'
 gem 'chartkick' #dont forget to add <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> to your erb file
-group :production do # http://railstutorial.ru/chapters/4_0/beginning#sec-heroku_setup
+# group :production do # http://railstutorial.ru/chapters/4_0/beginning#sec-heroku_setup
   gem 'pg', '0.15.1'
   gem 'rails_12factor'
-end
-
+# end
+gem 'unicorn'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
