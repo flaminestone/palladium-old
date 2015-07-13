@@ -9,7 +9,7 @@ preload_app true
 timeout 30
 
 # Set up socket location
-listen "/tmp/unicorn.sock", :backlog => 64
+listen "#{shared_dir}/sockets", :backlog => 64
 
 # Logging
 stderr_path "#{shared_dir}/log/unicorn.stderr.log"
