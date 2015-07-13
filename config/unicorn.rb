@@ -4,7 +4,7 @@ shared_dir = "#{app_dir}/shared"
 working_directory app_dir
 
 # Set unicorn options
-worker_processes 2
+worker_processes 1
 preload_app true
 timeout 30
 
@@ -18,4 +18,4 @@ stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 # Set master PID location
 pid "#{shared_dir}/pids/unicorn.pid"
 
-listen "0.0.0.0:8080", :tcp_nopush => true
+# listen "0.0.0.0:8080", :tcp_nopush => true
