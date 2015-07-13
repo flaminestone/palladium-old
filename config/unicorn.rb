@@ -18,4 +18,4 @@ stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 # Set master PID location
 pid "#{shared_dir}/pids/unicorn.pid"
 
-listen "127.0.0.1:8080", :tcp_nopush => true
+listen "0.0.0.0:8080", :tcp_nopush => true
