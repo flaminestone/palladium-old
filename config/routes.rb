@@ -3,14 +3,22 @@ Rails.application.routes.draw do
   resources :statuses
 
   resources :products do
-    resources :plans do
-      resources :runs do
-        resources :result_sets do
-          resources :results
-        end
-      end
-    end
+    resources :plans
   end
+
+
+  resources :plans do
+    resources :runs
+  end
+
+  resources :runs do
+    resources :result_sets
+  end
+
+  resources :result_sets do
+    resources :results
+  end
+
   root 'products#index'
   get 'users/sign_in', to: redirect('/login')
 

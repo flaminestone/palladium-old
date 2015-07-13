@@ -17,7 +17,7 @@
       <div class="page-header">
         <h1 align="center"><%= t('helpers.titles.status_settings_title') %></h1>
       </div>
-      <%= form_for [@product, @plan, @run, @result_set] do |f| %>
+      <%= form_for @result_set do |f| %>
 
           <div class="field">
             <%= f.text_field :name, class: "form-control input-lg", type: "text", placeholder: t('helpers.links.result_set_name') %>
@@ -27,8 +27,8 @@
           </div>
           <div class="modal-footer">
 
-            <!--<%= button_to 'Close', product_plan_run_result_set_url, class: 'btn btn-primary' %>-->
-            <%= link_to 'Back', product_plan_run_result_set_path, class: 'btn btn-default' %>
+            <!--<%= button_to 'Close', run_result_sets_path(@result_set), class: 'btn btn-primary' %>-->
+            <%= link_to 'Back', result_set_path(@result_set), class: 'btn btn-default' %>
             <%= f.submit class: 'btn btn-primary'%>
           </div>
       <% end %>

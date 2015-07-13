@@ -10,8 +10,10 @@ class ResultSet < ActiveRecord::Base
     unless self.results.nil?
       unless self.status.nil?
         unless self.run_id.nil?
-          run = Run.find(self.run_id)
-          update_run_status(run)
+          if Run.exists?(self.run_id)
+            run = Run.find(self.run_id)
+            update_run_status(run)
+          end
         end
       end
     end
@@ -23,6 +25,7 @@ class ResultSet < ActiveRecord::Base
       result = current_result_set.results.order(created_at: :desc).first # и брать последний записанный результат
       edit_hash = {}
       status_id = get_status_id(result)
+      status = Status.find(status_id)
       if status_exist(status_id, run_status)                  # проверка того, что в run.status уже есть такой статус, и необходимо просто перезаписать этот элемент массива
         run_status.each do |current_hash|
           if current_hash[:name] == status.name

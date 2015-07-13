@@ -20,7 +20,7 @@
               </thead>
               <tbody>
               <% @plan.runs.order(created_at: :desc).each do |run| %>
-                  <tr class="clickable-row run_str" data-href=<%= product_plan_run_result_sets_path(@product, @plan, run) %> name=<%= run.version %>>
+                  <tr class="clickable-row run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
 
                     <td><%= run.name %></td>
                     <td><%= run.version %></td>

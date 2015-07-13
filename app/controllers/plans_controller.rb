@@ -6,7 +6,7 @@ class PlansController < ApplicationController
   # GET /plans.json
   def index
     @plans = product_find_by_id.plans
-    @product_id = params.require(:product_id)
+    # @product_id = params.require(:product_id)
   end
 
   # GET /plans/1
