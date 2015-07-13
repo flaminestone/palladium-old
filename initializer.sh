@@ -2,4 +2,4 @@
 service postgresql start
 rake db:migrate
 rake init:configure
-bundle exec unicorn -c config/unicorn.rb -D
+#bundle exec unicorn -c config/unicorn.rb -D

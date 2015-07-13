@@ -1,0 +1,4 @@
+For install palladium:
+sudo docker build -t palladium .
+sudo docker run -i -t -d -p 127.0.0.1:8080:81 palladium
+sudo docker start palladium

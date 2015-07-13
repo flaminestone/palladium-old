@@ -27,20 +27,10 @@ RUN git clone https://github.com/flaminestone/palladium.git
 WORKDIR /opt/palladium
 RUN bundle install
 
-# Add default unicorn config
-# ADD unicorn.rb /app/config/unicorn.rb
-
-# Add default foreman config
-# ADD Procfile /app/Procfilesud
-
-#ENV RAILS_ENV production
-
-#CMD bundle exec rake assets:precompile
-
 USER postgres
 RUN /etc/init.d/postgresql start &&\
     psql --command "CREATE USER root WITH SUPERUSER PASSWORD 'root';" &&\
     createdb -O root root
 USER root
-CMD bash -C 'initializer.sh';'bash'
+#CMD bash /opt/palladium/initializer.sh
 
