@@ -42,6 +42,5 @@ RUN /etc/init.d/postgresql start &&\
     psql --command "CREATE USER root WITH SUPERUSER PASSWORD 'root';" &&\
     createdb -O root root
 USER root
-RUN git pull
-CMD bash initializer.sh
+CMD bash -C 'initializer.sh';'bash'
 
