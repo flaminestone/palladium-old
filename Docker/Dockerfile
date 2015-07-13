@@ -32,5 +32,5 @@ RUN /etc/init.d/postgresql start &&\
     psql --command "CREATE USER root WITH SUPERUSER PASSWORD 'root';" &&\
     createdb -O root root
 USER root
-#CMD bash /opt/palladium/initializer.sh
+CMD bash -C '/opt/palladium/initializer.sh';'bash'
 
