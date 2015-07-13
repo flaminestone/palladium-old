@@ -7,10 +7,10 @@ RUN apt-get update
 RUN apt-get install -qq -y nodejs
 
 # Install Nginx.
-#RUN apt-get -y install nginx 
+RUN apt-get -y install nginx
 
 # Add default palladium nginx config
-#ADD palladium.conf /etc/nginx/sites-enabled/
+ADD palladium.conf /etc/nginx/sites-enabled/
 
 # Install the latest postgresql lib for pg gem
 RUN sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
