@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+cd palladium/
 service postgresql start
 rake db:migrate
 rake init:configure
