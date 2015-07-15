@@ -26,13 +26,9 @@ RUN sudo apt-get install git
 RUN git clone https://github.com/flaminestone/palladium.git
 WORKDIR /opt/palladium
 RUN bundle install
-RUN git pull
 USER postgres
-RUN /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER root WITH SUPERUSER PASSWORD 'root';" &&\
-    createdb -O root root
 USER root
-RUN git pull
+EXPOSE 81
 ADD initializer.sh /opt/palladium/initializer.sh
 RUN chmod 755 /opt/palladium/*.sh
 RUN git pull
