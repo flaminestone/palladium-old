@@ -1,0 +1,8 @@
+Install container for palladium data base:
+sudo docker build -t db .
+sudo docker create -i -t -v /var/run/postgresql --name dbdata image_id
+sudo docker start container_id
+
+
+
+

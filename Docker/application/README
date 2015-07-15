@@ -1,0 +1,8 @@
+For install palladium:
+sudo docker build -t palladium .
+sudo docker run -i -t -d -p 8080:81 --volumes-from dbdata image_id
+sudo docker start container_id
+
+
+
+
