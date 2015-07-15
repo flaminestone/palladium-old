@@ -11,6 +11,7 @@ RUN apt-get -y install nginx
 
 # Add default palladium nginx config
 ADD palladium.conf /etc/nginx/sites-enabled/
+RUN rm /etc/nginx/sites-enabled/default
 
 # Install the latest postgresql lib for pg gem
 RUN sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
@@ -28,9 +29,8 @@ WORKDIR /opt/palladium
 RUN bundle install
 USER postgres
 USER root
-EXPOSE 81
+EXPOSE 80
 ADD initializer.sh /opt/palladium/initializer.sh
 RUN chmod 755 /opt/palladium/*.sh
-RUN git pull
 CMD bash -C '/opt/palladium/initializer.sh';'bash'
 
