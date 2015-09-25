@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1 align="center"><%= t('helpers.titles.status_settings_title') %></h1>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <label></label>
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation"><a href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/status_settings_title"><%= t('helpers.titles.status_settings_title') %></a></li>
+          <li role="presentation" class="active"><a href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7">
+        <label></label>
+
+        <!-- Modal -->
+        <table class="table table-hover">
+          <tbody>
+            <label>|<%= current_user.authentication_token %>|</label>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="field">
+    </div>
+  </div>
+</div>
+

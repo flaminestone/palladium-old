@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   post '/settings/status_settings_title/:id' => 'statuses#disable'
   resources :statuses, path: '/settings/status_settings'
 
+  get '/settings/tokens' => 'settings#tokens'
+
+
   #---------------------------API------------------------------#
   # Products
   get 'api/products/get_products' => 'products#get_products'

@@ -66,6 +66,7 @@ en:
       plans_and_results: "Plans and Results"
       admin_settings_title: "Account Settings"
       status_settings_title: "Status Settings"
+      token_settings_title: "Token Settings"
       results: "Results"
       test_results: "Test results"
       set_result_statistic: "Statistic"
