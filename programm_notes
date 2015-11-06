@@ -1,63 +1,31 @@
-rake init:configure - first
+<body>
+<link rel="stylesheet" type="text/css" href="../../../../assets/outside.css">
+<div class="container">
+  <div class="col-md-3 col-md-offset-4">
 
-        <script>
-                  $(function () {
-                      $("#status-bar-<%= result.id %>").highcharts(
-                              {
-                                  navigation: {
-                                      buttonOptions: {
-                                          enabled: false
-                                      }
-                                  },
-                                  credits: {
-                                      enabled: false
-                                  },
-                                  tooltip: {
-                                      enabled: false
-                                  },
-                                  chart: {
-                                      height: 50,
-                                      width: 250,
-                                      type: 'bar',
-                                      backgroundColor: null
-                                  },
-                                  title: {
-                                      text: ''
-                                  },
-                                  subTitle: {
-                                      text: ''
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  xAxis: {
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row" style="margin-top: 25em;">
+          <div class="row">
+            <div class="col-md-3 col-md-offset-5">
+              <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Email' %>
+              <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 col-md-offset-7">
+              <%= f.submit "Log in", class: 'field button-size' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <% if devise_mapping.rememberable? -%>
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+          <% end -%>
+        </div>
+    <% end %>
+  </div>
+  </div>
 
-                                      labels: {
-                                          enabled: false
-                                      }
-                                  },
-                                  yAxis: {
-                                      gridLineWidth: 0,
-                                      labels: {
-                                          enabled: false
-                                      },
-                                      title: {
-                                          text: ''
-                                      }
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  series: '<%= data.to_json.html_safe %>',
-                                  plotOptions: {
-                                      series: {
-                                          stacking: 'normal',
-                                          dataLabels: {
-                                              enabled: true
-                                          }
-                                      }
-                                  }
-                              }
-                      );
-                  });
-              </script>
+</body>
+<%= render "devise/shared/links" %>

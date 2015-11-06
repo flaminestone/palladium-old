@@ -1,0 +1,69 @@
+body { background: url("background.jpg");
+    no-repeat: center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.field {
+    background-color: #101010;
+    text-align: center;
+    border-width: 0em;
+    font-size: large;
+    color: #ffffff;
+    font-style: italic;
+}
+.block_field {
+    width: 360px;
+}
+.button {
+    background-color: #101010;
+    text-align: center;
+    border-width: 0em;
+    font-size: large;
+    color: #ffffff;
+}
+.remember_checkbox {
+    float: left;
+    text-align: center;
+    border-width: 0em;
+    font-size: large;
+    height: 3em;
+    width: 10em;
+    margin-top: 0.5em;
+    padding-top: 1em;
+    color:#666;
+}
+.remember_label {
+    font-weight: normal;
+}
+.field_size{
+    height: 3em;
+    width: 20em;
+    margin-top: 0.5em;
+}
+
+.button-size{
+    height: 3em;
+    width: 10em;
+    margin-top: 0.5em;
+}
+.login_button {
+    float: right;
+}
+.forget_password {
+    float: right;
+    font-size: large;
+    margin-top: 0.0em;
+    color:#666;
+}
+
+.sing_up_link {
+    float: left;
+    font-size: large;
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
+
+
