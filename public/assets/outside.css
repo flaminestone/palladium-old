@@ -5,7 +5,6 @@ body { background: url("background.jpg");
     -o-background-size: cover;
     background-size: cover;
 }
-
 .field {
     background-color: #101010;
     text-align: center;
@@ -38,13 +37,12 @@ body { background: url("background.jpg");
 .remember_label {
     font-weight: normal;
 }
-.field_size{
+.field_size {
     height: 3em;
     width: 20em;
     margin-top: 0.5em;
 }
-
-.button-size{
+.button-size {
     height: 3em;
     width: 10em;
     margin-top: 0.5em;
@@ -58,7 +56,6 @@ body { background: url("background.jpg");
     margin-top: 0.0em;
     color:#666;
 }
-
 .sing_up_link {
     float: left;
     font-size: large;
