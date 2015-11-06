@@ -1,23 +1,22 @@
 <body>
 <link rel="stylesheet" type="text/css" href="../../../../assets/outside.css">
-<!--GOVNOKOD-->
-<div class="row row-centered" style="margin-top: 20em">
+<div class="row" style="margin-top: 20em">
   <div class="col-md-3 col-md-offset-5">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="row block_field">
           <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Email' %>
           <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
-            <span class="remember_checkbox">
+          <span class="remember_checkbox">
             <% if devise_mapping.rememberable? -%>
                 <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me, class:"remember_label" %>
+                <%= f.label :remember_me, class: "remember_label" %>
             <% end -%>
             </span>
-            <%= f.submit 'Log in', class: 'button button-size login_button' %>
+          <%= f.submit 'Log in', class: 'button button-size login_button' %>
         </div>
     <% end %>
     <div class="row block_field">
-        <%= render "devise/shared/links" %>
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
