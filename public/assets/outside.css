@@ -1,9 +1,9 @@
-body { background: url("background.jpg");
-    no-repeat: center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+body {
+    background: url("background.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 .field {
     background-color: #101010;
