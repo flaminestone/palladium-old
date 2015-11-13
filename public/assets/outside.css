@@ -1,16 +1,21 @@
-body { background: url("background.jpg");
-    no-repeat: center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+@font-face {
+    font-family: "MHelvetica-LightOblique";
+    src: url(Helvetica-LightOblique.otf) format("truetype");
+}
+body {
+    background: url("backgorund.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 .field {
-    background-color: #101010;
+    background-color: #000000;
     text-align: center;
     border-width: 0em;
     font-size: large;
-    color: #ffffff;
+    color: #ededed;
+    font-family: MHelvetica-LightOblique;
     font-style: italic;
 }
 .email_in_popup{
@@ -28,7 +33,7 @@ body { background: url("background.jpg");
     width: 360px;
 }
 .button {
-    background-color: #101010;
+    background-color: #000000;
     text-align: center;
     border-width: 0em;
     font-size: large;
@@ -43,14 +48,15 @@ body { background: url("background.jpg");
 }
 .remember_checkbox {
     float: left;
-    text-align: center;
+    text-align: left;
     border-width: 0em;
     font-size: large;
     height: 3em;
     width: 10em;
     margin-top: 0.5em;
     padding-top: 1em;
-    color:#666;
+    color: #ededed;
+    font-family: MHelvetica-LightOblique;
 }
 .remember_label {
     font-weight: normal;
@@ -72,6 +78,8 @@ body { background: url("background.jpg");
 }
 .login_button {
     float: right;
+    color: #ededed;
+    font-family: MHelvetica-LightOblique;
 }
 
 .sing_up_button {
@@ -85,19 +93,20 @@ body { background: url("background.jpg");
     float: right;
     font-size: large;
     margin-top: 0.0em;
-    color:#666;
+    color: #ededed;
+    font-family: MHelvetica-LightOblique;
 }
 .sing_up_link {
     float: left;
     font-size: large;
     margin-top: 1em;
-    margin-left: 1.5em;
-    color:#666;
+    color: #ededed;
+    font-family: MHelvetica-LightOblique;
     background-color: transparent;
 }
 a:hover {
     background: transparent;
-    color:#666;
+    color: #ededed;
     cursor:pointer;
 }
 .sing_up_title{
