@@ -13,6 +13,17 @@ body { background: url("background.jpg");
     color: #ffffff;
     font-style: italic;
 }
+.email_in_popup{
+    margin-top: 0em;
+}
+.field_invert {
+    background-color: #ffffff;
+    text-align: center;
+    border-width: 0em;
+    font-size: large;
+    color: #000000;
+    font-style: italic;
+}
 .block_field {
     width: 360px;
 }
@@ -22,6 +33,13 @@ body { background: url("background.jpg");
     border-width: 0em;
     font-size: large;
     color: #ffffff;
+}
+.button_invert{
+    background-color: #ffffff;
+    text-align: center;
+    border-width: 0em;
+    font-size: large;
+    color: #000000;
 }
 .remember_checkbox {
     float: left;
@@ -42,6 +60,11 @@ body { background: url("background.jpg");
     width: 20em;
     margin-top: 0.5em;
 }
+.field_size_invert {
+    height: 3em;
+    width: 20em;
+    margin-top: 1.5em;
+}
 .button-size {
     height: 3em;
     width: 10em;
@@ -49,6 +72,14 @@ body { background: url("background.jpg");
 }
 .login_button {
     float: right;
+}
+
+.sing_up_button {
+    margin-left: 25%;
+    margin-bottom: 40px;
+    margin-top: 1.5em;
+    background-color: #059cd1;
+    color: #ffffff;
 }
 .forget_password {
     float: right;
@@ -61,6 +92,24 @@ body { background: url("background.jpg");
     font-size: large;
     margin-top: 1em;
     margin-left: 1.5em;
+    color:#666;
+    background-color: transparent;
+}
+a:hover {
+    background: transparent;
+    color:#666;
+    cursor:pointer;
+}
+.sing_up_title{
+    text-align: center;
+    font-size: 4em;
+    padding-bottom: 49px;
+    margin: 40px 0 10px;
+    border-bottom: 1px solid #bfbfbf;
+    color: #ffffff;
+}
+.popup_sing_up{
+    margin-top: 15%;
 }
 
 
