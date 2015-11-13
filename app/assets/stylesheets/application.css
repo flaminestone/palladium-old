@@ -40,4 +40,9 @@
     margin: 60px 0 40px;
     border-bottom: 1px solid #bfbfbf;
 }
+.navbar-inverse-app{
+    background-color: #000000;
+    border-color: #000000;
+    border-radius: 0px;
+}
 /*hard class edit*/
