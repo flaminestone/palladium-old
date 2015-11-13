@@ -1,28 +1,30 @@
 <body>
 <link rel="stylesheet" type="text/css" href="../../../../assets/outside.css">
-<div class="row" style="margin: 10% 0 0 0 ">
-  <div class="col-md-3 col-md-offset-5">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="row block_field">
-          <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Email' %>
-          <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
-          <span class="remember_checkbox">
+<div class="container-fluid">
+  <div class="im-centered">
+  <div class="row">
+    <div class="col-xs-12" style='float: inherit'>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="row block_field">
+            <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Email' %>
+            <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
+            <span class="remember_checkbox">
             <% if devise_mapping.rememberable? -%>
                 <%= f.check_box :remember_me %>
-                <%= f.label :remember_me, class: "remember_label" %>
+                  <%= f.label :remember_me, class: "remember_label" %>
             <% end -%>
             </span>
-          <%= f.submit 'Log in', class: 'button button-size login_button' %>
-        </div>
-    <% end %>
-    <div class="row block_field">
-      <%= render "devise/shared/links" %>
+            <%= f.submit 'Log in', class: 'button button-size login_button' %>
+            <%= render "devise/shared/links" %>
+          </div>
+      <% end %>
     </div>
   </div>
+    </div>
+</div>
 </div>
 </body>
 
-<!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog popup_sing_up">
     <%= render "devise/shared/user_registration" %>
