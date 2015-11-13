@@ -109,6 +109,11 @@ a:hover {
     color: #ededed;
     cursor:pointer;
 }
+a:visited {
+    background: transparent;
+    color: #ededed;
+    cursor:pointer;
+}
 .sing_up_title{
     text-align: center;
     font-size: 4em;
@@ -120,5 +125,3 @@ a:hover {
 .popup_sing_up{
     margin-top: 15%;
 }
-
-
