@@ -7,23 +7,21 @@
 .product_item {
   height: 3em;
   margin-top: 0.5em;
-  background-color: #101010;
+  background-color: #000000;
   text-align: center;
   font-size: large;
   color: #e6e6e6;
   padding-top: 1em;
 }
-
 .new_product_button {
   height: 3em;
   margin-top: 1em;
-  background-color: rgba(0, 92, 255, 0.43);
+  background-color: #059cd1;
   color: #e6e6e6;
   text-align: center;
   font-size: large;
   padding-top: 1em;
-  text-decoration:none;
-
+  text-decoration: none;
 }
 .button-size {
   height: 3em;
@@ -35,4 +33,46 @@
   border-width: 0em;
   font-size: large;
   color: #ffffff;
+}
+.field_invert {
+  background-color: #ffffff;
+  text-align: center;
+  border-width: 0em;
+  font-size: large;
+  color: #000000;
+  font-style: italic;
+}
+
+.block_field {
+  width: 360px;
+}
+.button {
+  background-color: #000000;
+  text-align: center;
+  border-width: 0em;
+  font-size: large;
+  color: #ffffff;
+}
+.field_size_invert {
+  height: 3em;
+  width: 20em;
+  margin-top: 1.5em;
+}
+.create_product_button {
+  margin-left: 25%;
+  margin-bottom: 40px;
+  margin-top: 1.5em;
+  background-color: #059cd1;
+  color: #ffffff;
+}
+.create_product_title {
+  text-align: center;
+  font-size: 4em;
+  padding-bottom: 20px;
+  margin: 40px 0 10px;
+  border-bottom: 1px solid #bfbfbf;
+  color: #ffffff;
+}
+.popup_sing_up {
+  margin-top: 15%;
 }
