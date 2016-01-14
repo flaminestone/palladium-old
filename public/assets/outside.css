@@ -92,19 +92,24 @@ body {
 .forget_password {
     float: right;
     font-size: large;
-    margin-top: 0.0em;
+    margin-top: 0.5em;
     color: #ededed;
     font-family: MHelvetica-LightOblique;
 }
 .sing_up_link {
     float: left;
     font-size: large;
-    margin-top: 1em;
+    margin-top: 0.5em;
     color: #ededed;
     font-family: MHelvetica-LightOblique;
     background-color: transparent;
 }
 a:hover {
+    background: transparent;
+    color: #ededed;
+    cursor:pointer;
+}
+a:visited {
     background: transparent;
     color: #ededed;
     cursor:pointer;
@@ -120,5 +125,9 @@ a:hover {
 .popup_sing_up{
     margin-top: 15%;
 }
-
-
+.im-centered {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    max-width: 360px;
+}
