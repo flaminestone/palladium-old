@@ -81,7 +81,6 @@ class APIShell
         custom_fields.merge!(custom_autotest_error_line: lines.join("\r\n"))
     end
 
-
     status_id = @api.get_statuses_by_param({name:result})
     status_id = JSON.parse(status_id).keys.first
     @result_set = get_runs_result_set_by_name(example.metadata[:description])
@@ -101,6 +100,11 @@ class APIShell
                          :status_id => status_id})
     raise("Status with id #{status_id} is not found. Create it or make active") unless JSON.parse(response)['status_id'].to_s == status_id
     @last_case = example.description
+    if @api.uri.port.nil?
+      "#{@api.uri.scheme}://#{@api.uri.host}/result_sets/#{JSON.parse(response)['result_set_id']}/results"
+    else
+      "#{@api.uri.scheme}://#{@api.uri.host}:#{@api.uri.port}/result_sets/#{JSON.parse(response)['result_set_id']}/results"
+    end
   end
 
   def get_product_data_by_name(product_name)

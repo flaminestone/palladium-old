@@ -4,7 +4,6 @@ require_relative 'APIShell'
 describe 'Multiplication' do
   (1..10).to_a.each do |i|
 
-
     describe 'Correct' do
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do

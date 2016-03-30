@@ -15,6 +15,8 @@ class Api
   include Result
   include Status
 
+  attr_reader :uri
+
   def initialize(address, username, token)
     @uri = URI("http://#{address}/api/")
     @username = username
