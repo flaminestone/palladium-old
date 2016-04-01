@@ -1,10 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
-group :development do
-  gem 'guard-rubocop'
-  gem 'rubocop-rspec'
-end
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -19,8 +15,8 @@ gem 'twitter-bootstrap-rails'
 gem 'devise' #auth
 gem 'simple_token_authentication', '~> 1.0'
 gem 'chartkick' #dont forget to add <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> to your erb file
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor'
+gem 'pg', '0.15.1'
+gem 'rails_12factor'
 gem 'unicorn'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
