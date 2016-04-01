@@ -2,7 +2,6 @@ require 'testing_shared'
 describe 'Multiplication' do
   (1..10).to_a.each do |i|
     describe 'Correct' do
-      File.open('analiz.txt', 'w'){ |file| file.write 'Start'}
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do
           @palladium = PalladiumApiShell.new(product_name: 'CDE',
@@ -24,10 +23,7 @@ describe 'Multiplication' do
         end
       end
       after :each do |example|
-        a = Time.now
         @palladium.add_result(example)
-        last_time = Time.now - a
-        File.open('analiz.txt', 'a'){ |file| file.puts last_time}
       end
     end
   end
