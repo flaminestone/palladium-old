@@ -23,7 +23,7 @@ describe 'Multiplication' do
         end
       end
       after :each do |example|
-        @palladium.add_result(example)
+        AfterTests.new(@palladium, example).set_result
       end
     end
   end
