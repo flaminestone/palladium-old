@@ -99,6 +99,7 @@ class StatusesController < ApplicationController
   end
 
   def status_exist?
-    render :json => "#{Status.exists?(:name => params['name'])}"
+    status_json = {:status_exist => "#{Status.exists?(:name => params['name'])}"}
+    render :json => status_json
   end
 end
