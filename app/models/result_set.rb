@@ -3,7 +3,7 @@ class ResultSet < ActiveRecord::Base
   belongs_to :run
   has_many :results, dependent: :destroy
   serialize :status
-  after_commit :count_run_status
+  # after_commit :count_run_status
 
   private
   def count_run_status

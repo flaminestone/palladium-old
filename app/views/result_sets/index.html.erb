@@ -17,10 +17,6 @@
           </tr>
           </thead>
           <tbody>
-          <% data = @run.status.map do |current_hash|%>
-              <%  current_hash.delete_if {| key | key == :count } %>
-              <%  {name:current_hash[:name], y:current_hash[:data].first, color:current_hash[:color]} %>
-          <% end %>
           <% @result_sets.order(name: :desc).each do |set_result| %>
               <% if set_result.results.order(created_at: :desc).first.nil? %>
                   <% last_result = Status.find_by_main_status(true).id %>
@@ -85,7 +81,7 @@
                 type: 'pie',
                 name: 'Browser share',
                 innerSize: '50%',
-                data: <%= data.to_json.html_safe %>
+                data: {}
             }]
         });
     });

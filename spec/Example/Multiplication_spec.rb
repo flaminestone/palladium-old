@@ -12,15 +12,6 @@ describe 'Multiplication' do
                                              token: StaticData::TOKEN)
           expect(current_element_second*2).to eq(current_element_second*2)
         end
-        it "#{current_element_second}_CDE" do
-          @palladium = PalladiumApiShell.new(product_name: 'CDE',
-                                             plan_name: 'plan_6',
-                                             run_name: "Multiplication Tests_#{i}",
-                                             host: StaticData::HOST,
-                                             login: StaticData::LOGIN,
-                                             token: StaticData::TOKEN)
-          expect(current_element_second*2).to eq(current_element_second*3)
-        end
       end
       after :each do |example|
         AfterTests.new(@palladium, example).set_result

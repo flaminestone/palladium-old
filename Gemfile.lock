@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/flaminestone/palladium_api
-  revision: 8c3b7df0a130c5b3ebf2b34eacadcae21b2a349a
+  revision: f0bf10315b3a0dbea9c3b5fa25d1fd26f2f262ac
+  branch: feature/optimize
   specs:
-    palladium_api (0.0.5)
+    palladium_api (0.0.6)
       colorize
 
 GEM

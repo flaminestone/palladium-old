@@ -2,7 +2,7 @@ class Result < ActiveRecord::Base
   validates :author, presence: {message: I18n.t('result.errors.not_presence')}
   belongs_to :result_set
   belongs_to :status
-  after_commit :count_result_set_status
+  # after_commit :count_result_set_status
 
   private
   def count_result_set_status

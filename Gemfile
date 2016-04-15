@@ -24,5 +24,5 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api'
+  gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api', branch: 'feature/optimize'
 end

@@ -4,8 +4,8 @@ class Run < ActiveRecord::Base
   has_many :result_sets, dependent: :destroy
   serialize :status
 
-  after_commit :count_plan_status
-  after_create :count_plan_status_after_create
+  # after_commit :count_plan_status
+  # after_create :count_plan_status_after_create
 
   def count_plan_status
     unless self.plan_id.nil?
