@@ -5,6 +5,7 @@ class CreateResults < ActiveRecord::Migration
       t.string :author
       t.integer :result_set_id
       t.integer :status_id
+      t.integer :plan_id
       t.timestamps null: false
     end
   end

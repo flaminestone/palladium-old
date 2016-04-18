@@ -35,6 +35,7 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
+    @result.plan_id = params[:plan_id]
     set_result = set_result_set
     respond_to do |format|
       status_is_active?(params['status_id']) unless params['status_id'].nil?

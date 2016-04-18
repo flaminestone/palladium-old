@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/flaminestone/palladium_api
-  revision: f0bf10315b3a0dbea9c3b5fa25d1fd26f2f262ac
+  revision: 992ec5ad5f2e265d195e55200732be480d22f0e5
   branch: feature/optimize
   specs:
     palladium_api (0.0.6)
@@ -62,7 +62,7 @@ GEM
     commonjs (0.2.7)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
-    devise (3.5.6)
+    devise (3.5.7)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)

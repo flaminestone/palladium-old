@@ -3,6 +3,6 @@ class StaticData
   # HOST = 'thepalladium.no-ip.org'
   LOGIN = '1@g.com'
   PASSWORD = '111'
-  TOKEN = 'a4f81eRoxxo1Yzxa66Ua'
+  TOKEN = 'x3svSoGzZ9my_qcpJbgE'
   # TOKEN = 'wbhqjUdG71PEii_rJhtM'
 end

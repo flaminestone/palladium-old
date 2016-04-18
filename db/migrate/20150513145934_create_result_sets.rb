@@ -6,7 +6,7 @@ class CreateResultSets < ActiveRecord::Migration
       t.string :version
       t.string :status
       t.integer :run_id
-
+      t.integer :plan_id
       t.timestamps null: false
     end
   end

@@ -4,6 +4,8 @@ class Status < ActiveRecord::Base
             uniqueness: {message: I18n.t('status.errors.not_uniqueness')}
   validates :color, length: {is: 7, message: I18n.t('status.errors.length_is_overlong')},
             presence: {message: I18n.t('status.errors.not_presence')}
+  scope :main, -> { where(main_status: true) }
+  scope :not_disabled, -> { where(disabled: false) }
 
   validates_each :color do |record, attr, value|
     if value.match('\A.').to_s == '#'

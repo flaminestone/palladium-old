@@ -4,8 +4,8 @@ describe 'Multiplication' do
     describe 'Correct' do
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do
-          @palladium = PalladiumApiShell.new(product_name: 'CDE',
-                                             plan_name: 'plan_6',
+          @palladium = PalladiumApiShell.new(product_name: 'CSE',
+                                             plan_name: 'plan_11',
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
                                              login: StaticData::LOGIN,

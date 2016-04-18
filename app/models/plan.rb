@@ -3,5 +3,4 @@ class Plan < ActiveRecord::Base
   belongs_to :product
   has_many :runs, dependent: :destroy
   serialize :status
-  # after_create :count_plan_status_after_create
 end

@@ -29,6 +29,7 @@ class ResultSetsController < ApplicationController
   # POST /result_sets.json
   def create
     @result_set = ResultSet.new(result_set_params)
+    @result_set.plan_id = params[:plan_id]
     run = set_run
     respond_to do |format|
       if @result_set.save
