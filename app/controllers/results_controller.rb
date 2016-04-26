@@ -20,7 +20,6 @@ class ResultsController < ApplicationController
     @product = product_find_by_id
     @plan = set_plan
     @run = set_run
-    @result_set = set_result_set
   end
 
   # GET /results/1/edit
@@ -35,7 +34,7 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    set_result = set_result_set
+    @result.plan_id = params[:plan_id]
     respond_to do |format|
       status_is_active?(params['status_id']) unless params['status_id'].nil?
       if @result.errors.empty?
@@ -45,9 +44,8 @@ class ResultsController < ApplicationController
           else
             Status.find(params['status_id']).results << @result
           end
-          set_result.results << @result
-          # format.html { redirect_to product_plan_run_result_set_result_path(product_find_by_id, set_plan, set_run, set_result_set, @result), notice: 'Result was successfully created.' }
-          # This method will be commented because creation can be only through API
+          set_result_set.results << @result
+          set_result_set.update(:status => 5)
           format.json { render :json => @result }
         else
           format.html { render :new }

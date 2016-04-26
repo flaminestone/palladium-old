@@ -1,0 +1,10 @@
+/home/flamine/.rvm/rubies/ruby-2.1.6/bin/ruby -r ./siteconf20160404-4406-tb4f8g.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+make "DESTDIR=" install
+installing default libraries

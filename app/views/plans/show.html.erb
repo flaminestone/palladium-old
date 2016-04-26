@@ -19,11 +19,12 @@
               </tr>
               </thead>
               <tbody>
-              <% @plan.runs.order(created_at: :desc).each do |run| %>
+              <% @plan.runs.order(created_at: :desc).find_each do |run| %>
                   <tr class="clickable-row run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
 
                     <td><%= run.name %></td>
                     <td><%= run.version %></td>
+                    <td><%= @all_results.size %></td>
                     <td>
                       <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
                       <% data = run.status.map do |current_hash| %>

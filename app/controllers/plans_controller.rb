@@ -14,6 +14,20 @@ class PlansController < ApplicationController
   def show
     @plan = set_plan
     @product = product_find_by_id
+    all_results = ResultSet.where(:plan_id => 7).pluck(:run_id, :status)
+    @status_id = Status.pluck(:id)
+    @results = {}
+    @status_id.each do |id|
+      @results.merge!({id => []})
+    end
+    all_results.each do | current_element |
+      @results[current_element.last] << current_element.first
+
+    end
+    p
+
+ #           p unic.uniq
+
   end
 
   # GET /plans/new

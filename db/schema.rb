@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150528104224) do
     t.string   "version"
     t.string   "status"
     t.integer  "run_id"
+    t.integer  "plan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150528104224) do
     t.string   "author"
     t.integer  "result_set_id"
     t.integer  "status_id"
+    t.integer  "plan_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

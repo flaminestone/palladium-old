@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/flaminestone/palladium_api
-  revision: 8c3b7df0a130c5b3ebf2b34eacadcae21b2a349a
+  revision: 992ec5ad5f2e265d195e55200732be480d22f0e5
+  branch: feature/optimize
   specs:
-    palladium_api (0.0.5)
+    palladium_api (0.0.6)
       colorize
 
 GEM
@@ -61,12 +62,11 @@ GEM
     commonjs (0.2.7)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
-    devise (3.5.6)
+    devise (4.0.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.1)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -100,11 +100,11 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.2)
+    multi_json (1.11.3)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
-    pg (0.15.1)
+    pg (0.18.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -171,10 +171,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simple_token_authentication (1.12.0)
+    simple_token_authentication (1.13.0)
       actionmailer (>= 3.2.6, < 5)
       actionpack (>= 3.2.6, < 5)
-      devise (~> 3.2)
+      devise (>= 3.2, < 5)
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -223,7 +223,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   palladium_api!
-  pg (= 0.15.1)
+  pg
   rails (= 4.2.0)
   rails_12factor
   rspec-rails

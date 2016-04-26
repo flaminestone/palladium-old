@@ -22,7 +22,7 @@
               <%  {name:current_hash[:name], y:current_hash[:data].first, color:current_hash[:color]} %>
           <% end %>
           <% @result_sets.order(name: :desc).each do |set_result| %>
-              <% if set_result.results.order(created_at: :desc).first.nil? %>
+              <% if set_result.results.order(created_at: :desc).last.nil? %>
                   <% last_result = Status.find_by_main_status(true).id %>
                   <% else %>
                   <% last_result = set_result.results.order(created_at: :desc).first.status_id %>
