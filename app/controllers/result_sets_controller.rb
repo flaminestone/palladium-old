@@ -1,5 +1,5 @@
 class ResultSetsController < ApplicationController
-  before_action :init_all_resourses, only: [:show, :edit, :update, :destroy]
+  # before_action :init_all_resourses, only: [:show, :edit, :update, :destroy]
   acts_as_token_authentication_handler_for User
 
 
@@ -28,7 +28,8 @@ class ResultSetsController < ApplicationController
   # POST /result_sets
   # POST /result_sets.json
   def create
-    @result_set = ResultSet.new(result_set_params)
+    attr = result_set_params.merge(params.permit(:run_id, :plan_id))
+    @result_set = ResultSet.new(attr.merge({:status => params['status_id'].to_i}))
     run = set_run
     respond_to do |format|
       if @result_set.save

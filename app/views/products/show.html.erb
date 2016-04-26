@@ -26,10 +26,6 @@
               </thead>
               <tbody>
               <% @product.plans.order(created_at: :desc).each do |plan| %>
-                  <% plan_data = plan.status.map do |current_hash| %>
-                      <%  current_hash.delete_if {| key | key == :count } %>
-                      <%  {name:current_hash[:name], data:current_hash[:data], color:current_hash[:color]} %>
-                  <% end %>
                   <tr class="clickable-row run_str" data-href=<%= product_plan_path(@product, plan) %> name=<%= plan.version %>>
 
                     <td><%= plan.name %></td>
@@ -84,7 +80,7 @@
                                   legend: {
                                       enabled: false
                                   },
-                                  series: <%= plan_data.to_json.html_safe %>,
+                                  series: {},
                                   plotOptions: {
                                       series: {
                                           stacking: 'normal',

@@ -14,20 +14,44 @@ class PlansController < ApplicationController
   def show
     @plan = set_plan
     @product = product_find_by_id
-    all_results = ResultSet.where(:plan_id => 7).pluck(:run_id, :status)
-    @status_id = Status.pluck(:id)
-    @results = {}
-    @status_id.each do |id|
-      @results.merge!({id => []})
+    results_array = ResultSet.where(:plan_id => params[:id]).pluck(:run_id, :status)
+    statuses_id_array = Status.pluck(:id, :name, :color)
+    @all_results = {}
+    @status_data = {}
+    unless results_array.empty?
+      results_array.transpose.first.uniq.each do |current_run_id| # добавляем заранее все хеши для данных каждого run
+        @all_results.merge!({current_run_id => []})
+      end
+      results = {}
+      results_array.each do |current_results|
+        if results.include?(current_results.first)
+          results[current_results.first] << current_results.last
+        else
+          results.merge!({current_results.first => [current_results.last]})
+        end
+      end
+      # results = {id =>[status_id, status_id, status_id, status_id, status_id, status_id, status_id, status_id, status_id]}
+      results.each do |run_id, run_data|
+        data = []
+        statuses_id_array.map do |current_status_id|
+          status_count = run_data.count(current_status_id.first)
+          status_count = nil if status_count == 0
+          data << {:data => [status_count].compact, color: current_status_id.last}
+        end
+        @status_data.merge!({run_id => data})
+      end
+      # @main_chart_data = [{:name: 'passed', :color: '#ff0000', y: '15'}, {}, {}]
+      @main_chart_data = []
+      @status_data # for run charts
+      ResultSet.where(:plan_id => params[:id]).group(:status).count.each do |key, value|
+        statuses_id_array.each do |curren_status|
+          if curren_status.first.to_s == %r(\d).match(key).to_s
+            @main_chart_data << {name: curren_status[1], color: curren_status.last, y: value}
+          end
+        end
+      end
     end
-    all_results.each do | current_element |
-      @results[current_element.last] << current_element.first
-
-    end
-    p
-
- #           p unic.uniq
-
+    @main_chart_data.to_json.html_safe
   end
 
   # GET /plans/new
@@ -50,12 +74,12 @@ class PlansController < ApplicationController
     respond_to do |format|
       if @plan.save
         product_for_plan.plans << @plan
-        format.json { render :json => {@plan.id => {'name'=> @plan.name,
+        format.json { render :json => {@plan.id => {'name' => @plan.name,
                                                     'version' => @plan.version,
                                                     'status' => @plan.status,
-                                                    'product_id'=> @plan.product_id,
-                                                    'created_at'=> @plan.created_at,
-                                                    'updated_at'=> @plan.updated_at}} }
+                                                    'product_id' => @plan.product_id,
+                                                    'created_at' => @plan.created_at,
+                                                    'updated_at' => @plan.updated_at}} }
         format.html { redirect_to product_plan_url(product_find_by_id, @plan), notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
@@ -91,18 +115,18 @@ class PlansController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plan
-      @plan = Plan.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def plan_params
-      params.require(:plan).permit(:name, :version, :product_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def plan_params
+    params.require(:plan).permit(:name, :version, :product_id)
+  end
 
   def product_find_by_id
-      Product.find(params.require(:product_id))
+    Product.find(params.require(:product_id))
   end
 
   public
@@ -135,7 +159,7 @@ class PlansController < ApplicationController
       end
       render :json => plans_json
     end
-    end
+  end
 
   def get_all_runs_by_plan
     runs_json = {}
@@ -147,10 +171,10 @@ class PlansController < ApplicationController
       # runs = [runs] until runs.count == 1
       runs.each do |current_run|
         runs_json.merge!(current_run.id => {'name' => current_run.name,
-                                                  'version' => current_run.version,
-                                                  'plan_id' => current_run.plan_id,
-                                                  'created_at' => current_run.created_at,
-                                                  'updated_at' => current_run.updated_at})
+                                            'version' => current_run.version,
+                                            'plan_id' => current_run.plan_id,
+                                            'created_at' => current_run.created_at,
+                                            'updated_at' => current_run.updated_at})
       end
       render :json => runs_json
     end

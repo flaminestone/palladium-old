@@ -21,16 +21,11 @@
               <tbody>
               <% @plan.runs.order(created_at: :desc).find_each do |run| %>
                   <tr class="clickable-row run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
-
                     <td><%= run.name %></td>
                     <td><%= run.version %></td>
-                    <td><%= @all_results.size %></td>
+                    <td><%= @status_data[run.id] %></td>
                     <td>
                       <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
-                      <% data = run.status.map do |current_hash| %>
-                          <% current_hash.delete_if { |key| key == :count } %>
-                          <% {name: current_hash[:name], data: current_hash[:data], color: current_hash[:color]} %>
-                      <% end %>
                       <script>
                           $(function () {
                               $("#status-bar-<%= run.id %>").highcharts({
@@ -78,7 +73,7 @@
                                   legend: {
                                       enabled: false
                                   },
-                                  series: <%= data.to_json.html_safe %>,
+                                  series: <%= @status_data[run.id].to_json.html_safe %>,
                                   plotOptions: {
                                       series: {
                                           stacking: 'normal',
@@ -100,10 +95,6 @@
       </div>
     </div>
   </div>
-  <% plan_data = @plan.status.map do |current_hash| %>
-      <% current_hash.delete_if { |key| key == :count } %>
-      <% {name: current_hash[:name], y: current_hash[:data].first, color: current_hash[:color]} %>
-  <% end %>
   <script type="text/javascript">
       $(function () {
           $('#container').highcharts({
@@ -142,7 +133,7 @@
               series: [{
                   type: 'pie',
                   name: 'Browser share',
-                  data: <%= plan_data.to_json.html_safe %>
+                  data: <%= @main_chart_data.to_json.html_safe %>
               }]
           });
       });

@@ -1,11 +1,11 @@
 class ResultsController < ApplicationController
-  before_action :set_result, only: [:show, :edit, :update, :destroy]
+  # before_action :set_result, only: [:show, :edit, :update, :destroy]
   acts_as_token_authentication_handler_for User
 
   # GET /results
   # GET /results.json
   def index
-    @result_set = ResultSet.find(params.require(:result_set_id))
+    @result_set = ResultSet.find_by_id(params.require(:result_set_id))
     @results = @result_set.results
   end
 
@@ -42,10 +42,11 @@ class ResultsController < ApplicationController
           if params['status_id'].nil?
             Status.find_by_main_status(true).results << @result
           else
-            Status.find(params['status_id']).results << @result
+            Status.find_by_id(params['status_id']).results << @result
           end
           set_result_set.results << @result
-          set_result_set.update(:status => 5)
+          # format.html { redirect_to product_plan_run_result_set_result_path(product_find_by_id, set_plan, set_run, set_result_set, @result), notice: 'Result was successfully created.' }
+          # This method will be commented because creation can be only through API
           format.json { render :json => @result }
         else
           format.html { render :new }
@@ -88,28 +89,28 @@ class ResultsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_result
-    @result = Result.find(params[:id])
+    @result = Result.find_by_id(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def result_params
-    params.require(:result).permit(:message, :author)
+    params.require(:result).permit(:message, :author, :result_set_id, :status_id, :plan_id)
   end
 
   def set_run
-    @run = Run.find(params[:run_id])
+    @run = Run.find_by_run_id(params[:run_id])
   end
 
   def set_plan
-    @plan = Plan.find(params[:plan_id])
+    @plan = Plan.find_by_plan_id(params[:plan_id])
   end
 
   def product_find_by_id
-    Product.find(params.require(:product_id))
+    Product.find_by_id(params.require(:product_id))
   end
 
   def set_result_set
-    @result_set = ResultSet.find(params[:result_set_id])
+    @result_set = ResultSet.find_by_id(params[:result_set_id])
   end
 
   public
