@@ -13,7 +13,6 @@
           <thead>
           <tr>
             <th><%= @result_sets.human_attribute_name(:name) %></th>
-            <th><%= @result_sets.human_attribute_name(:version) %></th>
           </tr>
           </thead>
           <tbody>
@@ -22,11 +21,10 @@
               <%  {name:current_hash[:name], y:current_hash[:data].first, color:current_hash[:color]} %>
           <% end %>
 
-          <%= status = Status.pluck(:id, :color).to_h %>
+          <% status = Status.pluck(:id, :color).to_h %>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="clickable-row run_str" data-href="<%= result_set_results_path(set_result) %>">
                 <td><%= set_result.name %></td>
-                <td><%= set_result.version %></td>
                 <td style="background-color: <%= status[set_result.status] %>">
                 </td>
               </tr>
