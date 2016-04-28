@@ -5,7 +5,7 @@ describe 'Multiplication' do
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do
           @palladium = PalladiumApiShell.new(product_name: 'CDE',
-                                             plan_name: 'plan_6',
+                                             plan_name: 'plan_7',
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
                                              login: StaticData::LOGIN,
@@ -14,7 +14,7 @@ describe 'Multiplication' do
         end
         it "#{current_element_second}_CDE" do
           @palladium = PalladiumApiShell.new(product_name: 'CDE',
-                                             plan_name: 'plan_6',
+                                             plan_name: 'plan_7',
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
                                              login: StaticData::LOGIN,
