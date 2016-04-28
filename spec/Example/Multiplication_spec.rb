@@ -4,7 +4,7 @@ describe 'Multiplication' do
     describe 'Correct' do
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do
-          @palladium = PalladiumApiShell.new(product_name: 'CDE',
+          @palladium = PalladiumApiShell.new(product_name: 'CSE',
                                              plan_name: 'plan_7',
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
@@ -12,8 +12,8 @@ describe 'Multiplication' do
                                              token: StaticData::TOKEN)
           expect(current_element_second*2).to eq(current_element_second*2)
         end
-        it "#{current_element_second}_CDE" do
-          @palladium = PalladiumApiShell.new(product_name: 'CDE',
+        it "#{current_element_second}_failed" do
+          @palladium = PalladiumApiShell.new(product_name: 'CSE',
                                              plan_name: 'plan_7',
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,

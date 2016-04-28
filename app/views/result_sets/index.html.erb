@@ -16,11 +16,6 @@
           </tr>
           </thead>
           <tbody>
-          <% data = @run.status.map do |current_hash|%>
-              <%  current_hash.delete_if {| key | key == :count } %>
-              <%  {name:current_hash[:name], y:current_hash[:data].first, color:current_hash[:color]} %>
-          <% end %>
-
           <% status = Status.pluck(:id, :color).to_h %>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="clickable-row run_str" data-href="<%= result_set_results_path(set_result) %>">
@@ -80,7 +75,7 @@
                 type: 'pie',
                 name: 'Browser share',
                 innerSize: '50%',
-                data: <%= data.to_json.html_safe %>
+                data: <%= @main_chart_data.to_json.html_safe %>
             }]
         });
     });
