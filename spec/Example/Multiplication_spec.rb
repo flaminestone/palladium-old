@@ -1,11 +1,13 @@
 require 'testing_shared'
 describe 'Multiplication' do
-  (1..10).to_a.each do |i|
+  (1..10).to_a.each do |j|
+
+    (1..10).to_a.each do |i|
     describe 'Correct' do
       (1..100).to_a.each do |current_element_second|
         it "#{current_element_second}" do
           @palladium = PalladiumApiShell.new(product_name: 'CSE',
-                                             plan_name: 'plan_7',
+                                             plan_name: "plan_#{j}",
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
                                              login: StaticData::LOGIN,
@@ -14,7 +16,7 @@ describe 'Multiplication' do
         end
         it "#{current_element_second}_failed" do
           @palladium = PalladiumApiShell.new(product_name: 'CSE',
-                                             plan_name: 'plan_7',
+                                             plan_name: "plan_#{j}",
                                              run_name: "Multiplication Tests_#{i}",
                                              host: StaticData::HOST,
                                              login: StaticData::LOGIN,
@@ -25,6 +27,7 @@ describe 'Multiplication' do
       after :each do |example|
         AfterTests.new(@palladium, example).set_result
       end
+    end
     end
   end
 end
