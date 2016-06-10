@@ -1,5 +1,5 @@
 class ResultSetsController < ApplicationController
-  before_action :init_all_resourses, only: [:show, :edit, :update, :destroy]
+  # before_action :init_all_resourses, only: [:show, :edit, :update, :destroy]
   acts_as_token_authentication_handler_for User
 
 
@@ -8,6 +8,15 @@ class ResultSetsController < ApplicationController
   def index
     @run = set_run
     @result_sets = @run.result_sets
+    @main_chart_data = []
+    statuses_id_array = Status.pluck(:id, :name, :color)
+    ResultSet.where(:run_id => params[:run_id]).group(:status).count.each do |key, value|
+      statuses_id_array.each do |curren_status|
+        if curren_status.first.to_s == %r(\d).match(key).to_s
+          @main_chart_data << {name: curren_status[1], color: curren_status.last, y: value}
+        end
+      end
+    end
   end
 
   # GET /result_sets/1
@@ -28,8 +37,8 @@ class ResultSetsController < ApplicationController
   # POST /result_sets
   # POST /result_sets.json
   def create
-    @result_set = ResultSet.new(result_set_params)
-    @result_set.plan_id = params[:plan_id]
+    attr = result_set_params.merge(params.permit(:run_id, :plan_id))
+    @result_set = ResultSet.new(attr.merge({:status => params['status_id'].to_i}))
     run = set_run
     respond_to do |format|
       if @result_set.save
@@ -88,7 +97,7 @@ class ResultSetsController < ApplicationController
   end
   # Use callbacks to share common setup or constraints between actions.
   def set_result_set
-    @result_set = ResultSet.find(params[:id])
+    @result_set = ResultSet.find_by_id(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -97,15 +106,15 @@ class ResultSetsController < ApplicationController
   end
 
   def set_run
-    @run = Run.find(params[:run_id])
+    @run = Run.find_by_id(params[:run_id])
   end
 
   def set_plan
-    @plan = Plan.find(params[:plan_id])
+    @plan = Plan.find_by_id(params[:plan_id])
   end
 
   def product_find_by_id
-    Product.find(params.require(:product_id))
+    Product.find_by_id(params.require(:product_id))
   end
 
   public
