@@ -1,12 +1,15 @@
-development: &default
+default: &default
   adapter: postgresql
-  encoding: unicode
-  database: postgres
   pool: 5
+  encoding: utf8
+
+development:
+  <<: *default
+  database: project_test
+
+production:
+  <<: *default
+  database: postgres
   username: postgres
   password:
   host: db
-test:
-  <<: *default
-  database: palladium
-

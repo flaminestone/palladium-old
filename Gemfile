@@ -18,11 +18,7 @@ gem 'chartkick' #dont forget to add <%= javascript_include_tag "//www.google.com
 gem 'pg'
 gem 'rails_12factor'
 gem 'unicorn'
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-  gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api', branch: 'feature/optimize'
-end
+gem 'byebug'
+gem 'web-console', '~> 2.0', group: :development
+gem 'spring'
+gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api', branch: 'feature/optimize'
