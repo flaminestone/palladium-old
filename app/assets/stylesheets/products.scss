@@ -76,15 +76,14 @@
 .popup_sing_up {
   margin-top: 15%;
 }
-
 .user_name{
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width:300px;
 }
-.dropdown {
-  background:#fff;
-  width:150px;
-  text-align: left;
-}
+
 .dropdown ul.dropdown-menu {
   border-radius:4px;
   box-shadow:none;
