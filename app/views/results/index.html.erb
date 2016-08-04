@@ -15,17 +15,17 @@
         <table class="table table-hover result_table">
           <thead>
           <tr>
-            <th><%= @results.human_attribute_name(:name) %></th>
-            <th><%= @results.human_attribute_name(:version) %></th>
+            <th>Date</th>
+            <th>Author</th>
             <th><%= @results.human_attribute_name(:status) %></th>
           </tr>
           </thead>
           <tbody>
           <% @results.order(created_at: :desc).each do |result| %>
               <tr class="clickable-row">
-                <td><%= result.message %></td>
+                <td><%= result.created_at %></td>
                 <td><%= result.author %></td>
-                <td style = "background-color: <%= Status.find(result.status_id).color%>"> <%= result.message %></td>
+                <td style = "background-color: <%= Status.find(result.status_id).color %>"> <%= result.message %></td>
               </tr>
           <% end %>
           </tbody>

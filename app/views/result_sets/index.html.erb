@@ -10,19 +10,11 @@
         <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         <h3><%= t('helpers.titles.results') %></h3>
         <table class="table table-hover sets_table">
-          <thead>
-          <tr>
-            <th><%= @result_sets.human_attribute_name(:name) %></th>
-          </tr>
-          </thead>
           <tbody>
-          <% status = Status.pluck(:id, :color).to_h %>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
-              <tr class="clickable-row run_str" data-href="<%= result_set_results_path(set_result) %>">
-                <td><%= set_result.name %></td>
-                <td style="background-color: <%= status[set_result.results.last.status_id] %>">
-                  <% p %>
-                </td>
+              <tr class="run_str">
+                <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>"><%= set_result.name %></td>
+                <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
               </tr>
           <% end %>
           </tbody>
@@ -80,11 +72,19 @@
             }]
         });
     });
-
-
     jQuery(document).ready(function ($) {
         $(".clickable-row").click(function () {
             window.document.location = $(this).data("href");
         });
+      $(".change-status-button").click(function () {
+            window.document.location = $(this).data("href");
+        });
     });
 </script>
+<style>
+  .change-status-button{
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+  }
+</style>
