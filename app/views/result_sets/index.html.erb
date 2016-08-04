@@ -20,7 +20,8 @@
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="clickable-row run_str" data-href="<%= result_set_results_path(set_result) %>">
                 <td><%= set_result.name %></td>
-                <td style="background-color: <%= status[set_result.status] %>">
+                <td style="background-color: <%= status[set_result.results.last.status_id] %>">
+                  <% p %>
                 </td>
               </tr>
           <% end %>
