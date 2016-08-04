@@ -4,7 +4,7 @@ services:
     image: postgres
   web:
     build: .
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bundle exec rails s -e development -p 80 -b '0.0.0.0'
     volumes:
       - .:/palladium
     ports:
