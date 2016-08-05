@@ -13,7 +13,11 @@
           <tbody>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="run_str">
-                <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>"><%= set_result.name %></td>
+                <td class="result_set_name_element" style="width: 1px;white-space: nowrap;">
+                  <%= set_result.name %>
+                </td>
+                <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>">
+                </td>
                 <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
               </tr>
           <% end %>
@@ -86,5 +90,14 @@
     width: 200px;
     text-align: center;
     cursor: pointer;
+  }
+  .clickable-row{
+    width: auto;
+    cursor: pointer;
+  }
+  .result_set_name_element {
+    cursor: text;
+    text-align: left;
+    padding-top: 12px;
   }
 </style>
