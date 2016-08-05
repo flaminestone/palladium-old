@@ -11,7 +11,7 @@
         <% unless @plan.runs.empty? %>
             <div id="container" style="height: 400px"></div>
             <h3><%= t('helpers.titles.runs') %></h3>
-            <table class="table runs_table">
+            <table class="table table-hover">
               <thead>
               <tr>
                 <th><%= @plan.runs.human_attribute_name(:name) %></th>
@@ -148,6 +148,5 @@
 
   a.link {
     color:black;
-    background-color:#dddddd;
-  }
+    background-color: rgba(0, 0, 0, 0);}
 </style>

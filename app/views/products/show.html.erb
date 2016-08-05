@@ -17,7 +17,7 @@
       <% unless @product.plans.empty? %>
           <div class='jumbotron'>
             <h3><%= t('helpers.titles.plans') %></h3>
-            <table class="table ">
+            <table class="table table-hover">
               <tbody>
               <% @product.plans.order(created_at: :desc).each do |plan| %>
                   <tr class="run_str" name=<%= plan.version %>>
@@ -132,6 +132,6 @@
 <style>
   a.link {
     color:black;
-    background-color:#eeeeee;
+    background-color: rgba(0, 0, 0, 0);
   }
 </style>
