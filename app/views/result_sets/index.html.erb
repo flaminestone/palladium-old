@@ -9,7 +9,7 @@
         </div>
         <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table sets_table">
+        <table class="table sets_table table-hover">
           <tbody>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="run_str">
@@ -97,6 +97,6 @@
   }
   a.link {
     color:black;
-    background-color:#cccccc;
+    background-color: rgba(0, 0, 0, 0);
   }
 </style>
