@@ -17,17 +17,15 @@
       <% unless @product.plans.empty? %>
           <div class='jumbotron'>
             <h3><%= t('helpers.titles.plans') %></h3>
-            <table class="table table-hover">
+            <table class="table ">
               <tbody>
               <% @product.plans.order(created_at: :desc).each do |plan| %>
                   <tr class="run_str" name=<%= plan.version %>>
-                      <td style="width: 1px;white-space: nowrap;">
-                        <div class="plan_name_element">
-                        <%= plan.name %>
-                        </div>
-                      </td>
-                    <td style="text-align: center;" class="clickable-row" data-href=<%= product_plan_path(@product, plan) %>><%= plan.version %></td>
-                    <td class="clickable-row" data-href=<%= product_plan_path(@product, plan) %>>
+                        <td>
+                          <a class="link" href=<%= product_plan_path(@product, plan) %>><%= plan.name %></a>
+                        </td>
+                    <td><%= plan.version %></td>
+                    <td >
                       <script>
                           $(function () {
                               $("#status-bar-<%= plan.id %>").highcharts({
@@ -132,11 +130,8 @@
     }
 </script>
 <style>
-  .clickable-row{
-    cursor: pointer;
-  }
-  .plan_name_element {
-    cursor: text;
-    text-align: center;
+  a.link {
+    color:black;
+    background-color:#eeeeee;
   }
 </style>

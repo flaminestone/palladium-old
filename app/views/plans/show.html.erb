@@ -11,7 +11,7 @@
         <% unless @plan.runs.empty? %>
             <div id="container" style="height: 400px"></div>
             <h3><%= t('helpers.titles.runs') %></h3>
-            <table class="table table-hover runs_table">
+            <table class="table runs_table">
               <thead>
               <tr>
                 <th><%= @plan.runs.human_attribute_name(:name) %></th>
@@ -19,12 +19,11 @@
               </thead>
               <tbody>
               <% @plan.runs.order(created_at: :desc).find_each do |run| %>
-                  <tr class="run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
-                    <td style="width: 1px;white-space: nowrap;">
-                      <div class="plan_name_element">
-                      <%= run.name %>
-                      </div></td>
-                    <td class="clickable-row" data-href=<%= run_result_sets_path(run) %>>
+                  <tr name=<%= run.version %>>
+                    <td style="padding-top: 23px">
+                     <a class="link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+                      </td>
+                    <td>
                       <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
                       <script>
                           $(function () {
@@ -147,12 +146,8 @@
 </div>
 <style>
 
-  .plan_name_element {
-    cursor: text;
-    text-align: center;
-    padding-top: 12px;
+  a.link {
+    color:black;
+    background-color:#dddddd;
   }
-    .clickable-row {
-      cursor: pointer;
-    }
 </style>
