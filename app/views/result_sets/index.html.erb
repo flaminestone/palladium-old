@@ -9,12 +9,12 @@
         </div>
         <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table table-hover sets_table">
+        <table class="table sets_table">
           <tbody>
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="run_str">
-                <td class="result_set_name_element" style="width: 1px;white-space: nowrap;">
-                  <%= set_result.name %>
+                <td>
+                  <a class="link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %> </a>
                 </td>
                 <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>">
                 </td>
@@ -95,9 +95,8 @@
     width: auto;
     cursor: pointer;
   }
-  .result_set_name_element {
-    cursor: text;
-    text-align: left;
-    padding-top: 12px;
+  a.link {
+    color:black;
+    background-color:#cccccc;
   }
 </style>
