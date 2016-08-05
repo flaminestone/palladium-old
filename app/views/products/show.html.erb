@@ -21,7 +21,7 @@
               <tbody>
               <% @product.plans.order(created_at: :desc).each do |plan| %>
                   <tr class="run_str" name=<%= plan.version %>>
-                      <td style="width: inherit">
+                      <td style="width: 1px;white-space: nowrap;">
                         <div class="plan_name_element">
                         <%= plan.name %>
                         </div>

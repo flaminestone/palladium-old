@@ -19,9 +19,12 @@
               </thead>
               <tbody>
               <% @plan.runs.order(created_at: :desc).find_each do |run| %>
-                  <tr class="clickable-row run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
-                    <td><%= run.name %></td>
-                    <td>
+                  <tr class="run_str" data-href=<%= run_result_sets_path(run) %> name=<%= run.version %>>
+                    <td style="width: 1px;white-space: nowrap;">
+                      <div class="plan_name_element">
+                      <%= run.name %>
+                      </div></td>
+                    <td class="clickable-row" data-href=<%= run_result_sets_path(run) %>>
                       <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
                       <script>
                           $(function () {
@@ -142,3 +145,14 @@
       });
   </script>
 </div>
+<style>
+
+  .plan_name_element {
+    cursor: text;
+    text-align: center;
+    padding-top: 12px;
+  }
+    .clickable-row {
+      cursor: pointer;
+    }
+</style>
