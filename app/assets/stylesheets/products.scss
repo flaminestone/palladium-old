@@ -1,117 +1,28 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.products_jumbotron {
-  background-color: #ffffff;
-}
 .product_item {
-  height: 3em;
-  margin-top: 0.5em;
-  background-color: #000000;
   text-align: center;
-  font-size: large;
-  color: #e6e6e6;
-  padding-top: 1em;
+  height: 200px;
+  width: 150px;
+  display: inline-block;
+  margin: 50px 5px 5px 50px;
 }
-.new_product_button {
-  height: 3em;
-  margin-top: 1em;
-  background-color: #059cd1;
-  color: #e6e6e6;
-  text-align: center;
-  font-size: large;
-  padding-top: 1em;
-  text-decoration: none;
+.product_image{
+  height: 150px;
+  width: 150px;
+  margin-bottom: 15px;
 }
-.button-size {
-  height: 3em;
-  width: 10em;
-  margin-top: 0.5em;
-}
-.button {
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #ffffff;
-}
-.field_invert {
-  background-color: #ffffff;
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #000000;
-  font-style: italic;
-}
+.product-name{
+  font-size: 18px;
 
-.block_field {
-  width: 360px;
 }
-.button {
-  background-color: #000000;
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #ffffff;
+a.product-name:visited{
+  color: #333333;
 }
-.field_size_invert {
-  height: 3em;
-  width: 20em;
-  margin-top: 1.5em;
+a.product-name:hover{
+  color: #333333;
 }
-.create_product_button {
-  margin-left: 25%;
-  margin-bottom: 40px;
-  margin-top: 1.5em;
-  background-color: #059cd1;
-  color: #ffffff;
-}
-.create_product_title {
-  text-align: center;
-  font-size: 4em;
-  padding-bottom: 20px;
-  margin: 40px 0 10px;
-  border-bottom: 1px solid #bfbfbf;
-  color: #ffffff;
-}
-.popup_sing_up {
-  margin-top: 15%;
-}
-.user_name{
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width:300px;
-}
-
-.dropdown ul.dropdown-menu {
-  border-radius:4px;
-  box-shadow:none;
-  margin-top:20px;
-  margin-right:20px;
-  width:150px;
-}
-.dropdown ul.dropdown-menu:before {
-  content: "";
-  border-bottom: 10px solid #fff;
-  border-right: 10px solid transparent;
-  border-left: 10px solid transparent;
-  position: absolute;
-  top: -10px;
-  right: 16px;
-  z-index: 10;
-}
-.dropdown ul.dropdown-menu:after {
-  content: "";
-  border-bottom: 12px solid #ccc;
-  border-right: 12px solid transparent;
-  border-left: 12px solid transparent;
-  position: absolute;
-  top: -12px;
-  right: 14px;
-  z-index: 9;
-}
-.edit_and_delete_elements{
-  font-size: medium;
-  vertical-align: top;
+.product-name{
+  color: #333333;
 }

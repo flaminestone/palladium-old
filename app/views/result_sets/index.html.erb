@@ -14,7 +14,7 @@
           <% @result_sets.order(name: :desc).find_each do |set_result| %>
               <tr class="run_str">
                 <td>
-                  <a class="link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %> </a>
+                  <a class="link result-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %> </a>
                 </td>
                 <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>">
                 </td>
@@ -95,8 +95,10 @@
     width: auto;
     cursor: pointer;
   }
-  a.link {
-    color:black;
+  a.result-name-link {
     background-color: rgba(0, 0, 0, 0);
+  }
+  a.result-name-link:visited {
+    color: #2E2F30;
   }
 </style>

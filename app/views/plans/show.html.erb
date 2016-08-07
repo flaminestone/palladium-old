@@ -21,7 +21,7 @@
               <% @plan.runs.order(created_at: :desc).find_each do |run| %>
                   <tr name=<%= run.version %>>
                     <td style="padding-top: 23px">
-                     <a class="link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+                     <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
                       </td>
                     <td>
                       <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
@@ -146,7 +146,7 @@
 </div>
 <style>
 
-  a.link {
+  a.plan-name-link {
     color:black;
-    background-color: rgba(0, 0, 0, 0);}
+  }
 </style>

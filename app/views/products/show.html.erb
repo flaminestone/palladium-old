@@ -22,7 +22,7 @@
               <% @product.plans.order(created_at: :desc).each do |plan| %>
                   <tr class="run_str" name=<%= plan.version %>>
                         <td>
-                          <a class="link" href=<%= product_plan_path(@product, plan) %>><%= plan.name %></a>
+                          <a class="link plan-name-link" href=<%= product_plan_path(@product, plan) %>><%= plan.name %></a>
                         </td>
                     <td><%= plan.version %></td>
                     <td >
@@ -94,43 +94,10 @@
       <% end %>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="list-group">
-        <a class="list-group-item active" onclick='unsort()'>
-          <h5 align="center"><%= t('helpers.links.all_version') %></h5>
-        </a>
-        <% @product.plans.select('distinct version').reverse.each do |plan| %>
-            <a class='list-group-item' onclick="sort('<%= plan.version %>')">
-              <%= plan.version %> <span class="badge">
-              <%= @product.plans.where(version: plan.version).count %>
-        <% end %>
-        </span></a></td>
-      </div>
-    </div>
   </div>
 </div>
-<script>
-    jQuery(document).ready(function ($) {
-        $(".clickable-row").click(function () {
-            window.document.location = $(this).data("href");
-        });
-    });
-    function sort(version) {
-        $('.run_str').each(function (index, obj) {
-            if (obj.getAttribute('name') != version) {
-                $('.run_str')[index].classList.add("hiden")
-            }
-            else {
-                $('.run_str')[index].classList.remove("hiden")
-            }
-        });
-    }
-    function unsort() {
-        $('.run_str').removeClass("hiden")
-    }
-</script>
 <style>
-  a.link {
+  a.plan-name-link {
     color:black;
     background-color: rgba(0, 0, 0, 0);
   }
