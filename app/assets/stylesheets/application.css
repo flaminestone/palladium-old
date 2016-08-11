@@ -13,6 +13,30 @@
  *= require_tree .
  *= require_self
  */
+
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    background: #fff;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+}
+.mainpage{
+    padding: 24px 24px 0;
+    min-width: 800px;
+}
 .navbar-app{
     background-color: #0f4071;
     border-radius: 0;

@@ -1,104 +1,33 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4 centered">
-        <div class="item_title">
-          <%= t '.title', :default => @product.name %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_product_path(@product), :class => 'btn btn-default' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      product_path(@product),
-                      :method => 'delete',
-                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-danger' %>
-        </div>
+    <div class="col-xs-2 sidebar-underspase">
+      <div class="create-new-plan-btn">
+        <span class="create-new">Create new plan  </span>
       </div>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-      <% unless @product.plans.empty? %>
-          <div class='jumbotron'>
-            <h3><%= t('helpers.titles.plans') %></h3>
-            <table class="table table-hover">
-              <tbody>
-              <% @product.plans.order(created_at: :desc).each do |plan| %>
-                  <tr class="run_str" name=<%= plan.version %>>
-                        <td>
-                          <a class="link plan-name-link" href=<%= product_plan_path(@product, plan) %>><%= plan.name %></a>
-                        </td>
-                    <td><%= plan.version %></td>
-                    <td >
-                      <script>
-                          $(function () {
-                              $("#status-bar-<%= plan.id %>").highcharts({
-                                  navigation: {
-                                      buttonOptions: {
-                                          enabled: false
-                                      }
-                                  },
-                                  credits: {
-                                      enabled: false
-                                  },
-                                  tooltip: {
-                                      enabled: false
-                                  },
-                                  chart: {
-                                      height: 50,
-                                      width: 250,
-                                      type: 'bar',
-                                      backgroundColor: null
-                                  },
-                                  title: {
-                                      text: ''
-                                  },
-                                  subTitle: {
-                                      text: ''
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  xAxis: {
-
-                                      labels: {
-                                          enabled: false
-                                      }
-                                  },
-                                  yAxis: {
-                                      gridLineWidth: 0,
-                                      labels: {
-                                          enabled: false
-                                      },
-                                      title: {
-                                          text: ''
-                                      }
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  series: {},
-                                  plotOptions: {
-                                      series: {
-                                          stacking: 'normal',
-                                           animation: false,
-                                          dataLabels: {
-                                              enabled: true
-                                          }
-                                      }
-                                  }
-                              });
-                          });
-                      </script>
-                    </td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-      <% end %>
+    <div class="col-xs-9 plan-element-underspase">
+      <div class="plans-title">
+        <span>Plans</span>
+      </div>
+      <div class="plan-list-box">
+        <table class="table table-hover">
+          <tbody>
+          <% @product.plans.each do |current_plan| %>
+              <tr>
+                <td><a class="plan-name-link link" href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a></td>
+                <td><%= current_plan.updated_at %></td>
+              </tr>
+          <% end  %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-<style>
-  a.plan-name-link {
-    color:black;
-    background-color: rgba(0, 0, 0, 0);
-  }
-</style>
+</div>
+
+
+
+
+
+

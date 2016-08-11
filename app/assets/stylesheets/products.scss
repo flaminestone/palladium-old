@@ -8,21 +8,111 @@
   display: inline-block;
   margin: 50px 5px 5px 50px;
 }
-.product_image{
+
+.product_image {
   height: 150px;
   width: 150px;
   margin-bottom: 15px;
 }
-.product-name{
+
+.product-name {
   font-size: 18px;
+}
+
+a.product-name:visited {
+  color: #333333;
+}
+
+a.product-name:hover {
+  color: #333333;
+}
+
+.product-name {
+  color: #333333;
+}
+
+.palladium-sidebar {
+  width: 240px;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.sidebar-underspase {
+  border-right: solid 1px #d1d1d1;
+  padding-right: 24px;
+  padding-left: 0px;
+  min-height: 500px;
+}
+
+.plan-list-box {
+  margin-top: 16px;
+}
+
+.create-new-plan-btn {
+  border-radius: 4px;
+  background-color: #ed7309;
+  height: 32px;
+  width: 100%;
+  color: white;
+  line-height: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  margin-bottom: 23px;
+  min-width: 137px;
+  float: left;
+}
+
+.create-new {
+  padding: 7px 12px 0 16px;
+  float: left;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+.mainPageContent {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 24px;
+  padding-right: 24px;
+  position: static;
+  left: 340px;
+  width: 100%;
+  margin: auto;
+  min-width:1024px;
+}
+
+.plans-title {
+  display: block;
+  height: 35px;
+  font-size: 24px;
+  line-height: 30px;
+}
+.plan-element{
+  height: 47px;
+  border: 1px solid #d1d1d1;
+  border-right: none;
+  border-left: none;
+  font: normal 12px 'Open Sans', sans-serif;
+  padding: 16px;
 
 }
-a.product-name:visited{
+.plan-name-link{
+  font-weight: bold;
+}
+.plan-element-underspase{
+  padding-left: 24px;
+}
+a.plan-name-link{
+  color: #333333;
+  cursor: pointer;
+}
+.plan-name-link:hover{
   color: #333333;
 }
-a.product-name:hover{
+.plan-name-link:visited{
   color: #333333;
 }
-.product-name{
-  color: #333333;
+tr{
+  height: 47px;
 }
