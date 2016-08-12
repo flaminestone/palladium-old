@@ -1,9 +1,22 @@
 <div class="container">
   <div class="row">
-        <table class="table table-hover">
+    <div id="chart-container" style="display: inline-block"></div>
+    <div class="legend-block">
+
+   <% @main_chart_data.each do |current_status| %>
+          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
+          <span class="status-count"><%= current_status[:y] %></span>
+          <span class="status-name"><%= current_status[:name] %></span>
+          <span class="status-persent">(<%= current_status[:y]*100.0/@all_result_count%>%)</span>
+          <br />
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover">
           <tbody>
           <% unless @plan.runs.empty? %>
-              <div id="chart-container" style="height: 300px"></div>
               <table class="table table-hover">
                 <tbody>
                 <% @plan.runs.order(created_at: :desc).find_each do |run| %>
@@ -145,12 +158,12 @@
       },
       plotOptions: {
         pie: {
-          allowPointSelect: true,
+          allowPointSelect: false,
           cursor: 'pointer',
           depth: 35,
           animation: false,
           dataLabels: {
-            enabled: true,
+            enabled: false,
             format: '{point.name}'
           }
         }
@@ -160,12 +173,6 @@
         name: 'Value',
         data: <%= @main_chart_data.to_json.html_safe %>
       }]
-    });
-  });
-
-  jQuery(document).ready(function ($) {
-    $(".clickable-row").click(function () {
-      window.document.location = $(this).data("href");
     });
   });
 </script>
