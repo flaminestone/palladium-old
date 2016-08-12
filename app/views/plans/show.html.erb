@@ -1,152 +1,171 @@
-<p id="notice"><%= notice %></p>
-
-
 <div class="container">
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="page-header runs_hading">
-          <h1 align="center"><%= t('helpers.titles.runs_title') %></h1>
-        </div>
-        <% unless @plan.runs.empty? %>
-            <div id="container" style="height: 400px"></div>
-            <h3><%= t('helpers.titles.runs') %></h3>
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th><%= @plan.runs.human_attribute_name(:name) %></th>
-              </tr>
-              </thead>
-              <tbody>
-              <% @plan.runs.order(created_at: :desc).find_each do |run| %>
-                  <tr name=<%= run.version %>>
-                    <td style="padding-top: 23px">
-                     <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+  <div class="row">
+        <table class="table table-hover">
+          <tbody>
+          <% unless @plan.runs.empty? %>
+              <div id="chart-container" style="height: 300px"></div>
+              <table class="table table-hover">
+                <tbody>
+                <% @plan.runs.order(created_at: :desc).find_each do |run| %>
+                    <tr>
+                      <td style="padding-top: 23px">
+                        <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
                       </td>
-                    <td>
-                      <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
-                      <script>
+                      <td>
+                        <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
+                        <script>
                           $(function () {
-                              $("#status-bar-<%= run.id %>").highcharts({
-                                  navigation: {
-                                      buttonOptions: {
-                                          enabled: false
-                                      }
-                                  },
-                                  credits: {
-                                      enabled: false
-                                  },
-                                  tooltip: {
-                                      enabled: false
-                                  },
-                                  chart: {
-                                      height: 50,
-                                      width: 250,
-                                      type: 'bar',
-                                      backgroundColor: null
-                                  },
-                                  title: {
-                                      text: ''
-                                  },
-                                  subTitle: {
-                                      text: ''
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  xAxis: {
+                            $("#status-bar-<%= run.id %>").highcharts({
+                              navigation: {
+                                buttonOptions: {
+                                  enabled: false
+                                }
+                              },
+                              credits: {
+                                enabled: false
+                              },
+                              tooltip: {
+                                enabled: false
+                              },
+                              chart: {
+                                height: 50,
+                                width: 250,
+                                type: 'bar',
+                                backgroundColor: null
+                              },
+                              title: {
+                                text: ''
+                              },
+                              subTitle: {
+                                text: ''
+                              },
+                              legend: {
+                                enabled: false
+                              },
+                              xAxis: {
 
-                                      labels: {
-                                          enabled: false
-                                      }
-                                  },
-                                  yAxis: {
-                                      gridLineWidth: 0,
-                                      labels: {
-                                          enabled: false
-                                      },
-                                      title: {
-                                          text: ''
-                                      }
-                                  },
-                                  legend: {
-                                      enabled: false
-                                  },
-                                  series: <%= @status_data[run.id].to_json.html_safe %>,
-                                  plotOptions: {
-                                      series: {
-                                          stacking: 'normal',
-                                          animation: false,
-                                          dataLabels: {
-                                              enabled: true
-                                          }
-                                      }
+                                labels: {
+                                  enabled: false
+                                }
+                              },
+                              yAxis: {
+                                gridLineWidth: 0,
+                                labels: {
+                                  enabled: false
+                                },
+                                title: {
+                                  text: ''
+                                }
+                              },
+                              legend: {
+                                enabled: false
+                              },
+                              series: <%= @status_data[run.id].to_json.html_safe %>,
+                              plotOptions: {
+                                series: {
+                                  stacking: 'normal',
+                                  animation: false,
+                                  dataLabels: {
+                                    enabled: true
                                   }
-                              });
+                                }
+                              }
+                            });
                           });
-                      </script>
-                    </td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-        <% end %>
-      </div>
-    </div>
+                        </script>
+                      </td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+          <% end %>
+          </tbody>
+        </table>
   </div>
-  <script type="text/javascript">
-      $(function () {
-          $('#container').highcharts({
-              navigation: {
-                  buttonOptions: {
-                      enabled: false
-                  }
-              },
-              chart: {
-                  backgroundColor: 'rgba(225, 225, 225, 0)',
-                  type: 'pie',
-                  options3d: {
-                      enabled: true,
-                      alpha: 45,
-                      beta: 0
-                  }
-              },
-              title: {
-                  text: '<b><%= @product.name %></b> <br><i><%= @plan.version %></i> version <br> <%= @plan.created_at %>'
-              },
-              tooltip: {
-                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-              },
-              plotOptions: {
-                  pie: {
-                      allowPointSelect: true,
-                      cursor: 'pointer',
-                      depth: 35,
-                      animation: false,
-                      dataLabels: {
-                          enabled: true,
-                          format: '{point.name}'
-                      }
-                  }
-              },
-              series: [{
-                  type: 'pie',
-                  name: 'Value',
-                  data: <%= @main_chart_data.to_json.html_safe %>
-              }]
-          });
-      });
-
-      jQuery(document).ready(function ($) {
-          $(".clickable-row").click(function () {
-              window.document.location = $(this).data("href");
-          });
-      });
-  </script>
 </div>
-<style>
+</div>
 
-  a.plan-name-link {
-    color:black;
-  }
-</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  $(function () {
+    $('#chart-container').highcharts({
+      navigation: {
+        buttonOptions: {
+          enabled: false
+        }
+      },
+      chart: {
+        backgroundColor: 'rgba(225, 225, 225, 0)',
+        type: 'pie',
+      },
+      title: {
+        text: ''
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+          animation: false,
+          dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+          }
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Value',
+        data: <%= @main_chart_data.to_json.html_safe %>
+      }]
+    });
+  });
+
+  jQuery(document).ready(function ($) {
+    $(".clickable-row").click(function () {
+      window.document.location = $(this).data("href");
+    });
+  });
+</script>
