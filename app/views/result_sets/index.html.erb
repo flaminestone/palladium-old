@@ -2,9 +2,15 @@
 <div class="container">
   <div class="row">
     <div id="chart-container" style="display: inline-block"></div>
-    <div class="legend-block" style="background-color: #0f4071">
+    <div class="legend-block">
 
-asdsadsdsd
+      <% @main_chart_data.each do |current_status| %>
+          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
+          <span class="status-count"><%= current_status[:y] %></span>
+          <span class="status-name"><%= current_status[:name] %></span>
+          <span class="status-persent">(<%= current_status[:y]*100.0/@all_result_count%>%)</span>
+          <br />
+      <% end %>
 
     </div>
     </div>

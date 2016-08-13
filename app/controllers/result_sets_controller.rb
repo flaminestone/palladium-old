@@ -18,6 +18,8 @@ class ResultSetsController < ApplicationController
       end
     end
     @statuses = Status.all
+    @all_result_count = 0
+    @main_chart_data.each {|el| @all_result_count += el[:y]}
   end
 
   # GET /result_sets/1
