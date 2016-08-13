@@ -17,7 +17,7 @@ class ResultSetsController < ApplicationController
         end
       end
     end
-    @statuses = Status.pluck(:id, :color).to_h
+    @statuses = Status.all
   end
 
   # GET /result_sets/1

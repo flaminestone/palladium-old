@@ -1,5 +1,4 @@
 
-
 <div class="container">
   <div class="row">
     <div id="chart-container" style="display: inline-block"></div>
@@ -15,12 +14,21 @@ asdsadsdsd
           <table class="table table-hover">
             <tbody>
             <% @result_sets.order(created_at: :desc).find_each do |set_result| %>
-                <tr>
-                  <td>
-                    <a class="link result-set-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %></a>
+                <tr class="result-set-element">
+                  <td  style="padding: 0px;">
+                    <div class="result-set-name-block">
+                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %></a>
+                    </div>
                   </td>
-                  <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
-                </tr>
+                  <td style="padding: 0px;">
+                  <div class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status - 1].color %>">
+                    <span class="status-name">
+                      <%= @statuses[set_result.status - 1].name %>
+
+                    </span>
+                  </div>
+                  </td>
+                  </tr>
             <% end %>
             </tbody>
           </table>
@@ -28,7 +36,6 @@ asdsadsdsd
 
   </div>
 </div>
-
 <script type="text/javascript">
     $(function () {
         $('#chart-container').highcharts({
