@@ -1,36 +1,37 @@
-<div class="container">
-  <p id="notice"><%= notice %></p>
 
-  <div class="container jumbotron runs_table">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="page-header sets_hading">
-          <h1 align="center"><%= t('helpers.titles.test_results') %></h1>
-        </div>
-        <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table sets_table table-hover">
-          <tbody>
-          <% @result_sets.order(name: :desc).find_each do |set_result| %>
-              <tr class="run_str">
-                <td>
-                  <a class="link result-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %> </a>
-                </td>
-                <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>">
-                </td>
-                <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+
+<div class="container">
+  <div class="row">
+    <div id="chart-container" style="display: inline-block"></div>
+    <div class="legend-block" style="background-color: #0f4071">
+
+asdsadsdsd
+
     </div>
+    </div>
+
+  <div class="row">
+      <% unless @result_sets.empty? %>
+          <table class="table table-hover">
+            <tbody>
+            <% @result_sets.order(created_at: :desc).find_each do |set_result| %>
+                <tr>
+                  <td>
+                    <a class="link result-set-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %></a>
+                  </td>
+                  <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
+
   </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
-        $('#run_status_chart').highcharts({
+        $('#chart-container').highcharts({
             navigation: {
                 buttonOptions: {
                     enabled: false
@@ -85,20 +86,3 @@
         });
     });
 </script>
-<style>
-  .change-status-button{
-    width: 200px;
-    text-align: center;
-    cursor: pointer;
-  }
-  .clickable-row{
-    width: auto;
-    cursor: pointer;
-  }
-  a.result-name-link {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  a.result-name-link:visited {
-    color: #2E2F30;
-  }
-</style>

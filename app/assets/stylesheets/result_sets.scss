@@ -1,15 +1,23 @@
 // Place all the styles related to the ResultSets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.sets_table{
-  background-color: #cccccc;
+.legend-block{
+  display: inline-block;
+  width: 50%;
+  float: right;
+  margin-top: 70px;
+  padding-left: 100px;
 }
-.sets_hading{
-  border-bottom: 1px solid #bbbbbb;
+.result-set-name-link{
+  font-weight: bold;
 }
-.result_table{
-  background-color: #bbbbbb;
+a.result-set-name-link{
+  color: #333333;
+  cursor: pointer;
 }
-.result_hading{
-  border-bottom: 1px solid #999999;
+.result-set-name-link:hover{
+  color: #333333;
+}
+.result-set-name-link:visited{
+  color: #333333;
 }
