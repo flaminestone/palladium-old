@@ -22,7 +22,6 @@ a.result-set-name-link{
   color: #333333;
 }
 .change-status-button{
-  font-size: 42px;
 }
 .status-name{
   font-size: 18px;
@@ -30,6 +29,17 @@ a.result-set-name-link{
 .result-set-element{
   height: 67px;
 }
-.result-set-name-block{
+.result-set-name-block, .result-set-status-block{
   padding-top: 25px;
+  padding-left: 5px;
+}
+.result-set-edit-link{
+float: right;
+}
+.edit-link{
+  cursor: pointer;
+}
+a.edit-link:hover, a.edit-link:visited{
+  color: #333333;
+  text-decoration: none;
 }
