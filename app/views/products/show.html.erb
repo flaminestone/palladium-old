@@ -8,8 +8,16 @@
           <tbody>
           <% @product.plans.each do |current_plan| %>
               <tr>
-                <td><a class="plan-name-link link" href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a></td>
-                <td><%= current_plan.updated_at %></td>
+                <td>
+                  <div class="plan-name-block">
+                    <a class="plan-name-link link"  href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a>
+                  </div>
+                </td>
+                <td>
+                  <div class="plan-data-block">
+                    <%= current_plan.updated_at %>
+                  </div>
+                </td>
               </tr>
           <% end  %>
           </tbody>

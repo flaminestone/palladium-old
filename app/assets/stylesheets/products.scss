@@ -88,15 +88,7 @@ a.product-name:hover {
   font-size: 24px;
   line-height: 30px;
 }
-.plan-element{
-  height: 47px;
-  border: 1px solid #d1d1d1;
-  border-right: none;
-  border-left: none;
-  font: normal 12px 'Open Sans', sans-serif;
-  padding: 16px;
 
-}
 .plan-name-link{
   font-weight: bold;
 }
@@ -112,4 +104,12 @@ a.plan-name-link{
 }
 .plan-name-link:visited{
   color: #333333;
+}
+.plan-name-block{
+  height: 50px;
+  padding-top: 13px
+}
+.plan-data-block{
+  height: 50px;
+  padding-top: 13px
 }
