@@ -18,6 +18,66 @@
                     <%= current_plan.updated_at %>
                   </div>
                 </td>
+                <td>
+                  <div id="status-bar-<%= current_plan.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
+                  <script>
+                    $(function () {
+                      $("#status-bar-<%= current_plan.id %>").highcharts({
+                        navigation: {
+                          buttonOptions: {
+                            enabled: false
+                          }
+                        },
+                        credits: {
+                          enabled: false
+                        },
+                        tooltip: {
+                          enabled: false
+                        },
+                        chart: {
+                          height: 50,
+                          width: 250,
+                          type: 'bar',
+                          backgroundColor: null
+                        },
+                        title: {
+                          text: ''
+                        },
+                        subTitle: {
+                          text: ''
+                        },
+                        legend: {
+                          enabled: false
+                        },
+                        xAxis: {
+
+                          labels: {
+                            enabled: false
+                          }
+                        },
+                        yAxis: {
+                          gridLineWidth: 0,
+                          labels: {
+                            enabled: false
+                          },
+                          title: {
+                            text: ''
+                          }
+                        },
+                        series: <%= @status_data[current_plan.id].to_json.html_safe %>,
+                        plotOptions: {
+                          series: {
+                            stacking: 'normal',
+                            animation: false,
+                            dataLabels: {
+                              enabled: true
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                </td>
               </tr>
           <% end  %>
           </tbody>
@@ -25,7 +85,7 @@
       </div>
   </div>
 </div>
-</div>
+
 
 
 
