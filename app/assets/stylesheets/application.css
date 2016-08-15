@@ -125,4 +125,8 @@ a.setting-link:hover{
     display: inline-block;
     float: left;
 }
+.block{
+    height: 36px;
+    line-height: 36px;
+}
 /*hard class edit*/

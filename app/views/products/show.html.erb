@@ -9,17 +9,17 @@
           <% @product.plans.each do |current_plan| %>
               <tr>
                 <td>
-                  <div class="plan-name-block">
+                  <div class="plan-name block">
                     <a class="plan-name-link link"  href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a>
                   </div>
                 </td>
                 <td>
-                  <div class="plan-data-block">
+                  <div class="plan-data block">
                     <%= current_plan.updated_at %>
                   </div>
                 </td>
                 <td>
-                  <div id="status-bar-<%= current_plan.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
+                  <div id="status-bar-<%= current_plan.id %>" style="min-width: 100px; max-width: 100px; height: 36px; margin: 0 auto"></div>
                   <script>
                     $(function () {
                       $("#status-bar-<%= current_plan.id %>").highcharts({

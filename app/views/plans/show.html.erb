@@ -18,11 +18,13 @@
           <tbody>
           <% @plan.runs.order(created_at: :desc).find_each do |run| %>
               <tr>
-                <td style="padding-top: 23px">
-                  <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+                <td>
+                  <div class="block">
+                    <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+                  </div>
                 </td>
                 <td>
-                  <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 50px; margin: 0 auto"></div>
+                  <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 36px; margin: 0 auto"></div>
                   <script>
                     $(function () {
                       $("#status-bar-<%= run.id %>").highcharts({
@@ -39,7 +41,7 @@
                         },
                         chart: {
                           height: 50,
-                          width: 250,
+                          width: 300,
                           type: 'bar',
                           backgroundColor: null
                         },
@@ -48,9 +50,6 @@
                         },
                         subTitle: {
                           text: ''
-                        },
-                        legend: {
-                          enabled: false
                         },
                         xAxis: {
 
