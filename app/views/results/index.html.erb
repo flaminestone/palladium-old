@@ -28,7 +28,10 @@
               </td>
               <td class="message-column">
                 <div class="message block">
-                  <%= result.message %></div>
+                  <a onclick="Open_modal(this.text);">
+                    <%= result.message %>
+                  </a>
+                </div>
               </td>
             </tr>
         <% end %>
@@ -37,8 +40,27 @@
     </div>
   </div>
 </div>
+<div class="modal bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Resuls message</h4>
+      </div>
+      <div class="modal-body">
+        <div id="modal-data"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
+<script>
+  function Open_modal(text) {
+    $('#modal-data').text(text);
+    $('#myModal').modal();
+  }
+</script>
 
 
