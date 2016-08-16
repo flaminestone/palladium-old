@@ -7,3 +7,21 @@
   display: inline-block;
   border: 1px #a0a0a0 solid;
 }
+.message {
+  overflow: hidden;
+}
+.message-column{
+  max-width: 570px;
+}
+.status-column{
+  min-width: 100px;
+  max-width: 200px;
+}
+.data-column{
+  min-width: 165px;
+}
+
+.author-column{
+  min-width: 50px;
+  max-width: 200px;
+}

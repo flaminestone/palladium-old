@@ -14,20 +14,20 @@
         <tbody>
         <% @results.order(created_at: :desc).each do |result| %>
             <tr class="clickable-row" style="padding: 0px;">
-              <td>
+              <td class="status-column">
                 <div class="block">
                   <div class="status-box" style="background-color: <%= Status.find(result.status_id).color %>"></div>
                   <span class="status-name"><%= Status.find(result.status_id).name %></span>
                 </div>
               </td>
-              <td>
+              <td class="data-column">
                 <div class="date block"><%= result.created_at %></div>
               </td>
-              <td>
+              <td class="author-column">
                 <div class="author block"><%= result.author %></div>
               </td>
-              <td>
-                <div class="status block">
+              <td class="message-column">
+                <div class="message block">
                   <%= result.message %></div>
               </td>
             </tr>
