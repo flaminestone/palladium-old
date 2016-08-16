@@ -1,7 +1,9 @@
 // Place all the styles related to the Results controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.block{
-  height: 36px;
-  line-height: 36px;
+.status-box{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border: 1px #a0a0a0 solid;
 }
