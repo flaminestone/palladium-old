@@ -44,6 +44,7 @@ div {
     text-align: left;
     padding: 4px 24px 4px 24px;
     position:relative;
+    min-width: 815px;
 }
 .palladium-name-block{
     margin-top: 12px;

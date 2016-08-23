@@ -11,14 +11,16 @@
   overflow: hidden;
 }
 .message-column{
-  max-width: 570px;
+  overflow: hidden;
+  max-width: 400px;
+
 }
 .status-column{
   min-width: 100px;
   max-width: 200px;
 }
 .data-column{
-  min-width: 165px;
+  min-width: 180px;
 }
 
 .author-column{
@@ -32,4 +34,14 @@
 }
 .modal-dialog{
   margin-top: 50px;
+}
+a.message-link{
+  color: #333333;
+  cursor: pointer;
+}
+.message-link:hover{
+  color: #333333;
+}
+.message-link:visited{
+  color: #333333;
 }
