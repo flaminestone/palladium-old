@@ -43,3 +43,56 @@ a.edit-link:hover, a.edit-link:visited{
   color: #333333;
   text-decoration: none;
 }
+.message-field{
+  width: 100%;
+  margin-top: 20px;
+}
+.active-inputs{
+  width: 100%;
+  position: relative;
+}
+.btn{
+  float: right;
+  margin-left: 10px;
+}
+
+.align_center
+{
+  position: relative;
+  width: 100%;
+}
+.align_center:after
+{
+  content: '';
+  display: block;
+  clear: both;
+}
+.align_center_to_left
+{
+  position: relative;
+  right: 50%;
+  float: right;
+}
+.align_center_to_right
+{
+  position: relative;
+  z-index: 1;
+  right: -50%;
+}
+.manual-botton:visited{
+  color: black;
+}
+.status-element {
+  width: 75px;
+  height: 75px;
+  border-style: solid;
+  border-color: #2E2F30;
+  display: inline-block;
+  text-align: center;
+  padding-top: 25px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.status-element-selected {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
+}
