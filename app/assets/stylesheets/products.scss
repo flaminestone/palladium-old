@@ -2,21 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .product_item {
+  display: inline-table;
   text-align: center;
-  height: 200px;
+  height: 250px;
   width: 150px;
-  display: inline-block;
   margin: 50px 5px 5px 50px;
 }
 
 .product_image {
+  position: relative;
   height: 150px;
-  width: 150px;
+  width: 100%;
   margin-bottom: 15px;
 }
 
-.product-name {
+.product-name-block {
   font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  width: inherit;
 }
 
 a.product-name:visited {
