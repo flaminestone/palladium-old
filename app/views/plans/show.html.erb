@@ -9,7 +9,7 @@
           <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
           <span class="status-count"><%= current_status[:y] %></span>
           <span class="status-name"><%= current_status[:name] %></span>
-          <span class="status-persent">(<%= current_status[:y]*100.0/@all_result_count %>%)</span>
+          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
           <br/>
       <% end %>
     </div>
