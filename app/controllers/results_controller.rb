@@ -6,6 +6,9 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     @result_set = ResultSet.find_by_id(params.require(:result_set_id))
+    @run = Run.find(@result_set.run_id)
+    @plan = Plan.find(@run.plan_id)
+    @product = Product.find(@plan.product_id)
     @results = @result_set.results
   end
 

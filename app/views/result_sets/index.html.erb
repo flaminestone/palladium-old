@@ -1,4 +1,7 @@
-
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+</ol>
 <div class="container">
   <div class="row">
     <div id="chart-container" style="display: inline-block"></div>
@@ -28,8 +31,8 @@
                   </td>
                   <td style="padding: 0px;">
                     <div class="result-set-status-block">
-                      <div class="status-box" style="background-color: <%= @statuses[set_result.status - 1].color %>"></div>
-                      <span class="status-name"><%= @statuses[set_result.status - 1].name %>
+                      <div class="status-box" style="background-color: <%= @statuses.find_by_id(set_result.status).color %>"></div>
+                      <span class="status-name"><%= @statuses.find_by_id(set_result.status).name %>
                         <a class="edit-link link" href="<%= edit_result_set_path(set_result) %>">&#9998;</a>
                       </span>
                     </div>

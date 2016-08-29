@@ -6,6 +6,8 @@ class ResultSetsController < ApplicationController
   # GET /result_sets
   # GET /result_sets.json
   def index
+    @plan = Plan.find(set_run.plan_id)
+    @product = Product.find(@plan.product_id)
     @run = set_run
     @result_sets = @run.result_sets
     @main_chart_data = []
@@ -36,6 +38,9 @@ class ResultSetsController < ApplicationController
   # GET /result_sets/1/edit
   def edit
     set_result_set
+    @run = Run.find(@result_set.run_id)
+    @plan = Plan.find(@run.plan_id)
+    @product = Product.find(@plan.product_id)
     @statuses = Status.all
   end
 

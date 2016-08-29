@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+  <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %> </a></li>
+</ol>
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">

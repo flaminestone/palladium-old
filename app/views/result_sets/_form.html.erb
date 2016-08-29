@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+  <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %> </a></li>
+</ol>
 <% if @result_set.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@result_set.errors.count, "error") %> prohibited this result_set from being saved:</h2>
