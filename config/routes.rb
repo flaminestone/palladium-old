@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   get '/settings/status_settings_title' => 'statuses#index'
   get '/settings/status_settings_title/:id/edit' => 'statuses#edit'
+  get '/settings/products' => 'products#edit'
   post '/settings/status_settings_title/:id' => 'statuses#disable'
   resources :statuses, path: '/settings/status_settings'
 

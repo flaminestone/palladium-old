@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :update, :destroy]
   acts_as_token_authentication_handler_for User
 
   # GET /products
@@ -33,6 +33,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @products = Product.all
   end
 
   # POST /products
