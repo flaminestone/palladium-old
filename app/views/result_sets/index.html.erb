@@ -1,36 +1,52 @@
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+</ol>
 <div class="container">
-  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <div id="chart-container" style="display: inline-block"></div>
+    <div class="legend-block">
 
-  <div class="container jumbotron runs_table">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="page-header sets_hading">
-          <h1 align="center"><%= t('helpers.titles.test_results') %></h1>
-        </div>
-        <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table sets_table table-hover">
-          <tbody>
-          <% @result_sets.order(name: :desc).find_each do |set_result| %>
-              <tr class="run_str">
-                <td>
-                  <a class="link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %> </a>
-                </td>
-                <td class="clickable-row" data-href="<%= result_set_results_path(set_result) %>">
-                </td>
-                <td class="change-status-button" data-href="<%= edit_result_set_path(set_result) %>" style="background-color: <%= @statuses[set_result.status] %>">Change</td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+      <% @main_chart_data.each do |current_status| %>
+          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
+          <span class="status-count"><%= current_status[:y] %></span>
+          <span class="status-name"><%= current_status[:name] %></span>
+          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
+          <br />
+      <% end %>
+
     </div>
+    </div>
+
+  <div class="row">
+      <% unless @result_sets.empty? %>
+          <table class="table table-hover">
+            <tbody>
+            <% @result_sets.order(created_at: :desc).find_each do |set_result| %>
+                <tr class="result-set-element">
+                  <td style="padding: 0px;">
+                    <div class="result-set-name-block">
+                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.name %></a>
+                    </div>
+                  </td>
+                  <td style="padding: 0px;">
+                    <div class="result-set-status-block">
+                      <div class="status-box" style="background-color: <%= @statuses.find_by_id(set_result.status).color %>"></div>
+                      <span class="status-name"><%= @statuses.find_by_id(set_result.status).name %>
+                        <a class="edit-link link" href="<%= edit_result_set_path(set_result) %>">&#9998;</a>
+                      </span>
+                    </div>
+                  </td>
+                  </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
   </div>
 </div>
-
 <script type="text/javascript">
     $(function () {
-        $('#run_status_chart').highcharts({
+        $('#chart-container').highcharts({
             navigation: {
                 buttonOptions: {
                     enabled: false
@@ -85,18 +101,3 @@
         });
     });
 </script>
-<style>
-  .change-status-button{
-    width: 200px;
-    text-align: center;
-    cursor: pointer;
-  }
-  .clickable-row{
-    width: auto;
-    cursor: pointer;
-  }
-  a.link {
-    color:black;
-    background-color: rgba(0, 0, 0, 0);
-  }
-</style>

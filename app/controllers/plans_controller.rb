@@ -52,6 +52,8 @@ class PlansController < ApplicationController
       end
     end
     @main_chart_data.to_json.html_safe
+    @all_result_count = 0
+        @main_chart_data.each {|el| @all_result_count += el[:y]}
   end
 
   # GET /plans/new

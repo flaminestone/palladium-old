@@ -1,32 +1,22 @@
-<body>
-<link rel="stylesheet" type="text/css" href="../../../../assets/outside.css">
-<div class="container-fluid">
-  <div class="im-centered">
-  <div class="row">
-    <div class="col-xs-12" style='float: inherit'>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="row block_field">
-            <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Email' %>
-            <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
-            <span class="remember_checkbox">
-            <% if devise_mapping.rememberable? -%>
-                <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me, class: "remember_label" %>
-            <% end -%>
-            </span>
-            <%= f.submit 'Log in', class: 'button button-size login_button' %>
-            <%= render "devise/shared/links" %>
+<div class="auth-block">
+  <div class="login-block">
+    <div class="palladium-name-block">
+      <h1>
+        <span><%= image_tag("logo.png", :alt => "rss feed", class: 'palladium-logo-auth') %>Palladium</span>
+      </h1>
+    </div>
+    <%= stylesheet_link_tag 'login_page', media: 'all', 'data-turbolinks-track' => true %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row block_field">
+          <%= f.email_field :email, autofocus: true, class: 'field field_size', :placeholder => 'Your registration email' %>
+          <%= f.password_field :password, class: 'field field_size', :placeholder => 'Password' %>
+          <div class="auth-buttons">
+            <%= f.submit 'Sign In', class: 'login_button' %>
+            <div class="sign-up-link-block">
+              <a class="sign-up link" href=<%= new_user_registration_url %>> Sign up </a><br />
+            </div>
           </div>
-      <% end %>
-    </div>
-  </div>
-    </div>
-</div>
-</div>
-</body>
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog popup_sing_up">
-    <%= render "devise/shared/user_registration" %>
+        </div>
+    <% end %>
   </div>
 </div>

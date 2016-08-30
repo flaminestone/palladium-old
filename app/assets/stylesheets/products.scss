@@ -1,117 +1,119 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.products_jumbotron {
-  background-color: #ffffff;
-}
 .product_item {
-  height: 3em;
-  margin-top: 0.5em;
-  background-color: #000000;
+  display: inline-table;
   text-align: center;
-  font-size: large;
-  color: #e6e6e6;
-  padding-top: 1em;
-}
-.new_product_button {
-  height: 3em;
-  margin-top: 1em;
-  background-color: #059cd1;
-  color: #e6e6e6;
-  text-align: center;
-  font-size: large;
-  padding-top: 1em;
-  text-decoration: none;
-}
-.button-size {
-  height: 3em;
-  width: 10em;
-  margin-top: 0.5em;
-}
-.button {
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #ffffff;
-}
-.field_invert {
-  background-color: #ffffff;
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #000000;
-  font-style: italic;
+  height: 250px;
+  width: 150px;
+  margin: 50px 5px 5px 50px;
 }
 
-.block_field {
-  width: 360px;
+.product_image {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  margin-bottom: 15px;
 }
-.button {
-  background-color: #000000;
-  text-align: center;
-  border-width: 0em;
-  font-size: large;
-  color: #ffffff;
-}
-.field_size_invert {
-  height: 3em;
-  width: 20em;
-  margin-top: 1.5em;
-}
-.create_product_button {
-  margin-left: 25%;
-  margin-bottom: 40px;
-  margin-top: 1.5em;
-  background-color: #059cd1;
-  color: #ffffff;
-}
-.create_product_title {
-  text-align: center;
-  font-size: 4em;
-  padding-bottom: 20px;
-  margin: 40px 0 10px;
-  border-bottom: 1px solid #bfbfbf;
-  color: #ffffff;
-}
-.popup_sing_up {
-  margin-top: 15%;
-}
-.user_name{
-  color: #ffffff;
-  white-space: nowrap;
+
+.product-name-block {
+  font-size: 18px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  width:300px;
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  width: inherit;
 }
 
-.dropdown ul.dropdown-menu {
-  border-radius:4px;
-  box-shadow:none;
-  margin-top:20px;
-  margin-right:20px;
-  width:150px;
+a.product-name:visited {
+  color: #333333;
 }
-.dropdown ul.dropdown-menu:before {
-  content: "";
-  border-bottom: 10px solid #fff;
-  border-right: 10px solid transparent;
-  border-left: 10px solid transparent;
-  position: absolute;
-  top: -10px;
-  right: 16px;
-  z-index: 10;
+
+a.product-name:hover {
+  color: #333333;
 }
-.dropdown ul.dropdown-menu:after {
-  content: "";
-  border-bottom: 12px solid #ccc;
-  border-right: 12px solid transparent;
-  border-left: 12px solid transparent;
-  position: absolute;
-  top: -12px;
-  right: 14px;
-  z-index: 9;
+
+.product-name {
+  color: #333333;
 }
-.edit_and_delete_elements{
-  font-size: medium;
+
+.palladium-sidebar {
+  width: 240px;
+  text-overflow: ellipsis;
   vertical-align: top;
+}
+
+.sidebar-underspase {
+  border-right: solid 1px #d1d1d1;
+  padding-right: 24px;
+  padding-left: 0px;
+  min-height: 500px;
+}
+
+.plan-list-box {
+  margin-top: 16px;
+}
+
+.create-new-plan-btn {
+  border-radius: 4px;
+  background-color: #ed7309;
+  height: 32px;
+  width: 100%;
+  color: white;
+  line-height: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  margin-bottom: 23px;
+  min-width: 137px;
+  float: left;
+}
+
+.create-new {
+  padding: 7px 12px 0 16px;
+  float: left;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+.mainPageContent {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 24px;
+  padding-right: 24px;
+  position: static;
+  left: 340px;
+  width: 100%;
+  margin: auto;
+  min-width:1024px;
+}
+
+.plans-title {
+  display: block;
+  height: 35px;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.plan-name-link{
+  font-weight: bold;
+}
+.plan-element-underspase{
+  padding-left: 24px;
+}
+a.plan-name-link{
+  color: #333333;
+  cursor: pointer;
+}
+.plan-name-link:hover{
+  color: #333333;
+}
+.plan-name-link:visited{
+  color: #333333;
+}
+.plan-name-block{
+  height: 50px;
+  padding-top: 13px
+}
+.plan-data-block{
+  height: 50px;
+  padding-top: 13px
 }

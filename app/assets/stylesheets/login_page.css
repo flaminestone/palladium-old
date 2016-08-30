@@ -1,0 +1,69 @@
+.auth-block {
+    display: block;
+    text-align: center;
+}
+
+.login-block {
+    width: 425px;
+    display: inline-block;
+    margin-top: 70px;
+    padding-bottom: 61px;
+    text-align: left;
+}
+
+.palladium-logo-auth {
+    height: 40px;
+    padding-bottom: 5px;
+}
+
+.field_size {
+    width: 400px;
+    height: 41px;
+    margin-top: 23px;
+}
+
+.field{
+    border: solid 1px #c7c7c7;
+    background-color: white;
+    border-radius: 3px;
+    padding: 8px 20px;
+    font-size: 18px;
+}
+
+.login_button{
+    color: white;
+    background-color: #2da7db;
+    font-size: 15px;
+    line-height: 17px;
+    padding: 7px 30px 8px 30px;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 0px;
+}
+
+.login_button:hover{
+    background-color: #3db8ec;
+}
+
+.auth-buttons{
+    padding-top: 20px;
+}
+.block_field{
+    padding-left: 20px;
+}
+.sign-up-link-block{
+    float: right;
+    padding-right: 35px;
+    padding-top: 7px;
+}
+.sign-up{
+    color: #333333;
+    cursor: pointer;
+}
+.sign-up:hover{
+    color: #333333;
+}
+.sign-up:visited{
+    color: #333333;
+}

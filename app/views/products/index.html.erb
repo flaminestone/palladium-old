@@ -1,59 +1,13 @@
-<%- model_class = Product -%>
 <div class="container">
-  <div class="products_jumbotron">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4 centered">
-        <div class="item_title">
-          <%= t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+  <% @products.each do |product| %>
+      <a class="link product-name " style="text-decoration: none;" href=<%= product_path(product)%>>
+      <div class="product_item">
+        <div class="product_image" style="background: url(http://www.e-reading.club/illustrations/131/131390-square.jpg)  100% 100% no-repeat; background-size: contain;">
+        </div>
+        <div class="product-name-block">
+          <%= product.name %>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <% @products.each do |product| %>
-          <a href=<%= product_path(product) %>>
-            <div class="product_item col-md-8 col-md-offset-2 centered">
-              <%= product.name %>
-            </div>
-          </a>
-      <% end %>
-    </div>
-    <div>
-        <a href=<%= new_product_path %> data-toggle="modal" data-target="#myModal">
-          <div class="new_product_button col-md-4 col-md-offset-4 centered">
-          <%= t('.new', :default => t("helpers.links.new")) %>
-        </div>
       </a>
-    </div>
-  </div>
+  <% end %>
 </div>
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog popup_sing_up">
-    <div class="container" style="background-color: #000000">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2 centered">
-          <div class="create_product_title">
-            Create Product
-          </div>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2 centered">
-          <%= render "products/form" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  jQuery(document).ready(function ($) {
-    $(".clickable-row").click(function () {
-      window.document.location = $(this).data("href");
-    });
-  });
-</script>
-
-
-

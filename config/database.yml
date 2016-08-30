@@ -8,9 +8,9 @@ development: &default
   encoding: unicode
   database: postgres
   pool: 5
-  username: postgres
-  password:
-  host: db
+  username: palladium
+  password: password1
+  host: localhost
 
 production: &default
   adapter: postgresql
