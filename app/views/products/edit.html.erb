@@ -21,18 +21,24 @@
 
     <div class="col-md-9">
       <% @products.each do |product| %>
-          <a class="link product-name " style="text-decoration: none;" href=<%= product_path(product) %>>
+          <a class="link product-name " style="text-decoration: none;">
             <div class="product_item">
-              <div class="product_image" style="background: url(http://www.e-reading.club/illustrations/131/131390-square.jpg)  100% 100% no-repeat; background-size: contain;">
+              <div class="product_image" style="background: url('<%= asset_path(product.image.url) %>')  100% 100% no-repeat; background-size: contain;">
               </div>
               <div class="product-name-block">
                 <%= product.name %>
+                <%= form_for product, html: { multipart: true } do |form| %>
+                    <div class="actions-elements">
+                      <a class="file-upload">Change
+                        <%= form.file_field :image, :type => 'file', onchange: 'this.form.submit();' %>
+                      </a>
+                    </div>
+                <% end %>
               </div>
             </div>
           </a>
       <% end %>
     </div>
-
   </div>
 </div>
 <style>
