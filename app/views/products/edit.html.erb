@@ -23,7 +23,7 @@
       <% @products.each do |product| %>
           <a class="link product-name " style="text-decoration: none;">
             <div class="product_item">
-              <div class="product_image" style="background: url('<%= asset_path(product.image.url) %>')  100% 100% no-repeat; background-size: contain;">
+              <div class="product_image" style="background: url('<%= asset_path(product.image.url) %>')  100% 100% no-repeat; background-size: contain; background-position: center;">
               </div>
               <div class="product-name-block">
                 <%= product.name %>
