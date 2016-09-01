@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :destroy]
   acts_as_token_authentication_handler_for User
 
   # GET /products
@@ -33,6 +33,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @products = Product.all.order('name ASC')
   end
 
   # POST /products
@@ -54,6 +55,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product = Product.find(params[:id])
     respond_to do |format|
       if @product.update(product_params)
         format.json { render json: @product}
@@ -88,7 +90,7 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name)
+    params.require(:product).permit(:image)
   end
 
   public
