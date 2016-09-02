@@ -22,18 +22,18 @@
       <% unless @result_sets.empty? %>
           <table class="table table-hover">
             <tbody>
-            <% @result_set_list.each do |set_result| %>
+            <% @result_set_list.each_pair do |set_result_id, value| %>
                 <tr class="result-set-element">
                   <td style="padding: 0px;">
                     <div class="result-set-name-block">
-                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result) %>> <%= set_result.first %></a>
+                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result_id) %>> <%= value[:name] %></a>
                     </div>
                   </td>
                   <td style="padding: 0px;">
                     <div class="result-set-status-block">
-                      <div class="status-box" style="background-color: <%= @statuses[set_result.last][:color] %>"></div>
-                      <span class="status-name"><%= @statuses[set_result.last][:name] %>
-                        <a class="edit-link link" href="<%= edit_result_set_path(set_result) %>">&#9998;</a>
+                      <div class="status-box" style="background-color: <%= value[:status] %>"></div>
+                      <span class="status-name"><%= value[:name] %>
+                        <a class="edit-link link" href="<%= edit_result_set_path(set_result_id ) %>">&#9998;</a>
                       </span>
                     </div>
                   </td>
