@@ -14,15 +14,15 @@ class ProductsController < ApplicationController
     # TODO: ATTENTION!! Found n+1 request. Fixme, pls
     @status_data = {}
     status_hash = {}
-    Status.pluck(:id, :color).each{|curret_status| status_hash.merge!( {curret_status.first => curret_status.last}) }
+    Status.pluck(:id, :color).each { |curret_status| status_hash.merge!({curret_status.first => curret_status.last}) }
     plans_id = @product.plans.pluck(:id)
     plans_id.each do |plan_id|
       data = []
       ResultSet.where(:plan_id => plan_id).group(:status).count.each do |key, value|
-        data << {'data' => [value], 'color' => status_hash[%r(\d).match(key)[0].to_i] }
+        data << {'data' => [value], 'color' => status_hash[%r(\d).match(key)[0].to_i]}
       end
       @status_data.merge!(plan_id => data)
-      end
+    end
   end
 
   # GET /products/new
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
-        format.json { render json: @product}
+        format.json { render json: @product }
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -57,7 +57,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     respond_to do |format|
       if @product.update(product_params)
-        format.json { render json: @product}
+        format.json { render json: @product }
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
