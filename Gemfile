@@ -21,5 +21,5 @@ gem 'unicorn'
 gem 'byebug'
 gem 'web-console', '~> 2.0', group: :development
 gem 'spring'
-gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api', branch: 'feature/optimize'
+gem 'palladium_api', git: 'https://github.com/flaminestone/palladium_api', branch: 'master'
 gem "paperclip", "~> 4.2"
