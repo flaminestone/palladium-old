@@ -11,15 +11,20 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    # TODO: ATTENTION!! Found n+1 request. Fixme, pls
+    # Bad way, but its work))
     @status_data = {}
     status_hash = {}
     Status.pluck(:id, :color).each { |curret_status| status_hash.merge!({curret_status.first => curret_status.last}) }
     plans_id = @product.plans.pluck(:id)
+    data_unsort = ResultSet.where(:plan_id => @product.plans.pluck(:id)).group(:plan_id, :status).count
     plans_id.each do |plan_id|
       data = []
-      ResultSet.where(:plan_id => plan_id).group(:status).count.each do |key, value|
-        data << {'data' => [value], 'color' => status_hash[%r(\d).match(key)[0].to_i]}
+      data_sort = data_unsort.find_all { |curret_data|
+        curret_data[0][0] == plan_id
+      }
+      data_sort
+      data_sort.each do |data_array|
+        data << {'data' => [data_array[1]], 'color' => status_hash[%r(\d).match(data_array[0][1])[0].to_i]}
       end
       @status_data.merge!(plan_id => data)
     end
