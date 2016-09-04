@@ -19,9 +19,15 @@ class ResultSetsController < ApplicationController
         end
       end
     end
-    @statuses = Status.all
+    @statuses = {}
+    statuses_id_array.each{ |current_status| @statuses.merge!({current_status.first => {:name => current_status[1], :color => current_status[2]}})}
     @all_result_count = 0
     @main_chart_data.each {|el| @all_result_count += el[:y]}
+    result_set = @result_sets.order(name: :asc).pluck(:id, :name, :status)
+    @result_set_list = {}
+    result_set.each{ |current_result_set|
+      @result_set_list.merge!({current_result_set.first => {:name => current_result_set[1], :status => @statuses[current_result_set[2]][:color]}})
+    }
   end
 
   # GET /result_sets/1

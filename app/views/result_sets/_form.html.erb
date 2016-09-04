@@ -26,7 +26,7 @@
             <div class="align_center">
               <div class="align_center_to_left">
                 <div class="align_center_to_right">
-                  <% @statuses.each do |current_status| %>
+                  <% @statuses.not_disabled.each do |current_status| %>
                       <div class="status-element <%= 'status-element-selected' if current_status.id == @result_set.status %>" style="background-color: <%= current_status.color %>" id=<%= current_status.id %>>
                         <%= current_status.name %>
                         <%= radio_button_tag('set_status', current_status.id, false, :class => "radio hidden") %>
