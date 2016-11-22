@@ -6,7 +6,7 @@
       <div class="plan-list-box">
         <table class="table table-hover">
           <tbody>
-          <% @product.plans.each do |current_plan| %>
+          <% @product.plans.reverse.each do |current_plan| %>
               <tr>
                 <td>
                   <div class="plan-name block">
