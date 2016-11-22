@@ -83,6 +83,8 @@ a.edit-link:hover, a.edit-link:visited{
   color: black;
 }
 .status-element {
+  white-space: nowrap;
+  overflow: hidden;
   width: 75px;
   height: 75px;
   border-style: solid;
