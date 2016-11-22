@@ -6,6 +6,9 @@
 █─████─██─█───█───█─██─█────██───█───█─███─█
 ████████████████████████████████████████████
 
+sudo su - postgres
+psql
+ALTER USER "palladium" WITH PASSWORD 'password1';
 
 For start palladium:
 docker-compose build
