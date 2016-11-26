@@ -1,21 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="plans-title">
-      <span>Plans</span>
-    </div>
     <div class="plan-list-box">
       <% @product.plans.reverse.each do |current_plan| %>
           <div class="line-block">
             <div class="plan-data-block">
-            <a class="plan-name-link link" href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a>
+              <a class="plan-name-link plan_name link" href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a>
             </div>
             <div class="plan-data-block">
               <%= current_plan.updated_at %>
             </div>
+            <div class="advanced_status_bar">
+              <ol class="repository-lang-stats-numbers">
+                <% @status_data[current_plan.id][:data].each do |data| %>
+                    <li class="repository-lang-stats-numbers">
+                      <span class="color-block" style="background-color:<%= data['color'] %>;"></span>
+                      <span class="lang"><%= data['name'] %></span>
+                      <span><%= data['data'] %></span>
+                      <span class="percent">(<%= (data['data'].to_f/@status_data[current_plan.id][:all_data]*100).round(2) %>%)</span>
+                    </li>
+                <% end %>
+              </ol>
+            </div>
             <div class="repository-lang-stats-graph">
               <% @status_data[current_plan.id][:data].each do |data| %>
                   <span class="language-color" style="width:<%= data['data'].to_f/@status_data[current_plan.id][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
-            <% end %>
+              <% end %>
             </div>
           </div>
       <% end %>
