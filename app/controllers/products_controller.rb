@@ -22,12 +22,15 @@ class ProductsController < ApplicationController
       data_sort = data_unsort.find_all { |curret_data|
         curret_data[0][0] == plan_id
       }
-      data_sort
+      all_data = 0
       data_sort.each do |data_array|
-        data << {'data' => [data_array[1]], 'color' => status_hash[%r(\d).match(data_array[0][1])[0].to_i]}
+        data << {'data' => data_array[1], 'color' => status_hash[%r(\d).match(data_array[0][1])[0].to_i]}
+        all_data += data_array[1]
       end
-      @status_data.merge!(plan_id => data)
+      @status_data.merge!(plan_id => {data: data, all_data: all_data})
+      # status_data style: [id: '1', status: {status_id:'id', status_name:'name', status_data:{status_count:'count', percent:'%'}}]
     end
+    p
   end
 
   # GET /products/new

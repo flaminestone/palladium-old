@@ -83,7 +83,7 @@ a.product-name:hover {
   left: 340px;
   width: 100%;
   margin: auto;
-  min-width:1024px;
+  min-width: 1024px;
 }
 
 .plans-title {
@@ -93,38 +93,48 @@ a.product-name:hover {
   line-height: 30px;
 }
 
-.plan-name-link{
+.plan-name-link {
   font-weight: bold;
 }
-.plan-element-underspase{
+
+.plan-element-underspase {
   padding-left: 24px;
 }
-a.plan-name-link{
+
+a.plan-name-link {
   color: #333333;
   cursor: pointer;
 }
-.plan-name-link:hover{
+
+.plan-name-link:hover {
   color: #333333;
 }
-.plan-name-link:visited{
+
+.plan-name-link:visited {
   color: #333333;
 }
-.plan-name-block{
+
+.plan-name-block {
   height: 50px;
   padding-top: 13px
 }
-.plan-data-block{
+
+.plan-data-block {
   height: 50px;
-  padding-top: 13px
+  width: 300px;
+  padding-top: 13px;
+  display: inline-block;
 }
+
 a.file-upload {
   text-decoration: none;
 }
+
 .file-upload:hover, .file-upload:active {
   color: #7C7C7C;
-  background-image: -webkit-linear-gradient(top, #f3f3f3, 0,  #ebebeb, 100%);
-  background-image:  -moz-linear-gradient(top, #f3f3f3 0,  #ebebeb 100%);
-  background-image: linear-gradient(to bottom, #f3f3f3 0,  #ebebeb 100%);
+  background-image: -webkit-linear-gradient(top, #f3f3f3, 0, #ebebeb, 100%);
+  background-image: -moz-linear-gradient(top, #f3f3f3 0, #ebebeb 100%);
+  background-image: linear-gradient(to bottom, #f3f3f3 0, #ebebeb 100%);
 }
 
 .file-upload {
@@ -140,6 +150,7 @@ a.file-upload {
   margin: 0;
   background: #dedede;
 }
+
 .file-upload input {
   cursor: pointer;
   opacity: 0;
@@ -149,6 +160,20 @@ a.file-upload {
   width: 171px;
   height: 28px;
 }
-.actions-elements{
+
+.actions-elements {
   margin: 5px 5px 5px 5px;
+}
+
+.repository-lang-stats-graph {
+  border: 1px #000000;
+  border-style: solid;
+  display: table;
+  width: 100%;
+}
+
+.language-color {
+  display: table-cell;
+  line-height: 8px;
+  text-indent: -9999px;
 }
