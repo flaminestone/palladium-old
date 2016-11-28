@@ -129,13 +129,16 @@ a.setting-link:hover{
     height: 36px;
     line-height: 36px;
 }
-.line-block{
+.line-block {
     font-size: 13px;
     font-family: verdana, arial, helvetica, sans-serif;
     line-height: 1.42857143;
     vertical-align: top;
     padding: 8px;
     border-top: 1px solid #dddddd;
+}
+.line-block:hover{
+    background-color: #f4f4f4;
 }
 .color-block{
     display: inline-block;
