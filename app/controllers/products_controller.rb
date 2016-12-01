@@ -13,20 +13,20 @@ class ProductsController < ApplicationController
   def show
     # Bad way, but its work))
     @status_data = {}
-    status_hash = {}
-    Status.pluck(:id, :color).each { |curret_status| status_hash.merge!({curret_status.first => curret_status.last}) }
+    @status_names = {}
+    Status.group(:id, :name, :color).count.keys.each { |current_status| @status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
     plans_id = @product.plans.pluck(:id)
-    data_unsort = ResultSet.where(:plan_id => @product.plans.pluck(:id)).group(:plan_id, :status).count
+    result_sets = ResultSet.where(:plan_id => plans_id).group(:plan_id)
+    data_unsort = result_sets.group(:status).count
     plans_id.each do |plan_id|
       data = []
-      data_sort = data_unsort.find_all { |curret_data|
-        curret_data[0][0] == plan_id
-      }
-      data_sort
+      data_sort = data_unsort.find_all { |curret_data| curret_data[0][0] == plan_id }
+      all_data = 0
       data_sort.each do |data_array|
-        data << {'data' => [data_array[1]], 'color' => status_hash[%r(\d).match(data_array[0][1])[0].to_i]}
+        data << {'data' => data_array[1], 'name' => @status_names[%r(\d).match(data_array[0][1])[0].to_i][:name], 'color' => @status_names[%r(\d).match(data_array[0][1])[0].to_i][:color]}
+        all_data += data_array[1]
       end
-      @status_data.merge!(plan_id => data)
+      @status_data.merge!(plan_id => {data: data, all_data: result_sets.count[plan_id]})
     end
   end
 

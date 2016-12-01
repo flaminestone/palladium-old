@@ -3,14 +3,25 @@ default: &default
   pool: 5
   encoding: utf8
 
+
 development: &default
   adapter: postgresql
   encoding: unicode
   database: postgres
   pool: 5
-  username: palladium
-  password: password1
-  host: localhost
+  username: postgres
+  password:
+  host: db
+
+
+#development: &default
+#  adapter: postgresql
+#  encoding: unicode
+#  database: postgres
+#  pool: 5
+#  username: palladium
+#  password: password1
+#  host: localhost
 
 production: &default
   adapter: postgresql
