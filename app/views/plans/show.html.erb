@@ -16,7 +16,9 @@
   </div>
     <% @plan.runs.order(created_at: :desc).find_each do |run| %>
         <div class="line-block">
-          <%= run.name %>
+          <div class="block">
+            <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+          </div>
         </div>
         <div class="repository-lang-stats-graph">
             <% @status_data[run.id][:data].each do |data| %>
