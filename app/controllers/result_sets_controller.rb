@@ -6,17 +6,27 @@ class ResultSetsController < ApplicationController
   # GET /result_sets
   # GET /result_sets.json
   def index
+    @plan = Plan.find(set_run.plan_id)
+    @product = Product.find(@plan.product_id)
     @run = set_run
     @result_sets = @run.result_sets
     @main_chart_data = []
     statuses_id_array = Status.pluck(:id, :name, :color)
     ResultSet.where(:run_id => params[:run_id]).group(:status).count.each do |key, value|
       statuses_id_array.each do |curren_status|
-        if curren_status.first.to_s == %r(\d).match(key).to_s
+        if curren_status.first.to_s == %r(\d+).match(key).to_s
           @main_chart_data << {name: curren_status[1], color: curren_status.last, y: value}
         end
       end
     end
+    @statuses = {}
+    statuses_id_array.each{ |current_status| @statuses.merge!({current_status.first => {:name => current_status[1], :color => current_status[2]}})}
+    @all_result_count = 0
+    @main_chart_data.each {|el| @all_result_count += el[:y]}
+    result_set = @result_sets.order(name: :asc).pluck(:id, :name, :status)
+    @result_set_list = {}
+    result_set.each{ |current_result_set|
+      @result_set_list.merge!({current_result_set.first => {:name => current_result_set[1], :status => {:status_name =>@statuses[current_result_set[2]][:name], :color=> @statuses[current_result_set[2]][:color]}}}) }
   end
 
   # GET /result_sets/1
@@ -32,6 +42,11 @@ class ResultSetsController < ApplicationController
 
   # GET /result_sets/1/edit
   def edit
+    set_result_set
+    @run = Run.find(@result_set.run_id)
+    @plan = Plan.find(@run.plan_id)
+    @product = Product.find(@plan.product_id)
+    @statuses = Status.all
   end
 
   # POST /result_sets
@@ -61,17 +76,20 @@ class ResultSetsController < ApplicationController
   # PATCH/PUT /result_sets/1
   # PATCH/PUT /result_sets/1.json
   def update
-    init_all_resourses
-    respond_to do |format|
-      if @result_sets.update_all(result_set_params)
-        format.html { redirect_to result_set_url(@result_set), notice: 'Result set was successfully updated.' }
-        # This string will be commented because creation can be only through API
-        format.json { render :json => @result_set }
-      else
-        format.html { render :edit }
-        format.json { render json: @result_set.errors, status: :unprocessable_entity }
+    set_result_set
+    status = Status.find(params['set_status'])
+     @result = Result.new(message: params['data'], author: current_user.email, status_id: status.id, plan_id: @result_set.plan_id, result_set_id: @result_set.id)
+      @result.errors.add(:status, 'Status is disable') if status.disabled
+      if @result.errors.empty?
+        if @result.save
+          @result_set.results << @result
+          status.results << @result
+          @result_set.update!(status: @result.status_id)
+          redirect_to run_result_sets_path(Run.find(@result_set.run_id)), notice: 'Status has changed'
+        else
+          render json: @result.errors, status: :unprocessable_entity
+        end
       end
-    end
   end
 
   # DELETE /result_sets/1
@@ -95,6 +113,7 @@ class ResultSetsController < ApplicationController
     @product = Product.find(@plan.product_id)
     @result_sets = ResultSet.where(run_id: Run.where(plan_id: Product.find(@product).plans.ids).ids, name: set_result_set.name)
   end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_result_set
     @result_set = ResultSet.find_by_id(params[:id])

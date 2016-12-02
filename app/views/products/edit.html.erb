@@ -1,6 +1,48 @@
-<h1>Editing Product</h1>
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1 align="center"><%= t('helpers.titles.admin_settings_title') %></h1>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <label></label>
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation">
+            <a href="/settings/admin" class="navigation-link"><%= t('helpers.titles.admin_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/status_settings_title" class="navigation-link">Status Settings</a>
+          </li>
+          <li role="presentation">
+            <a href="/settings/tokens" class="navigation-link"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li role="presentation" class="active">
+            <a href="/settings/products" class="navigation-link">Change product image</a></li>
+        </ul>
+      </div>
+    </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+    <div class="col-md-9">
+      <% @products.each do |product| %>
+          <a class="link product-name " style="text-decoration: none;">
+            <div class="product_item">
+              <div class="product_image" style="background: url('<%= asset_path(product.image.url) %>')  100% 100% no-repeat; background-size: contain; background-position: center;">
+              </div>
+              <div class="product-name-block">
+                <%= product.name %>
+                <%= form_for product, html: { multipart: true } do |form| %>
+                    <div class="actions-elements">
+                      <a class="file-upload">Change
+                        <%= form.file_field :image, :type => 'file', onchange: 'this.form.submit();' %>
+                      </a>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+          </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+<style>
+  a.navigation-link:visited {
+    color: #333333;
+  }
+</style>

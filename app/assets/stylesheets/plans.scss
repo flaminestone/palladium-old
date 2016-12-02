@@ -4,6 +4,19 @@
 .runs_table{
   background-color: #dddddd;
 }
-.runs_hading{
-  border-bottom: 1px solid #dddddd;
+.legend-block{
+  display: inline-block;
+  width: 50%;
+  float: right;
+  margin-top: 70px;
+  padding-left: 100px;
+}
+.status-box{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border: 1px #a0a0a0 solid;
+}
+.status-name, .status-count{
+  font-size: 18px;
 }

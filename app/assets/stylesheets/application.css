@@ -13,36 +13,170 @@
  *= require_tree .
  *= require_self
  */
-.hiden {
-    display: none;
-}
-.modal-header{
-    background-color:#EEEEEE;
-}
-.color_rect{
+
+html {
+    height: 100%;
     width: 100%;
-    height: 2em;
 }
-.jumbotron{
-    width:auto;
-    height:auto;
+body {
+    background: #fff;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
 
+div {
+    margin: 0;
+    padding: 0;
 }
-.container{
-    width:auto;
-    height:auto;
-
+.mainpage{
+    min-width: 800px;
 }
-.item_title {
+.navbar-app{
+    background-color: #0f4071;
+    border-radius: 0;
+    height: 48px;
+    text-align: left;
+    padding: 4px 24px 4px 24px;
+    position:relative;
+    min-width: 815px;
+}
+.palladium-name-block{
+    margin-top: 12px;
+    display:inline-block;
+}
+a.palladium-link{
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ffffff;
+}
+a.link{
+    background-color: rgba(0, 0, 0, 0);
+}
+.palladium-logo{
+    height: 18px;
+}
+.profile-box{
+    float: right;
+    display:inline-block;
+}
+.caret{
+    margin-left: 6px;
+    color: #c5c5c5;
+}
+.user-name{
+    border-bottom: 1px dotted;
+    display: inline-block;
+    color: #c5c5c5;
+}
+.user-caret{
+    display: inline-block;
+}
+.dropdown-menu:before,
+.dropdown-menu:after {
+    display:none;
+}
+.dropdown-menu-custom {
+    margin-top: 7px;
+    width: 143px;
+    min-width: 0px;
+    font-size: 12px;
+}
+.dropdown-toggle{
+    cursor: pointer;
+    margin-left: 30px;
+    padding-top: 12px;
+    height: 40px;
+    vertical-align: middle;
+}
+.palladium-settings {
+    width: 32px;
+    height: 32px;
+    padding: 5px 4px 4px 4px;
+    margin-top: 5px;
+    font-size: 20px;
+    background-color: #033260;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+}
+a.setting-link{
+    text-decoration:none;
+    color: #c5c5c5;
+}
+a.setting-link:hover{
+    color: #ffffff;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: #e9e9e9;
+}
+#chart-container{
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+.block{
+    height: 36px;
+    line-height: 36px;
+}
+.line-block {
+    font-size: 13px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    line-height: 1.42857143;
+    vertical-align: top;
+    padding: 8px;
+    border-top: 1px solid #dddddd;
+}
+.line-block:hover{
+    background-color: #f4f4f4;
+}
+.color-block{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
     text-align: center;
-    font-size: 4em;
-    padding-bottom: 49px;
-    margin: 60px 0 40px;
-    border-bottom: 1px solid #bfbfbf;
 }
-.navbar-inverse-app{
-    background-color: #000000;
-    border-color: #000000;
-    border-radius: 0px;
+.advanced_status_bar{
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.lang {
+    font-weight: bold;
+}
+.status-attr {
+    display: table-cell;
+    max-width: 200px;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis;
+    padding-right: 3px;
+}
+
+.repository-lang-stats-numbers{
+    display: inline-table;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    text-align: center;
+    white-space: nowrap;
+    list-style-type: none;
+}
+
+.language-color {
+    display: table-cell;
+    line-height: 8px;
+    text-indent: -9999px;
+    height: 5px;
 }
 /*hard class edit*/

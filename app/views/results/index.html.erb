@@ -1,40 +1,71 @@
-<p id="notice"><%= notice %></p>
-
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+  <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %> </a></li>
+</ol>
 <div class="container">
-  <p id="notice"><%= notice %></p>
-
-  <div class="container jumbotron sets_table">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="page-header sets_hading">
-          <h1 align="center"><%= t('helpers.titles.test_results') %></h1>
-          <h2 align="center"><%= @result_set.name %></h2>
-          <h3 align="center"><%= link_to 'Statistic', controller: "result_sets", action: "show", id:@result_set %></h3>
-        </div>
-        <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table table-hover result_table">
-          <thead>
-          <tr>
-            <th><%= @results.human_attribute_name(:name) %></th>
-            <th><%= @results.human_attribute_name(:version) %></th>
-            <th><%= @results.human_attribute_name(:status) %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @results.order(created_at: :desc).each do |result| %>
-              <tr class="clickable-row">
-                <td><%= result.message %></td>
-                <td><%= result.author %></td>
-                <td style = "background-color: <%= Status.find(result.status_id).color %>"> <%= result.message %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h3><%= t('helpers.titles.results') %></h3>
+      <table class="table table-hover result_table">
+        <thead>
+        <tr>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Author</th>
+          <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @results.order(created_at: :desc).each do |result| %>
+            <tr class="clickable-row" style="padding: 0px;">
+              <td class="status-column">
+                <div class="block">
+                  <div class="status-box" style="background-color: <%= Status.find(result.status_id).color %>"></div>
+                  <span class="status-name"><%= Status.find(result.status_id).name %></span>
+                </div>
+              </td>
+              <td class="data-column">
+                <div class="date block"><%= result.created_at %></div>
+              </td>
+              <td class="author-column">
+                <div class="author block"><%= result.author %></div>
+              </td>
+              <td class="message-column">
+                <div class="message block">
+                  <a onclick="Open_modal(this.text);" class="message-link link">
+                    <%= result.message %>
+                  </a>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Resuls message</h4>
+      </div>
+      <div class="modal-body">
+        <div id="modal-data"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-
+<script>
+  function Open_modal(text) {
+    $('#modal-data').text(text);
+    $('#myModal').modal();
+  }
+</script>
 
 

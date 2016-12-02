@@ -1,3 +1,47 @@
 // Place all the styles related to the Results controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.status-box{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border: 1px #a0a0a0 solid;
+}
+.message {
+  overflow: hidden;
+}
+.message-column{
+  overflow: hidden;
+  max-width: 400px;
+
+}
+.status-column{
+  min-width: 100px;
+  max-width: 200px;
+}
+.data-column{
+  min-width: 180px;
+}
+
+.author-column{
+  min-width: 50px;
+  max-width: 200px;
+}
+#modal-data{
+  padding-top: 25px;
+  overflow: auto;
+  height: 100px;
+}
+.modal-dialog{
+  margin-top: 50px;
+}
+a.message-link{
+  color: #333333;
+  cursor: pointer;
+}
+.message-link:hover{
+  color: #333333;
+}
+.message-link:visited{
+  color: #333333;
+}

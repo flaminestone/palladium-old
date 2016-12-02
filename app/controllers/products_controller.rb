@@ -1,17 +1,35 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :destroy]
   acts_as_token_authentication_handler_for User
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-    @product = Product.new
+    @products = Product.all.order('name ASC')
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    # Bad way, but its work))
+    @status_data = {}
+    @status_names = {}
+    Status.group(:id, :name, :color).count.keys.each { |current_status| @status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
+    plans_id = @product.plans.pluck(:id)
+    result_sets = ResultSet.where(:plan_id => plans_id).group(:plan_id)
+    data_unsort = result_sets.group(:status).count
+    plans_id.each do |plan_id|
+      data = []
+      data_sort = data_unsort.find_all { |curret_data| curret_data[0][0] == plan_id }
+      all_data = 0
+      data_sort.each do |data_array|
+        status_id = %r(\d+).match(data_array[0][1])[0].to_i
+        data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
+        all_data += data_array[1]
+      end
+      temp = data.sort_by { |key|  key.first }.to_h # need for sorting
+      @status_data.merge!(plan_id => {data: temp.values, all_data: result_sets.count[plan_id]})
+    end
   end
 
   # GET /products/new
@@ -21,15 +39,16 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @products = Product.all.order('name ASC')
   end
 
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @product = Product.new({:name => product_params})
     respond_to do |format|
       if @product.save
-        format.json { render json: @product}
+        format.json { render json: @product }
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -42,9 +61,10 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product = Product.find(params[:id])
     respond_to do |format|
-      if @product.update(product_params)
-        format.json { render json: @product}
+      if @product.update({:name => product_params})
+        format.json { render json: @product }
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -76,7 +96,7 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name)
+    params.require(:product)[:name]
   end
 
   public

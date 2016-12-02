@@ -7,36 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-inverse-app">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href= <%= root_path %>>Palladium</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <% if user_signed_in? %>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #ffffff;"><%= current_user.email %><span class="caret"></span></a>
-          <% end %>
-
-          <ul class="dropdown-menu">
-            <li><a href="/settings/admin"><i class="fa fa-fw fa-gear"></i> <%= t("helpers.links.settings") %></a></li>
-            <li><a href="/users/sign_out" rel="nofollow" data-method="delete"><i class='fa fa-fw fa-power-off'></i> Logout</a></li>
+<div class="navbar-app">
+  <div class="palladium-name-block">
+    <a class="link palladium-link" href=<%= root_path %>>
+      <%= image_tag("logo.png", :alt => "rss feed", class: 'palladium-logo') %>
+      Palladium</a>
+  </div>
+  <% if user_signed_in? %>
+      <div class="profile-box">
+        <div class="dropdown">
+          <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <div class="user-name"><%= current_user.email %></div>
+            <span class="caret"></span>
+          </div>
+          <ul class="dropdown-menu pull-right dropdown-menu-custom">
+            <li class="logout-link"><a href="/users/sign_out" rel="nofollow" data-method="delete">Sign Out</a></li>
           </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<%= yield %>
-</body>
+        </div>
+      </div>
+      <div class="palladium-settings">
+        <a class="fa fa-fw fa-gear link setting-link" href="/settings/admin"></a>
+      </div>
+      </div>
+  <% end %>
+  <div class="mainpage">
+    <%= yield %>
+  </div>
+  </body>
 </html>

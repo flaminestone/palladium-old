@@ -1,40 +1,51 @@
+<ol class="breadcrumb">
+  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
+</ol>
 <div class="container">
-  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <div id="chart-container" style="display: inline-block"></div>
+    <div class="legend-block">
 
-  <div class="container jumbotron runs_table">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="page-header sets_hading">
-          <h1 align="center"><%= t('helpers.titles.test_results') %></h1>
-        </div>
-        <div id="run_status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        <h3><%= t('helpers.titles.results') %></h3>
-        <table class="table table-hover sets_table">
-          <thead>
-          <tr>
-            <th><%= @result_sets.human_attribute_name(:name) %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% status = Status.pluck(:id, :color).to_h %>
-          <% @result_sets.order(name: :desc).find_each do |set_result| %>
-              <tr class="clickable-row run_str" data-href="<%= result_set_results_path(set_result) %>">
-                <td><%= set_result.name %></td>
-                <td style="background-color: <%= status[set_result.status] %>">
-                  <% p %>
-                </td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+      <% @main_chart_data.each do |current_status| %>
+          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
+          <span class="status-count"><%= current_status[:y] %></span>
+          <span class="status-name"><%= current_status[:name] %></span>
+          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
+          <br />
+      <% end %>
+
     </div>
+    </div>
+  <div class="row">
+      <% unless @result_sets.empty? %>
+          <table class="table table-hover">
+            <tbody>
+            <% @result_set_list.each_pair do |set_result_id, value| %>
+                <tr class="result-set-element">
+                  <td style="padding: 0px;">
+                    <div class="result-set-name-block">
+                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result_id) %>> <%= value[:name] %></a>
+                    </div>
+                  </td>
+                  <td style="padding: 0px;">
+                    <div class="result-set-status-block">
+                      <div class="status-box" style="background-color: <%= value[:status][:color] %>"></div>
+                      <span class="status-name"><%= value[:status][:status_name] %>
+                        <a class="edit-link link" href="<%= edit_result_set_path(set_result_id ) %>">&#9998;</a>
+                      </span>
+                    </div>
+                  </td>
+                  </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
   </div>
 </div>
-
 <script type="text/javascript">
     $(function () {
-        $('#run_status_chart').highcharts({
+        $('#chart-container').highcharts({
             navigation: {
                 buttonOptions: {
                     enabled: false
@@ -59,7 +70,7 @@
                 pie: {
                     animation: false,
                     dataLabels: {
-                        enabled: true,
+                        enabled: false,
                         distance: -50,
                         style: {
                             fontWeight: 'bold',
@@ -80,10 +91,11 @@
             }]
         });
     });
-
-
     jQuery(document).ready(function ($) {
         $(".clickable-row").click(function () {
+            window.document.location = $(this).data("href");
+        });
+      $(".change-status-button").click(function () {
             window.document.location = $(this).data("href");
         });
     });

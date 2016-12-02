@@ -7,9 +7,11 @@
       <div class="row">
         <label></label>
         <ul class="nav nav-pills nav-stacked">
-          <li role="presentation"><a href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/admin" class="navigation-link"><%= t('helpers.titles.admin_settings_title') %></a></li>
           <li role="presentation" class="active"><a href="/settings/status_settings_title">Status Settings</a></li>
-          <li role="presentation"><a href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/tokens" class="navigation-link"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li><a href="/settings/products" class="navigation-link">Change product image</a></li>
+
         </ul>
       </div>
     </div>
@@ -30,23 +32,40 @@
               <tr class="row">
                 <td><%= status.name %></td>
                 <td>
-                  <div class="color_rect_index masthead" style = "background-color: <%= status.color %>;"></div>
+                  <div class="status-box" style="background-color: <%= status.color %>"></div>
+
                 </td>
-                <td><%= link_to 'Edit', "/settings/status_settings_title/#{status.id}/edit" %>
+                <td><%= link_to 'Edit', "/settings/status_settings_title/#{status.id}/edit", class: 'action-link link' %>
                   <%= link_to t('.disable', :default => t("helpers.links.disable")),
                               "/settings/status_settings_title/#{status.id}",
                               :method => 'disable',
-                              :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))} unless status.main_status %></td>
+                              :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?') )}, class: 'action-link link' unless status.main_status %></td>
               </tr>
           <% end %>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="field">
-    </div>
   </div>
 </div>
+
+<style>
+  .actions{
+    display: inline-block;
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+  a.action-link:visited{
+    color: black;
+  }
+  a.action-link:hover{
+    color: black;
+  }
+  a.navigation-link:visited{
+    color: #333333;
+  }
+</style>
+
 <script>
     jQuery(document).ready(function ($) {
         $(".clickable-row").click(function () {

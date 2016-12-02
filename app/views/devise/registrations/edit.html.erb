@@ -9,8 +9,9 @@
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation" class="active">
             <a href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
-          <li role="presentation"><a href="/settings/status_settings_title">Status Settings</a></li>
-          <li role="presentation"><a href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/status_settings_title" class="navigation-link link">Status Settings</a></li>
+          <li role="presentation"><a href="/settings/tokens" class="navigation-link link"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li role="presentation"><a href="/settings/products" class="navigation-link link">Change product image</a></li>
         </ul>
       </div>
     </div>
@@ -20,50 +21,41 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
               <%= devise_error_messages! %>
 
-              <div class="field">
                 <%= f.label :email %><br>
 
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon1">@</span>
                   <%= f.email_field :email, autofocus: true, :autocomplete => :off, class: 'form-control' %>
                 </div>
-              </div>
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                   <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
               <% end %>
 
-              <div class="field">
                 <%= f.label :Old_password %><br>
 
                 <div class="input-group">
                   <%= f.password_field :current_password, :autocomplete => :off, class: 'form-control' %>
                 </div>
 
-                <div class="field">
                   <%= f.label :New_password %> <i>(leave blank if you don't want to change it)</i><br>
 
                   <div class="input-group">
                     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
                   </div>
-                </div>
 
-                <div class="field">
                   <%= f.label :Confirm_new_password %><br>
 
                   <div class="input-group">
                     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
                   </div>
-                </div>
-              </div>
 
               <div class="actions">
-                <%= f.submit t('helpers.links.update_profile'), class: "btn btn-success" %>
+                <%= f.submit t('helpers.links.update_profile'), class: "btn btn-success actions" %>
               </div>
           <% end %>
         </div>
       </div>
-      <div class="field">
         <div class="panel panel-danger">
 
           <div class="panel-heading">Delete account</div>
@@ -72,7 +64,20 @@
             <%= button_to t("helpers.links.delete_your_account"), registration_path(resource_name), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-danger" %>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
+<style>
+  .actions{
+    display: inline-block;
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+    a.navigation-link:visited{
+      color: #333333;
+    }
+
+  a.navigation-link{
+      color: #333333;
+    }
+</style>

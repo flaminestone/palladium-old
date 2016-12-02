@@ -6,6 +6,9 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     @result_set = ResultSet.find_by_id(params.require(:result_set_id))
+    @run = Run.find(@result_set.run_id)
+    @plan = Plan.find(@run.plan_id)
+    @product = Product.find(@plan.product_id)
     @results = @result_set.results
   end
 
@@ -44,8 +47,9 @@ class ResultsController < ApplicationController
           else
             Status.find_by_id(params['status_id']).results << @result
           end
-          set_result_set.results << @result
-          @result_set.update(status: @result.status_id)
+          set_result_set
+          @result_set.results << @result
+          @result_set.update!(status: @result.status_id)
           # format.html { redirect_to product_plan_run_result_set_result_path(product_find_by_id, set_plan, set_run, set_result_set, @result), notice: 'Result was successfully created.' }
           # This method will be commented because creation can be only through API
           format.json { render :json => @result }
