@@ -17,7 +17,6 @@
 
     </div>
     </div>
-
   <div class="row">
       <% unless @result_sets.empty? %>
           <table class="table table-hover">
@@ -31,8 +30,8 @@
                   </td>
                   <td style="padding: 0px;">
                     <div class="result-set-status-block">
-                      <div class="status-box" style="background-color: <%= value[:status] %>"></div>
-                      <span class="status-name"><%= value[:name] %>
+                      <div class="status-box" style="background-color: <%= value[:status][:color] %>"></div>
+                      <span class="status-name"><%= value[:status][:status_name] %>
                         <a class="edit-link link" href="<%= edit_result_set_path(set_result_id ) %>">&#9998;</a>
                       </span>
                     </div>

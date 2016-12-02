@@ -26,8 +26,7 @@ class ResultSetsController < ApplicationController
     result_set = @result_sets.order(name: :asc).pluck(:id, :name, :status)
     @result_set_list = {}
     result_set.each{ |current_result_set|
-      @result_set_list.merge!({current_result_set.first => {:name => current_result_set[1], :status => @statuses[current_result_set[2]][:color]}})
-    }
+      @result_set_list.merge!({current_result_set.first => {:name => current_result_set[1], :status => {:status_name =>@statuses[current_result_set[2]][:name], :color=> @statuses[current_result_set[2]][:color]}}}) }
   end
 
   # GET /result_sets/1
