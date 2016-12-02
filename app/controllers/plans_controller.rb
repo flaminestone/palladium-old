@@ -12,48 +12,34 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
-    @plan = set_plan
     @product = product_find_by_id
-    results_array = ResultSet.where(:plan_id => params[:id]).pluck(:run_id, :status)
-    statuses_id_array = Status.pluck(:id, :name, :color)
-    @all_results = {}
-    @status_data = {}
-    unless results_array.empty?
-      results_array.transpose.first.uniq.each do |current_run_id| # добавляем заранее все хеши для данных каждого run
-        @all_results.merge!({current_run_id => []})
+    @status_names = {}
+    @status_data = {} # for run charts
+    results = ResultSet.where(:plan_id => params[:id])
+    results_status_array = results.group(:status).count
+    results_array = results.group(:run_id, :status).count
+    Status.group(:id, :name, :color).order(id: :asc).count.keys.each { |current_status| @status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
+    return if results_array.empty?
+    runs_id_array = results_array.map { |current_element| {current_element[0][0] => {data: {:count => current_element[1], :color => current_element[0][1]}}} }
+    runs_id_array.each do |plan_id|
+      data = []
+      all_data = 0
+      data_sort = results_array.find_all { |curret_data| curret_data[0][0] == plan_id.keys.first }
+      data_sort.each do |data_array|
+        status_id = %r(\d+).match(data_array[0][1])[0].to_i
+        data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
+        all_data += data_array[1]
       end
-      results = {}
-      results_array.each do |current_results|
-        if results.include?(current_results.first)
-          results[current_results.first] << current_results.last
-        else
-          results.merge!({current_results.first => [current_results.last]})
-        end
-      end
-      # results = {id =>[status_id, status_id, status_id, status_id, status_id, status_id, status_id, status_id, status_id]}
-      results.each do |run_id, run_data|
-        data = []
-        statuses_id_array.map do |current_status_id|
-          status_count = run_data.count(current_status_id.first)
-          status_count = nil if status_count == 0
-          data << {:data => [status_count].compact, color: current_status_id.last}
-        end
-        @status_data.merge!({run_id => data})
-      end
-      # @main_chart_data = [{:name: 'passed', :color: '#ff0000', y: '15'}, {}, {}]
-      @main_chart_data = []
-      @status_data # for run charts
-      ResultSet.where(:plan_id => params[:id]).group(:status).count.each do |key, value|
-        statuses_id_array.each do |curren_status|
-          if curren_status.first.to_s == %r(\d).match(key).to_s
-            @main_chart_data << {name: curren_status[1], color: curren_status.last, y: value}
-          end
-        end
-      end
+      temp = data.sort_by { |key| key.first }.to_h # need for sorting
+      @status_data.merge!(plan_id.keys.first => {data: temp.values, all_data: all_data})
     end
-    @main_chart_data.to_json.html_safe
+    @main_chart_data = []
+    results_status_array.each { |current|
+      @main_chart_data << {:y => current[1], :name => @status_names[%r(\d+).match(current[0])[0].to_i][:name], :color => @status_names[%r(\d+).match(current[0])[0].to_i][:color]}
+    }
+    @main_chart_data
     @all_result_count = 0
-        @main_chart_data.each {|el| @all_result_count += el[:y]}
+    results_status_array.values.map { |i| @all_result_count += i }
   end
 
   # GET /plans/new
