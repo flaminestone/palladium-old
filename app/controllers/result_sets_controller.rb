@@ -14,7 +14,7 @@ class ResultSetsController < ApplicationController
     statuses_id_array = Status.pluck(:id, :name, :color)
     ResultSet.where(:run_id => params[:run_id]).group(:status).count.each do |key, value|
       statuses_id_array.each do |curren_status|
-        if curren_status.first.to_s == %r(\d).match(key).to_s
+        if curren_status.first.to_s == %r(\d+).match(key).to_s
           @main_chart_data << {name: curren_status[1], color: curren_status.last, y: value}
         end
       end

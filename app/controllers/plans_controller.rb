@@ -26,16 +26,16 @@ class PlansController < ApplicationController
       all_data = 0
       data_sort = results_array.find_all { |curret_data| curret_data[0][0] == plan_id.keys.first }
       data_sort.each do |data_array|
-        status_id = %r(\d).match(data_array[0][1])[0].to_i
+        status_id = %r(\d+).match(data_array[0][1])[0].to_i
         data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
         all_data += data_array[1]
       end
-      temp = data.sort_by { |key| key }.to_h # need for sorting
+      temp = data.sort_by { |key| key.first }.to_h # need for sorting
       @status_data.merge!(plan_id.keys.first => {data: temp.values, all_data: all_data})
     end
     @main_chart_data = []
     results_status_array.each { |current|
-      @main_chart_data << {:y => current[1], :name => @status_names[%r(\d).match(current[0])[0].to_i][:name], :color => @status_names[%r(\d).match(current[0])[0].to_i][:color]}
+      @main_chart_data << {:y => current[1], :name => @status_names[%r(\d+).match(current[0])[0].to_i][:name], :color => @status_names[%r(\d+).match(current[0])[0].to_i][:color]}
     }
     @main_chart_data
     @all_result_count = 0

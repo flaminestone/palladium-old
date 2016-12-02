@@ -155,11 +155,19 @@ a.setting-link:hover{
 .lang {
     font-weight: bold;
 }
+.status-attr {
+    display: table-cell;
+    max-width: 200px;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis;
+    padding-right: 3px;
+}
 
 .repository-lang-stats-numbers{
-    display: table-cell;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    display: inline-table;
+    padding-bottom: 10px;
+    padding-left: 15px;
     text-align: center;
     white-space: nowrap;
     list-style-type: none;
