@@ -164,4 +164,10 @@ a.setting-link:hover{
     list-style-type: none;
 }
 
+.language-color {
+    display: table-cell;
+    line-height: 8px;
+    text-indent: -9999px;
+    height: 5px;
+}
 /*hard class edit*/
