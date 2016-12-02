@@ -14,85 +14,16 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <tbody>
-    <% unless @plan.runs.empty? %>
-        <table class="table table-hover">
-          <tbody>
-          <% @plan.runs.order(created_at: :desc).find_each do |run| %>
-              <tr>
-                <td>
-                  <div class="block">
-                    <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
-                  </div>
-                </td>
-                <td>
-                  <div id="status-bar-<%= run.id %>" style="min-width: 100px; max-width: 100px; height: 36px; margin: 0 auto"></div>
-                  <script>
-                    $(function () {
-                      $("#status-bar-<%= run.id %>").highcharts({
-                        navigation: {
-                          buttonOptions: {
-                            enabled: false
-                          }
-                        },
-                        credits: {
-                          enabled: false
-                        },
-                        tooltip: {
-                          enabled: false
-                        },
-                        chart: {
-                          height: 50,
-                          width: 300,
-                          type: 'bar',
-                          backgroundColor: null
-                        },
-                        title: {
-                          text: ''
-                        },
-                        subTitle: {
-                          text: ''
-                        },
-                        xAxis: {
-
-                          labels: {
-                            enabled: false
-                          }
-                        },
-                        yAxis: {
-                          gridLineWidth: 0,
-                          labels: {
-                            enabled: false
-                          },
-                          title: {
-                            text: ''
-                          }
-                        },
-                        legend: {
-                          enabled: false
-                        },
-                        series: <%= @status_data[run.id].to_json.html_safe %>,
-                        plotOptions: {
-                          series: {
-                            stacking: 'normal',
-                            animation: false,
-                            dataLabels: {
-                              enabled: true
-                            }
-                          }
-                        }
-                      });
-                    });
-                  </script>
-                </td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
+    <% @plan.runs.order(created_at: :desc).find_each do |run| %>
+        <div class="line-block">
+          <%= run.name %>
+        </div>
+        <div class="repository-lang-stats-graph">
+            <% @status_data[run.id][:data].each do |data| %>
+                <span class="language-color" style="width:<%= data['data'].to_f/@status_data[run.id][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
+            <% end %>
+        </div>
     <% end %>
-    </tbody>
-  </div>
 </div>
 
 <script type="text/javascript">
