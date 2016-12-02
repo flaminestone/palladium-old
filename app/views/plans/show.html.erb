@@ -14,18 +14,28 @@
       <% end %>
     </div>
   </div>
-    <% @plan.runs.order(created_at: :desc).find_each do |run| %>
-        <div class="line-block">
-          <div class="block">
-            <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
-          </div>
+  <% @plan.runs.order(created_at: :desc).find_each do |run| %>
+      <div class="line-block">
+        <div class="block">
+          <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
         </div>
+        <ol class="repository-lang-stats-numbers">
+          <% @status_data[run.id][:data].each do |data| %>
+              <li class="repository-lang-stats-numbers">
+                <span class="color-block" style="background-color:<%= data['color'] %>;"></span>
+                <span><%= data['name'] %></span>
+                <span><%= data['data'] %></span>
+                <span class="percent">(<%= (data['data'].to_f/@status_data[run.id][:all_data]*100).round(2) %>%)</span>
+              </li>
+          <% end %>
+        </ol>
         <div class="repository-lang-stats-graph">
-            <% @status_data[run.id][:data].each do |data| %>
-                <span class="language-color" style="width:<%= data['data'].to_f/@status_data[run.id][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
-            <% end %>
+          <% @status_data[run.id][:data].each do |data| %>
+              <span class="language-color" style="width:<%= data['data'].to_f/@status_data[run.id][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
+          <% end %>
         </div>
-    <% end %>
+      </div>
+  <% end %>
 </div>
 
 <script type="text/javascript">

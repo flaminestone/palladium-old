@@ -142,9 +142,10 @@ a.setting-link:hover{
 }
 .color-block{
     display: inline-block;
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
+    text-align: center;
 }
 .advanced_status_bar{
     padding-left: 0;
