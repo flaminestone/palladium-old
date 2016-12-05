@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'less-rails' # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'sprockets', '3.6.3'
 gem 'twitter-bootstrap-rails'
-gem 'devise', '= 3.5.3' #authgit
+gem 'devise'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'chartkick' #dont forget to add <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> to your erb file
 gem 'pg'
