@@ -6,11 +6,13 @@
     <div id="chart-container" style="display: inline-block"></div>
     <div class="legend-block">
       <% @main_chart_data.each do |current_status| %>
-          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
-          <span class="status-count"><%= current_status[:y] %></span>
-          <span class="status-name"><%= current_status[:name] %></span>
-          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
+          <a href= <%= url_for(params.merge(:sorting => {:id => current_status.first})) %>>
+          <div class="status-box" style="background-color: <%= current_status[1][:color].downcase %>"></div>
+          <span class="status-count"><%= current_status[1][:y] %></span>
+          <span class="status-name"><%= current_status[1][:name] %></span>
+          <span class="status-persent">(<%= (current_status[1][:y]*100.0/@all_result_count).round 1 %>%)</span>
           <br/>
+          </a>
       <% end %>
     </div>
   </div>
@@ -74,7 +76,7 @@
       series: [{
         type: 'pie',
         name: 'Value',
-        data: <%= @main_chart_data.to_json.html_safe %>
+        data: <%= @main_chart_data.values.to_json.html_safe %>
       }]
     });
   });

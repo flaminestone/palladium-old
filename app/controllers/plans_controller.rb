@@ -33,10 +33,11 @@ class PlansController < ApplicationController
       temp = data.sort_by { |key| key.first }.to_h # need for sorting
       @status_data.merge!(plan_id.keys.first => {data: temp.values, all_data: all_data})
     end
-    @main_chart_data = []
-    results_status_array.each { |current|
-      @main_chart_data << {:y => current[1], :name => @status_names[%r(\d+).match(current[0])[0].to_i][:name], :color => @status_names[%r(\d+).match(current[0])[0].to_i][:color]}
-    }
+    @main_chart_data = {}
+    results_status_array.each do |current|
+      id = %r(\d+).match(current[0])[0].to_i
+      @main_chart_data.merge!({id => {:y => current[1], :name => @status_names[id][:name], :color => @status_names[id][:color]}})
+    end
     @main_chart_data
     @all_result_count = 0
     results_status_array.values.map { |i| @all_result_count += i }
