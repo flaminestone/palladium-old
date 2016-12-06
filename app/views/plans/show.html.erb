@@ -23,7 +23,7 @@
     </div>
   </div>
   <% @main_data.each do |run| %>
-      <% next if @status_data[run[0]].nil? %>
+      <% next if @status_data[run[0]].nil? # FIXME %>
       <div class="line-block">
         <div class="block">
           <a class="link plan-name-link" href=<%= run_result_sets_path(run[0]) %>><%= run[1] %></a>
