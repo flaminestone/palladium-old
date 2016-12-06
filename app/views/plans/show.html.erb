@@ -5,36 +5,46 @@
   <div class="row">
     <div id="chart-container" style="display: inline-block"></div>
     <div class="legend-block">
+      <div class="block">
+        <a class="link clear-filter-link" href="<%= url_for(:only_path => false, :overwrite_params => nil) %>">Clear
+          filter</a></div>
       <% @main_chart_data.each do |current_status| %>
-          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
-          <span class="status-count"><%= current_status[:y] %></span>
-          <span class="status-name"><%= current_status[:name] %></span>
-          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
+          <% (request.GET['sorting']['status'] == current_status[0].to_s ? sequence = :asc : sequence = :desc) unless request.GET['sorting'].nil? %>
+          <% (request.GET['sorting']['sequence'] == 'asc' ? sequence = :desc : sequence = :asc) unless request.GET['sorting'].nil? %>
+          <a class="link legend-link" href="<%= url_for(:sorting => {:status => current_status.first, :sequence => sequence}) %>">
+            <div class="status-box" style="background-color: <%= current_status[1][:color].downcase %>"></div>
+            <span class="status-count"><%= current_status[1][:y] %></span>
+            <span class="status-name"><%= current_status[1][:name] %></span>
+            <span class="status-persent">(<%= (current_status[1][:y]*100.0 / @all_result_count).round 1 %>%)</span>
+          </a>
+          <span style="font-size: large"><%=("&#9668".html_safe if request.GET['sorting']['status'] == current_status[0].to_s) unless request.GET['sorting'].nil?%></span>
           <br/>
-      <% end %>
+    <% end %>
     </div>
   </div>
-  <% @plan.runs.order(created_at: :desc).find_each do |run| %>
+  <% @main_data.each do |run| %>
+      <% next if @status_data[run[0]].nil? %>
       <div class="line-block">
         <div class="block">
-          <a class="link plan-name-link" href=<%= run_result_sets_path(run) %>><%= run.name %></a>
+          <a class="link plan-name-link" href=<%= run_result_sets_path(run[0]) %>><%= run[1] %></a>
         </div>
-          <% @status_data[run.id][:data].each do |data| %>
-              <li class="repository-lang-stats-numbers">
-                <div class="status-attr">
-                  <span class="color-block" style="background-color:<%= data['color'] %>;"></span>
-                  <span><%= data['name'] %></span>
-                  <span><%= data['data'] %></span>
-                </div>
-                <div class="status-attr">
-                  <span class="percent">(<%= (data['data'].to_f/@status_data[run.id][:all_data]*100).round(2) %>
+        <% @status_data[run[0]][:data].each do |data| %>
+
+            <li class="repository-lang-stats-numbers">
+              <div class="status-attr">
+                <span class="color-block" style="background-color:<%= data['color'] %>;"></span>
+                <span><%= data['name'] %></span>
+                <span><%= data['data'] %></span>
+              </div>
+              <div class="status-attr">
+                  <span class="percent">(<%= (data['data'].to_f/@status_data[run[0]][:all_data]*100).round(2) %>
                     %)</span>
-                </div>
-              </li>
-          <% end %>
+              </div>
+            </li>
+        <% end %>
         <div class="repository-lang-stats-graph">
-          <% @status_data[run.id][:data].each do |data| %>
-              <span class="language-color" style="width:<%= data['data'].to_f/@status_data[run.id][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
+          <% @status_data[run[0]][:data].each do |data| %>
+              <span class="language-color" style="width:<%= data['data'].to_f/@status_data[run[0]][:all_data]*100 %>%; background-color:<%= data['color'] %>;">status</span>
           <% end %>
         </div>
       </div>
@@ -42,40 +52,40 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {
-    $('#chart-container').highcharts({
-      navigation: {
-        buttonOptions: {
-          enabled: false
-        }
-      },
-      chart: {
-        backgroundColor: 'rgba(225, 225, 225, 0)',
-        type: 'pie',
-      },
-      title: {
-        text: ''
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: false,
-          cursor: 'pointer',
-          depth: 35,
-          animation: false,
-          dataLabels: {
-            enabled: false,
-            format: '{point.name}'
-          }
-        }
-      },
-      series: [{
-        type: 'pie',
-        name: 'Value',
-        data: <%= @main_chart_data.to_json.html_safe %>
-      }]
+    $(function () {
+        $('#chart-container').highcharts({
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
+            chart: {
+                backgroundColor: 'rgba(225, 225, 225, 0)',
+                type: 'pie',
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: false,
+                    cursor: 'pointer',
+                    depth: 35,
+                    animation: false,
+                    dataLabels: {
+                        enabled: false,
+                        format: '{point.name}'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Value',
+                data: <%= @main_chart_data.values.to_json.html_safe %>
+            }]
+        });
     });
-  });
 </script>

@@ -179,4 +179,13 @@ a.setting-link:hover{
     text-indent: -9999px;
     height: 5px;
 }
+.legend-link, .legend-link:visited, .legend-link:hover {
+    color: #333333;
+    cursor: pointer;
+}
+
+.clear-filter-link, .clear-filter-link:visited, .clear-filter-link:hover {
+    color: #333333;
+    cursor: pointer;
+}
 /*hard class edit*/

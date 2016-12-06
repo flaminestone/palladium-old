@@ -17,29 +17,51 @@ class PlansController < ApplicationController
     @status_data = {} # for run charts
     results = ResultSet.where(:plan_id => params[:id])
     results_status_array = results.group(:status).count
-    results_array = results.group(:run_id, :status).count
+    results_array = results.group(:status, :run_id).count
     Status.group(:id, :name, :color).order(id: :asc).count.keys.each { |current_status| @status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
     return if results_array.empty?
-    runs_id_array = results_array.map { |current_element| {current_element[0][0] => {data: {:count => current_element[1], :color => current_element[0][1]}}} }
+    runs_id_array = results_array.map do |current_element|
+      {current_element[0][1] => {data: {:count => current_element[1], :color => %r(\d+).match(current_element[0][0])[0].to_i}}}
+    end
     runs_id_array.each do |plan_id|
       data = []
       all_data = 0
-      data_sort = results_array.find_all { |curret_data| curret_data[0][0] == plan_id.keys.first }
+      data_sort = results_array.find_all { |curret_data|
+        curret_data[0][1] == plan_id.keys.first
+      }
       data_sort.each do |data_array|
-        status_id = %r(\d+).match(data_array[0][1])[0].to_i
+        status_id = %r(\d+).match(data_array[0][0])[0].to_i
         data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
         all_data += data_array[1]
       end
       temp = data.sort_by { |key| key.first }.to_h # need for sorting
       @status_data.merge!(plan_id.keys.first => {data: temp.values, all_data: all_data})
     end
-    @main_chart_data = []
-    results_status_array.each { |current|
-      @main_chart_data << {:y => current[1], :name => @status_names[%r(\d+).match(current[0])[0].to_i][:name], :color => @status_names[%r(\d+).match(current[0])[0].to_i][:color]}
-    }
-    @main_chart_data
+    @main_chart_data = {}
+    results_status_array.each do |current|
+      id = %r(\d+).match(current[0])[0].to_i
+      @main_chart_data.merge!({id => {:y => current[1], :name => @status_names[id][:name], :color => @status_names[id][:color]}})
+    end
     @all_result_count = 0
     results_status_array.values.map { |i| @all_result_count += i }
+    if params['sorting'].nil?
+      @main_data = @plan.runs.order(created_at: :desc).pluck(:id, :name)
+    else
+      sequence = sorting(runs_id_array)
+      @main_data = @plan.runs.find(sequence).pluck(:id, :name)
+      @main_data.reverse! if params['sorting']['sequence'] == 'asc'
+    end
+  end
+
+  def sorting(runs_id_array)
+    case
+      when params['sorting'][:status]
+        data_after_sorting = runs_id_array.select { |data, _|
+          data.values.first[:data][:color].to_s == params['sorting'][:status]
+        }
+        data_after_sorting = data_after_sorting.sort_by { |name| name.values.first[:data][:count] }
+    end
+    data_after_sorting.map!{|hash| hash.keys.first}
   end
 
   # GET /plans/new
