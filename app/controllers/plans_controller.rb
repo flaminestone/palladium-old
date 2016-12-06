@@ -17,12 +17,11 @@ class PlansController < ApplicationController
   # @param [Hash] @main_chart_data is a date for main chart on page. It have to be in specific format {status_id => {y => data_count, name => name_of_status, color => status_color}}
   def show
     @product = product_find_by_id
-    @status_names = {}
+    @status_names = Status.get_statuses
     @status_data = {} # for run charts
     results = ResultSet.where(:plan_id => params[:id])
     results_status_array = results.group(:status).count
     results_array = results.group(:status, :run_id).count
-    Status.group(:id, :name, :color).order(id: :asc).count.keys.each { |current_status| @status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
     return if results_array.empty?
     runs_id_array = results_array.map do |current_element|
       {current_element[0][1] => {data: {:count => current_element[1], :color => %r(\d+).match(current_element[0][0])[0].to_i}}}
