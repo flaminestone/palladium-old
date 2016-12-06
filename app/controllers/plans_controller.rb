@@ -11,6 +11,10 @@ class PlansController < ApplicationController
 
   # GET /plans/1
   # GET /plans/1.json
+  # For correctly working, need 2 varibles:
+  # @param [Array] @main_data is a a double array [[run_id, run_name], [run_id, run_name], [run_id, run_name]].
+  # data in @main_data must be sorted.
+  # @param [Hash] @main_chart_data is a date for main chart on page. It have to be in specific format {status_id => {y => data_count, name => name_of_status, color => status_color}}
   def show
     @product = product_find_by_id
     @status_names = {}
