@@ -146,6 +146,14 @@ a.setting-link:hover{
     height: 11px;
     border-radius: 50%;
     text-align: center;
+    margin-right: 3px;
+}
+.status-color-small{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    text-align: center;
 }
 .advanced_status_bar{
     padding-left: 0;
@@ -179,7 +187,7 @@ a.setting-link:hover{
     text-indent: -9999px;
     height: 5px;
 }
-.legend-link, .legend-link:visited, .legend-link:hover {
+.legend-data, .legend-data:visited, .legend-data:hover {
     color: #333333;
     cursor: pointer;
 }
@@ -187,5 +195,19 @@ a.setting-link:hover{
 .clear-filter-link, .clear-filter-link:visited, .clear-filter-link:hover {
     color: #333333;
     cursor: pointer;
+}
+.status-box{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border: 1px #a0a0a0 solid;
+    margin-right: 3px;
+}
+.status-name, .status-count{
+    font-size: 18px;
+    margin-right: 3px;
+}
+.status-name-small, .status-color-small{
+    margin-right: 3px;
 }
 /*hard class edit*/
