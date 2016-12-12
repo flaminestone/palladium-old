@@ -4,7 +4,7 @@ class Plan < ActiveRecord::Base
   has_many :runs, dependent: :destroy
   serialize :status
 
-  # return [Hash] {run_id => {:count => int, :id => int, :color => str, :name => str}, {}, {}}
+  # return [Hash] {plan_id => {:count => int, :id => int, :color => str, :name => str}, {}, {}}
   def self.get_plan_status(plan_id, status_names = nil)
     status_names = Status.get_statuses if status_names.nil?
     # get all resuls sets from plan with id = @param [Integer] plan_id
