@@ -31,7 +31,9 @@
         });
             return(result)
     }
-    function Filterit(it) {
+    function Filterit(obj, it) {
+        $('#clearfix-selector').remove();
+        $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
         HideAll();
         Object.entries(main_data).forEach(function (item) {
             Object.keys(item[1]).forEach(function (sub_item) {
@@ -48,7 +50,7 @@
         $("div[class=line-block]").hide();
     }
     function ShowAll() {
+        $('#clearfix-selector').remove();
         $("div[class=line-block]").show();
-
     }
 </script>
