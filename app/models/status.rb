@@ -18,4 +18,10 @@ class Status < ActiveRecord::Base
       record.errors.add(attr, I18n.t('status.errors.color'))
     end
   end
+
+  def self.get_statuses
+    status_names = {}
+    Status.group(:id, :name, :color).order(id: :asc).count.keys.each { |current_status| status_names.merge!({current_status[0] => {:name => current_status[1], :color => current_status[2]}}) }
+    status_names
+  end
 end
