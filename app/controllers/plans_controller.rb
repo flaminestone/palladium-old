@@ -17,62 +17,12 @@ class PlansController < ApplicationController
   # @param [Hash] @main_chart_data is a date for main chart on page. It have to be in specific format {status_id => {y => data_count, name => name_of_status, color => status_color}}
   def show
     @product = product_find_by_id
-    @status_names = Status.get_statuses
-    @status_data = {} # for run charts
-    results = ResultSet.where(:plan_id => params[:id])
-    results_status_array = results.group(:status).count
-    results_array = results.group(:status, :run_id).count
-    return if results_array.empty?
-    runs_id_array = results_array.map do |current_element|
-      {current_element[0][1] => {data: {:count => current_element[1], :color => %r(\d+).match(current_element[0][0])[0].to_i}}}
-    end
-    runs_id_array.each do |plan_id|
-      data = []
-      all_data = 0
-      data_sort = results_array.find_all { |curret_data|
-        curret_data[0][1] == plan_id.keys.first
-      }
-      data_sort.each do |data_array|
-        status_id = %r(\d+).match(data_array[0][0])[0].to_i
-        data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
-        all_data += data_array[1]
-      end
-      temp = data.sort_by { |key| key.first }.to_h # need for sorting
-      @status_data.merge!(plan_id.keys.first => {data: temp.values, all_data: all_data})
-    end
-    @main_chart_data = {}
-    results_status_array.each do |current|
-      id = %r(\d+).match(current[0])[0].to_i
-      @main_chart_data.merge!({id => {:y => current[1], :name => @status_names[id][:name], :color => @status_names[id][:color]}})
-    end
-    @all_result_count = 0
-    results_status_array.values.map { |i| @all_result_count += i }
-    if params['sorting'].nil?
-      @main_data = @plan.runs.order(created_at: :desc).pluck(:id, :name)
-    else
-      sequence = sorting(runs_id_array)
-      @main_data = @plan.runs.find(sequence).pluck(:id, :name)
-      @main_data.reverse! if params['sorting']['sequence'] == 'asc'
-    end
+    return if ResultSet.where(:plan_id => params[:id]).empty?
+    @main_data = Plan.get_plan_status(params[:id]).to_json
+    @runs = Hash[*@plan.runs.pluck(:id, :name).flatten].to_json
+    # @main_data must be like "{"21":{"3":{"count":96,"id":3,"color":"#FFFFAA","name":"Failed"},"12":{"count":2,"id":12,"color":"#FFFFAA","name":"9_st"}},"22":{"2":{"count":100,"id":2,"color":"#95d96d","name":"Passed"},"3":{"count":100,"id":3,"color":"#FFFFAA","name":"Failed"}}}"
+    #"21" is a run id, 3 - status id, 96 - count of result_sets with this status, 3 - status id again, #FFFFAA - status color, Failed - status name
   end
-
-  def sorting(runs_id_array)
-    case
-      when params['sorting'][:status]
-        data_after_sorting = runs_id_array.select { |data, _|
-          data.values.first[:data][:color].to_s == params['sorting'][:status]
-        }
-        data_after_sorting = data_after_sorting.sort_by { |name| name.values.first[:data][:count] }
-    end
-    data_after_sorting.map!{|hash| hash.keys.first}
-  end
-
-  # GET /plans/new
-  # This method will be commented because creation can be only through API
-  # def new
-  #   @product = product_find_by_id
-  #   @plan = Plan.new
-  # end
 
   # GET /plans/1/edit
   def edit
