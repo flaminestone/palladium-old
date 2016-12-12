@@ -2,7 +2,6 @@ class ResultSetsController < ApplicationController
   # before_action :init_all_resourses, only: [:show, :edit, :update, :destroy]
   acts_as_token_authentication_handler_for User
 
-
   # GET /result_sets
   # GET /result_sets.json
   def index
