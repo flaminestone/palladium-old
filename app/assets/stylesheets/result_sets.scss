@@ -98,3 +98,14 @@ a.edit-link:hover, a.edit-link:visited{
 .status-element-selected {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
 }
+.result-set-block{
+  display: inline-table;
+}
+.inline-block{
+  display: inline-table;
+}
+.name-block{
+  display: inline-table;
+  min-width: 300px;
+  max-width: 500px;
+}

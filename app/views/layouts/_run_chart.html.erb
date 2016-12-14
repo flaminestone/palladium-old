@@ -1,0 +1,77 @@
+<div class="row">
+  <div id="chart-container"></div>
+  <div class="legend-block">
+    <div class="block">
+      <span class="clear-filter-link" onclick="ShowAll()">Clear filter</span>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    function CreateChart() {
+        data = {};
+        all_result_count = 0;
+        Object.values(<%= @main_data.html_safe %>).forEach(function (item) {
+            all_result_count += 1;
+            if (item['id'] in data) {
+                data[item['id']]['y'] += 1;
+            }
+            else {
+                data[item['id'].toString()] = {
+                    'y': 1,
+                    'color': item['color'].toString(),
+                    'name': item['name'].toString()
+                };
+            }
+        });
+        var maim_chart_data = Object.values(data);
+        console.log(maim_chart_data);
+        $('#chart-container').highcharts({
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
+            chart: {
+                backgroundColor: 'rgba(225, 225, 225, 0)',
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: '',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 50
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    animation: false,
+                    dataLabels: {
+                        enabled: false,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Value',
+                innerSize: '50%',
+                data: maim_chart_data
+            }]
+        });
+        Object.entries(data).forEach(function (item) {
+            $(".legend-block").append("<div id='legend-element'><a class='link legend-data' onclick='Filterit(this, " + item[0] + ")'><div class='status-box' style='background-color: " + item[1]['color'] + "'></div><span class='status-count'>" + item[1]['y'] + "</span><span class='status-name'>" + item[1]['name'] + "</span><span class='status-persent'>" + (Math.round((item[1]['y'] / all_result_count * 100) * 100) / 100 ) + "%</span></a></div>");
+        });
+    }
+</script>
