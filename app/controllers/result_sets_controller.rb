@@ -22,11 +22,16 @@ class ResultSetsController < ApplicationController
 
   # GET /result_sets/1/edit
   def edit
-    set_result_set
-    @run = Run.find(@result_set.run_id)
-    @plan = Plan.find(@run.plan_id)
-    @product = Product.find(@plan.product_id)
-    @statuses = Status.all
+    if params[:result_set_list]
+      ids = params[:result_set_list]['status'].split(',').map{ |element| element.to_i}
+# ........TODO
+    else
+      set_result_set
+      @run = Run.find(@result_set.run_id)
+      @plan = Plan.find(@run.plan_id)
+      @product = Product.find(@plan.product_id)
+      @statuses = Status.all
+    end
   end
 
   # POST /result_sets

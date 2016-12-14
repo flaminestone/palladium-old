@@ -8,15 +8,25 @@
     <%= render partial: 'layouts/run_chart' %>
   </div>
   <div class="row runs-list">
+    <div class="filter-toolbar">
+      <INPUT class='checkbox-all' type="checkbox" onchange="checkAll(this)" name="chk[]"/>
+      <button class='multi-result-change button' type="button" onclick="SetResultMultiply()">Set results</button>
+      <%= form_tag('/result_sets/edit', :id => 'multipl-result') do -%>
+      <%= hidden_field(:result_set_list, :status, :value => '') %>
+      <% end -%>
+    </div>
   </div>
 </div>
 <script>
     var main_data = <%=  @main_data.html_safe  %>;
     var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
-        if (!$( "#legend-element" ).length){CreateChart();}
+        if (!$("#legend-element").length) {
+            CreateChart();
+        }
         Object.entries(main_data).forEach(function (item) {
             $(".runs-list").append("<div class='line-block' value=" + item[0] + ">" +
+                "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' />" +
                 "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
                 "<div class='inline-block'>" +
                 "<div id='legend-element'>" +
@@ -25,26 +35,64 @@
                 "<a class='link edit-link' href=/result_sets/" + item[0] + "/edit><span class='edit-link-pict'>&#9998;</span></a></div>");
         })
     });
-    function Filterit(obj,status) {
-        $('#clearfix-selector').remove();
-        $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
-        HideAll();
-
-        Object.entries(main_data).forEach(function (item) {
-            console.log(item[1]['id']);
-            if (status == item[1]['id']){
-                ShowElement(item[0]);
-            }
-        });
+    function Filterit(obj, status) {
+        uncheckall();
+        if (obj.getAttribute("value") == 1) {
+            $(".legend-data").attr('value', 0);
+            $('#clearfix-selector').remove();
+            ShowAll()
+        } else {
+            $('#clearfix-selector').remove();
+            $(".legend-data").attr('value', 0);
+            $(obj).attr('value', 1);
+            $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
+            HideAll();
+            Object.entries(main_data).forEach(function (item) {
+                if (status == item[1]['id']) {
+                    ShowElement(item[0]);
+                }
+            });
+        }
     }
-    function HideAll(){
+    function HideAll() {
         $("div[class=line-block]").hide();
     }
     function ShowAll() {
         $('#clearfix-selector').remove();
         $("div[class=line-block]").show();
     }
-    function ShowElement(value){
+    function ShowElement(value) {
         $("div[class=line-block][value*=" + value + "]").show();
+    }
+    function checkAll(ele) {
+        var checkboxes = $("input:visible");
+        if (ele.checked) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type == 'checkbox') {
+                    checkboxes[i].checked = true;
+                }
+            }
+        } else {
+            uncheckall()
+        }
+    }
+    function uncheckall() {
+        var checkboxes = $("input");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+
+
+    function SetResultMultiply() {
+        var checkboxes = [];
+        $("input.checkbox-element:checked").parent().each(function(){
+            checkboxes.push(this.getAttribute("value"))
+        });
+        $("#result_set_list_status").attr('value', checkboxes);
+        console.log(checkboxes);
+        document.getElementById("multipl-result").submit();
     }
 </script>

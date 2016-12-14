@@ -108,7 +108,17 @@ a.edit-link:hover, a.edit-link:visited{
   display: inline-table;
   min-width: 300px;
   max-width: 500px;
+  padding-left: 8px;
 }
 .edit-link-pict{
  font-size: 18px;
+}
+.filter-toolbar{
+  height: 20px;
+  background-color: rgba(26, 100, 180, 0.33);
+  padding-left: 8px;
+}
+.multi-result-change{
+  height: 20px;
+
 }
