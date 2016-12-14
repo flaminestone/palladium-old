@@ -7,29 +7,23 @@
   </div>
 </div>
 <script type="text/javascript">
-    // Legend elements has Sort( function. Fill free to use is)
     function CreateChart() {
-        // BEGIN Get data for main chart
         data = {};
         all_result_count = 0;
         Object.values(<%= @main_data.html_safe %>).forEach(function (item) {
-            console.log(item);
-            Object.values(item).forEach(function (sub_item) {
-                all_result_count += sub_item['count'];
-                if (sub_item['id'] in data) {
-                    data[sub_item['id']]['y'] = sub_item['count'] + parseInt(data[sub_item['id']]['y']);
-                }
-                else {
-                    data[sub_item['id'].toString()] = {
-                        'y': sub_item['count'],
-                        'color': sub_item['color'].toString(),
-                        'name': sub_item['name'].toString()
-                    };
-                }
-            });
+            all_result_count += 1;
+            if (item['id'] in data) {
+                data[item['id']]['y'] += 1;
+            }
+            else {
+                data[item['id'].toString()] = {
+                    'y': 1,
+                    'color': item['color'].toString(),
+                    'name': item['name'].toString()
+                };
+            }
         });
         var maim_chart_data = Object.values(data);
-        console.log('Main chart data = ');
         console.log(maim_chart_data);
         $('#chart-container').highcharts({
             navigation: {
@@ -39,39 +33,45 @@
             },
             chart: {
                 backgroundColor: 'rgba(225, 225, 225, 0)',
-                type: 'pie'
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
             },
             title: {
-                text: ''
+                text: '',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 50
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
             plotOptions: {
                 pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    depth: 35,
                     animation: false,
                     dataLabels: {
                         enabled: false,
-                        format: '{point.name}'
-                    }
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%']
                 }
             },
             series: [{
                 type: 'pie',
                 name: 'Value',
+                innerSize: '50%',
                 data: maim_chart_data
             }]
         });
-        // END Get data for main chart
-        // BEGIN Add legends block
-
         Object.entries(data).forEach(function (item) {
-//            console.log(item[0]);
             $(".legend-block").append("<div id='legend-element'><a class='link legend-data' onclick='Filterit(this, " + item[0] + ")'><div class='status-box' style='background-color: " + item[1]['color'] + "'></div><span class='status-count'>" + item[1]['y'] + "</span><span class='status-name'>" + item[1]['name'] + "</span><span class='status-persent'>" + (Math.round((item[1]['y'] / all_result_count * 100) * 100) / 100 ) + "%</span></a></div>");
         });
-        // End Add legends block
     }
 </script>

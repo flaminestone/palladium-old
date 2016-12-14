@@ -2,106 +2,48 @@
   <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
   <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
 </ol>
+
 <div class="container">
   <div class="row">
-    <div id="chart-container" style="display: inline-block"></div>
-    <div class="legend-block">
-
-      <% @main_chart_data.each do |current_status| %>
-          <div class="status-box" style="background-color: <%= current_status[:color].downcase %>"></div>
-          <span class="status-count"><%= current_status[:y] %></span>
-          <span class="status-name"><%= current_status[:name] %></span>
-          <span class="status-persent">(<%= (current_status[:y]*100.0/@all_result_count).round 1 %>%)</span>
-          <br />
-      <% end %>
-
-    </div>
-    </div>
-  <div class="row">
-      <% unless @result_sets.empty? %>
-          <table class="table table-hover">
-            <tbody>
-            <% @result_set_list.each_pair do |set_result_id, value| %>
-                <tr class="result-set-element">
-                  <td style="padding: 0px;">
-                    <div class="result-set-name-block">
-                      <a class="link result-set-name-link" href=<%= result_set_results_path(set_result_id) %>> <%= value[:name] %></a>
-                    </div>
-                  </td>
-                  <td style="padding: 0px;">
-                    <div class="result-set-status-block">
-                      <div class="status-box" style="background-color: <%= value[:status][:color] %>"></div>
-                      <span class="status-name"><%= value[:status][:status_name] %>
-                        <a class="edit-link link" href="<%= edit_result_set_path(set_result_id ) %>">&#9998;</a>
-                      </span>
-                    </div>
-                  </td>
-                  </tr>
-            <% end %>
-            </tbody>
-          </table>
-      <% end %>
+    <%= render partial: 'layouts/run_chart' %>
+  </div>
+  <div class="row runs-list">
   </div>
 </div>
-<script type="text/javascript">
+<script>
+    var main_data = <%=  @main_data.html_safe  %>;
+    var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
-        $('#chart-container').highcharts({
-            navigation: {
-                buttonOptions: {
-                    enabled: false
-                }
-            },
-            chart: {
-                backgroundColor: 'rgba(225, 225, 225, 0)',
-                plotBackgroundColor: null,
-                plotBorderWidth: 0,
-                plotShadow: false
-            },
-            title: {
-                text: 'Browser<br>shares',
-                align: 'center',
-                verticalAlign: 'middle',
-                y: 50
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    animation: false,
-                    dataLabels: {
-                        enabled: false,
-                        distance: -50,
-                        style: {
-                            fontWeight: 'bold',
-                            color: 'white',
-                            textShadow: '0px 1px 2px black'
-                        }
-                    },
-                    startAngle: -90,
-                    endAngle: 90,
-                    center: ['50%', '75%']
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Value',
-                innerSize: '50%',
-                data: <%= @main_chart_data.to_json.html_safe %>
-            }]
-        });
+        if (!$( "#legend-element" ).length){CreateChart();}
+        Object.entries(main_data).forEach(function (item) {
+            $(".runs-list").append("<div class='line-block' value=" + item[0] + ">" +
+                "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
+                "<div class='inline-block'>" +
+                "<div id='legend-element'>" +
+                "<div class='status-box' style='background-color: " + item[1]['color'] + "'></div>" +
+                "<span class='status-name'>" + item[1]['name'] + "</span></div>" + "</div></div>");
+        })
     });
-    jQuery(document).ready(function ($) {
-        $(".clickable-row").click(function () {
-            window.document.location = $(this).data("href");
+    function Filterit(obj,status) {
+        $('#clearfix-selector').remove();
+        $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
+        HideAll();
+
+        Object.entries(main_data).forEach(function (item) {
+            console.log(item[1]['id']);
+            if (status == item[1]['id']){
+                ShowElement(item[0]);
+            }
         });
-      $(".change-status-button").click(function () {
-            window.document.location = $(this).data("href");
-        });
-    });
+    }
+    function HideAll(){
+        $("div[class=line-block]").hide();
+    }
+    function ShowAll() {
+        $('#clearfix-selector').remove();
+        $("div[class=line-block]").show();
+    }
+    function ShowElement(value){
+        $("div[class=line-block][value*=" + value + "]").show();
+    }
 </script>
-<style>
-  table {
-    table-layout: fixed;
-  }
-</style>
