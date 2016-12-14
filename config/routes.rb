@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  get '/result_sets/edit' => 'result_sets#edit'
+  post '/result_sets/edit' => 'result_sets#edit'
   resources :statuses
 
   resources :products do
