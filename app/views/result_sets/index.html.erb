@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
-  <div class="name-block-nav"><li ><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %></a></li></div>
+  <div class="name-block-nav" title= <%= @product.name %>><li ><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %></a></li></div>
   <div class="name-block-nav nav-separater"><li>&#9658;</li></div>
-  <div class="name-block-nav"><li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %></a></li></div>
+  <div class="name-block-nav" title=<%= @plan.name %>><li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %></a></li></div>
 </ol>
 
 <div class="container">
@@ -68,7 +68,7 @@
             CreateChart();
         }
         Object.entries(main_data).forEach(function (item) {
-            $(".runs-list").append("<div class='line-block' value=" + item[0] + ">" +
+            $(".runs-list").append("<div class='line-block' title=" + result_sets[item[0]] + " value=" + item[0] + ">" +
                 "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' />" +
                 "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
                 "<div class='inline-block'>" +

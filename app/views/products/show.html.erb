@@ -4,7 +4,7 @@
       <% @product.plans.reverse.each do |current_plan| %>
           <div class="line-block">
             <div class="plan-data-block">
-              <a class="plan-name-link plan_name link" href="<%= product_plan_path(@product, current_plan) %>"><%= current_plan.name %></a>
+              <a class="plan-name-link plan_name link" href="<%= product_plan_path(@product, current_plan) %>" title=<%= current_plan.name %>><%= current_plan.name %></a>
             </div>
             <div class="plan-data-block">
               <%= current_plan.updated_at %>
