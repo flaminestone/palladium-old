@@ -33,6 +33,11 @@ div {
     margin: 0;
     padding: 0;
 }
+input[type="checkbox"]{
+    margin: 7px 7px 7px 7px;
+    width: 14px;
+    height: 14px;
+}
 .mainpage{
     min-width: 800px;
 }
@@ -218,5 +223,9 @@ a.setting-link:hover{
 }
 .nav-separater{
     color: #0f4071;
+}
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 /*hard class edit*/

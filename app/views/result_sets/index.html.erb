@@ -13,7 +13,7 @@
       <div class="sticky-anchor"></div>
       <div class="sticky-content container">
         <INPUT class='checkbox-all' type="checkbox" onchange="checkAll(this)" name="chk[]"/>
-        <button class='multi-result-change' type="button" onclick="SetResultMultiply()" data-toggle="modal" data-target=".bs-example-modal-sm">Set
+        <button class='multi-result-change disabled' type="button" onclick="SetResultMultiply()">Set
           results
         </button>
       </div>
@@ -69,7 +69,7 @@
         }
         Object.entries(main_data).forEach(function (item) {
             $(".runs-list").append("<div class='line-block' title=" + result_sets[item[0]] + " value=" + item[0] + ">" +
-                "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' />" +
+                "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' onclick='blockOrunblock()'/>" +
                 "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
                 "<div class='inline-block'>" +
                 "<div id='legend-element'>" +
@@ -79,7 +79,6 @@
         })
     });
     function Filterit(obj, status) {
-        uncheckall();
         if (obj.getAttribute("value") == 1) {
             $(".legend-data").attr('value', 0);
             $('#clearfix-selector').remove();
@@ -99,10 +98,12 @@
     }
     function HideAll() {
         $("div[class=line-block]").hide();
+        uncheckall();
     }
     function ShowAll() {
         $('#clearfix-selector').remove();
         $("div[class=line-block]").show();
+        uncheckall();
     }
     function ShowElement(value) {
         $("div[class=line-block][value*=" + value + "]").show();
@@ -118,6 +119,7 @@
         } else {
             uncheckall()
         }
+        blockOrunblock()
     }
     function uncheckall() {
         var checkboxes = $("input");
@@ -126,21 +128,32 @@
                 checkboxes[i].checked = false;
             }
         }
+        $(".multi-result-change").addClass('disabled');
     }
     function SetResultMultiply(serult_set) {
+        if ($("input:checkbox:checked").length > 0){
         var result_ids = [];
         if (serult_set === undefined) {
+            $('#modal').modal('show');
             $("input.checkbox-element:checked").parent().each(function () {
                 result_ids.push(this.getAttribute("value"))
             });
             $("#result_set_list_status").attr('value', result_ids);
             $('#result-count').text(result_ids.length);
-        } else{
+        } else {
             result_ids = [serult_set.toString()];
             $('#modal').modal('show');
             $('#result-count').text(result_ids.length);
         }
         $("#result_set_list").attr('value', result_ids);
+    }
+    }
 
+    function blockOrunblock(){
+        if ($("input:checkbox:checked").length === 0){
+            $(".multi-result-change").addClass('disabled');
+        } else {
+            $(".multi-result-change").removeClass('disabled');
+        }
     }
 </script>
