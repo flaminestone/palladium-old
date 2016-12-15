@@ -7,17 +7,53 @@
   <div class="row">
     <%= render partial: 'layouts/run_chart' %>
   </div>
+
+
   <div class="row runs-list">
-    <div class="filter-toolbar">
-      <INPUT class='checkbox-all' type="checkbox" onchange="checkAll(this)" name="chk[]"/>
-      <button class='multi-result-change button' type="button" onclick="SetResultMultiply()">Set results</button>
-      <%= form_tag('/result_sets/edit', :id => 'multipl-result') do -%>
-      <%= hidden_field(:result_set_list, :status, :value => '') %>
-      <% end -%>
+
+
+    <div id="sticky" class="sticky-element">
+      <div class="sticky-anchor"></div>
+      <div class="sticky-content container">
+        <INPUT class='checkbox-all' type="checkbox" onchange="checkAll(this)" name="chk[]"/>
+        <button class='multi-result-change' type="button" onclick="SetResultMultiply()" data-toggle="modal" data-target="#myModal">Set
+          results
+        </button>
+      </div>
     </div>
   </div>
 </div>
+
 <script>
+    var StickyElement = function (node) {
+        var doc = $(document),
+            fixed = false,
+            anchor = node.find('.sticky-anchor'),
+            content = node.find('.sticky-content');
+
+        var onScroll = function (e) {
+            var docTop = doc.scrollTop(),
+                anchorTop = anchor.offset().top;
+
+            console.log('scroll', docTop, anchorTop);
+            if (docTop > anchorTop) {
+                if (!fixed) {
+                    anchor.height(content.outerHeight());
+                    content.addClass('fixed');
+                    fixed = true;
+                }
+            } else {
+                if (fixed) {
+                    anchor.height(0);
+                    content.removeClass('fixed');
+                    fixed = false;
+                }
+            }
+        };
+
+        $(window).on('scroll', onScroll);
+    };
+    var demo = new StickyElement($('#sticky'));
     var main_data = <%=  @main_data.html_safe  %>;
     var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
@@ -84,15 +120,13 @@
             }
         }
     }
-
-
     function SetResultMultiply() {
         var checkboxes = [];
-        $("input.checkbox-element:checked").parent().each(function(){
+        $("input.checkbox-element:checked").parent().each(function () {
             checkboxes.push(this.getAttribute("value"))
         });
         $("#result_set_list_status").attr('value', checkboxes);
         console.log(checkboxes);
-        document.getElementById("multipl-result").submit();
+//        document.getElementById("multipl-result").submit();
     }
 </script>
