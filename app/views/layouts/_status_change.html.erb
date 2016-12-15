@@ -1,0 +1,13 @@
+<div class="result-data">
+
+  <%= form_tag('/result_sets/edit', method: :post, id: 'result-set-form') do %>
+        <%= select(:status, :status_id, options_from_collection_for_select(Status.all, :id, :name), {}, { :class => 'form-control form-control-small form-select' })%>
+
+      <%= hidden_field_tag(:result_set_list, "") %>
+      <%= text_area(:comment, :text, :class => 'result-comment') %>
+  <% end %>
+  <div class="alert alert-danger custom-alert" role="alert">Count of result sets for changing:
+    <span id="result-count">0</span></div>
+  <a class="btn btn-primary" onclick="$('#result-set-form').submit()">Add new result</a>
+  <a class="btn btn-default manual-botton" data-dismiss="modal" aria-label="Close">Cancel</a>
+</div>

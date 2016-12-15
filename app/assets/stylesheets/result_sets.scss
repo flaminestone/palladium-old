@@ -51,30 +51,25 @@ a.edit-link:hover, a.edit-link:visited{
   width: 100%;
   position: relative;
 }
-.btn{
+.bt{
   float: right;
   margin-left: 10px;
 }
-
-.align_center
-{
+.align_center {
   position: relative;
   width: 100%;
 }
-.align_center:after
-{
+.align_center:after {
   content: '';
   display: block;
   clear: both;
 }
-.align_center_to_left
-{
+.align_center_to_left {
   position: relative;
   right: 50%;
   float: right;
 }
-.align_center_to_right
-{
+.align_center_to_right {
   position: relative;
   z-index: 1;
   right: -50%;
@@ -108,7 +103,43 @@ a.edit-link:hover, a.edit-link:visited{
   display: inline-table;
   min-width: 300px;
   max-width: 500px;
+  padding-left: 8px;
 }
 .edit-link-pict{
  font-size: 18px;
+}
+.filter-toolbar{
+  height: 20px;
+  width: 100%;
+  background-color: rgba(26, 100, 180, 0.33);
+}
+.multi-result-change{
+  height: 22px;
+  margin-left: 6px;
+}
+.sticky-content {
+  background: #0f4071;
+  padding: 10px;
+}
+.sticky-content.fixed {
+  position: fixed;
+  top: 0;
+}
+.modal-result-header{
+ background-color: #0f4071;
+}
+.modal-result-title, .modal-result-close, .modal-result-close:visited{
+  color: white;
+}
+.result-data{
+  padding: 10px;
+}
+.result-comment{
+  margin-top: 5px;
+  width: 100%;
+  resize: vertical;
+}
+.custom-alert{
+  width: 50%;
+  margin-left: 25%;
 }

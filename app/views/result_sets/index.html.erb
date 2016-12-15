@@ -8,43 +8,140 @@
     <%= render partial: 'layouts/run_chart' %>
   </div>
   <div class="row runs-list">
+    <div id="sticky" class="sticky-element">
+      <div class="sticky-anchor"></div>
+      <div class="sticky-content container">
+        <INPUT class='checkbox-all' type="checkbox" onchange="checkAll(this)" name="chk[]"/>
+        <button class='multi-result-change' type="button" onclick="SetResultMultiply()" data-toggle="modal" data-target=".bs-example-modal-sm">Set
+          results
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+
+<div id="modal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-result-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="modal-result-close">&times;</span></button>
+        <h4 class="modal-title modal-result-title"><b>Modal title</b></h4>
+      </div>
+      <%= render partial: 'layouts/status_change' %>
+    </div>
+  </div>
+</div>
+
 <script>
+    var StickyElement = function (node) {
+        var doc = $(document),
+            fixed = false,
+            anchor = node.find('.sticky-anchor'),
+            content = node.find('.sticky-content');
+
+        var onScroll = function (e) {
+            var docTop = doc.scrollTop(),
+                anchorTop = anchor.offset().top;
+
+//            console.log('scroll', docTop, anchorTop);
+            if (docTop > anchorTop) {
+                if (!fixed) {
+                    anchor.height(content.outerHeight());
+                    content.addClass('fixed');
+                    fixed = true;
+                }
+            } else {
+                if (fixed) {
+                    anchor.height(0);
+                    content.removeClass('fixed');
+                    fixed = false;
+                }
+            }
+        };
+
+        $(window).on('scroll', onScroll);
+    };
+    var demo = new StickyElement($('#sticky'));
     var main_data = <%=  @main_data.html_safe  %>;
     var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
-        if (!$( "#legend-element" ).length){CreateChart();}
+        if (!$("#legend-element").length) {
+            CreateChart();
+        }
         Object.entries(main_data).forEach(function (item) {
             $(".runs-list").append("<div class='line-block' value=" + item[0] + ">" +
+                "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' />" +
                 "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
                 "<div class='inline-block'>" +
                 "<div id='legend-element'>" +
                 "<div class='status-box' style='background-color: " + item[1]['color'] + "'></div>" +
                 "<span class='status-name'>" + item[1]['name'] + "</span></div>" + "</div>" +
-                "<a class='link edit-link' href=/result_sets/" + item[0] + "/edit><span class='edit-link-pict'>&#9998;</span></a></div>");
+                "<a class='link edit-link' onclick='SetResultMultiply(" + item[0] + ")'><span class='edit-link-pict'>&#9998;</span></a></div>");
         })
     });
-    function Filterit(obj,status) {
-        $('#clearfix-selector').remove();
-        $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
-        HideAll();
-
-        Object.entries(main_data).forEach(function (item) {
-            console.log(item[1]['id']);
-            if (status == item[1]['id']){
-                ShowElement(item[0]);
-            }
-        });
+    function Filterit(obj, status) {
+        uncheckall();
+        if (obj.getAttribute("value") == 1) {
+            $(".legend-data").attr('value', 0);
+            $('#clearfix-selector').remove();
+            ShowAll()
+        } else {
+            $('#clearfix-selector').remove();
+            $(".legend-data").attr('value', 0);
+            $(obj).attr('value', 1);
+            $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
+            HideAll();
+            Object.entries(main_data).forEach(function (item) {
+                if (status == item[1]['id']) {
+                    ShowElement(item[0]);
+                }
+            });
+        }
     }
-    function HideAll(){
+    function HideAll() {
         $("div[class=line-block]").hide();
     }
     function ShowAll() {
         $('#clearfix-selector').remove();
         $("div[class=line-block]").show();
     }
-    function ShowElement(value){
+    function ShowElement(value) {
         $("div[class=line-block][value*=" + value + "]").show();
+    }
+    function checkAll(ele) {
+        var checkboxes = $("input:visible");
+        if (ele.checked) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type == 'checkbox') {
+                    checkboxes[i].checked = true;
+                }
+            }
+        } else {
+            uncheckall()
+        }
+    }
+    function uncheckall() {
+        var checkboxes = $("input");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+    function SetResultMultiply(serult_set) {
+        var result_ids = [];
+        if (serult_set === undefined) {
+            $("input.checkbox-element:checked").parent().each(function () {
+                result_ids.push(this.getAttribute("value"))
+            });
+            $("#result_set_list_status").attr('value', result_ids);
+            $('#result-count').text(result_ids.length);
+        } else{
+            result_ids = [serult_set.toString()];
+            $('#modal').modal('show');
+            $('#result-count').text(result_ids.length);
+        }
+        $("#result_set_list").attr('value', result_ids);
+
     }
 </script>
