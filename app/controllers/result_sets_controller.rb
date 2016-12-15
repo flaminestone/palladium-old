@@ -7,6 +7,7 @@ class ResultSetsController < ApplicationController
     @product = Product.find(@plan.product_id)
     @main_data = Run.get_run_status(params[:run_id]).to_json
     @result_sets = Hash[*@run.result_sets.pluck(:id, :name).flatten].to_json
+    @statuses = Status.all.pluck( :name, :id)
   end
 
   # GET /result_sets/1
@@ -22,16 +23,9 @@ class ResultSetsController < ApplicationController
 
   # GET /result_sets/1/edit
   def edit
-    if params[:result_set_list]
-      ids = params[:result_set_list]['status'].split(',').map{ |element| element.to_i}
-# ........TODO
-    else
-      set_result_set
-      @run = Run.find(@result_set.run_id)
-      @plan = Plan.find(@run.plan_id)
-      @product = Product.find(@plan.product_id)
-      @statuses = Status.all
-    end
+      ids = params[:result_set_list].split(',').map{ |element| element.to_i}
+      ResultSet.add_multiplt_results({:id => ids, :comment => params[:comment][:text], :status => params[:status][:status_id], :author => current_user.email})
+      redirect_to :back
   end
 
   # POST /result_sets
