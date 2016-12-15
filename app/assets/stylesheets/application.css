@@ -210,4 +210,13 @@ a.setting-link:hover{
 .status-name-small, .status-color-small{
     margin-right: 3px;
 }
+
+.name-block-nav{
+    max-width: 300px;
+    overflow: hidden;
+    display: inline-block;
+}
+.nav-separater{
+    color: #0f4071;
+}
 /*hard class edit*/

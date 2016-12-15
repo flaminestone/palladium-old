@@ -100,10 +100,11 @@ a.edit-link:hover, a.edit-link:visited{
   display: inline-table;
 }
 .name-block{
-  display: inline-table;
-  min-width: 300px;
-  max-width: 500px;
+  width: 600px;
   padding-left: 8px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 10px;
 }
 .edit-link-pict{
  font-size: 18px;

@@ -118,10 +118,9 @@ a.plan-name-link {
 }
 
 .plan-name-block {
-  height: 50px;
-  padding-top: 13px
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
 .plan-data-block {
   height: 50px;
   max-width: 500px;

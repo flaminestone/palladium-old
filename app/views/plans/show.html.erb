@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
+    <li class="name-block-nav"><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
 </ol>
 <div class="container">
   <div class="row">
@@ -8,14 +8,13 @@
   <div class="row runs-list">
   </div>
 </div>
-
 <script type="text/javascript">
   var runs = <%= @runs.html_safe %>;
   var main_data = <%=  @main_data.html_safe  %>;
   $(function () {
         if (!$( "#legend-element" ).length){CreateChart();}
         Object.entries(main_data).forEach(function (item) {
-            $(".runs-list").append("<div class='line-block' value=" + item[0] + "><div class='block'><a class='link plan-name-link' href='/runs/" + item[0] + "/result_sets'>" + runs[item[0]] + "</a></div>" +
+            $(".runs-list").append("<div class='line-block' value=" + item[0] + "><div class='block plan-name-block'><a class='link plan-name-link' href='/runs/" + item[0] + "/result_sets'>" + runs[item[0]] + "</a></div>" +
                 "<div class='block'>" + GenerateCurrentRunsStatus(item[1]) + "</div></div>")
         })
     });
