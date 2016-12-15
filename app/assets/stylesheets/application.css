@@ -219,4 +219,8 @@ a.setting-link:hover{
 .nav-separater{
     color: #0f4071;
 }
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 /*hard class edit*/
