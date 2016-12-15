@@ -115,6 +115,7 @@ a.edit-link:hover, a.edit-link:visited{
 }
 .multi-result-change{
   height: 22px;
+  margin-left: 6px;
 }
 .sticky-content {
   background: #0f4071;
@@ -137,4 +138,8 @@ a.edit-link:hover, a.edit-link:visited{
   margin-top: 5px;
   width: 100%;
   resize: vertical;
+}
+.custom-alert{
+  width: 50%;
+  margin-left: 25%;
 }
