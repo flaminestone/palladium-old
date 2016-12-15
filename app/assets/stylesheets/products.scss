@@ -124,9 +124,12 @@ a.plan-name-link {
 
 .plan-data-block {
   height: 50px;
-  width: 300px;
+  max-width: 500px;
+  min-width: 300px;
   padding-top: 13px;
   display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 a.file-upload {
