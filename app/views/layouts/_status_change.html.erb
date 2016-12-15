@@ -1,55 +1,13 @@
-<ol class="breadcrumb">
-  <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %> </a></li>
-  <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %> </a></li>
-  <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %> </a></li>
-</ol>
-<% if @result_set.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@result_set.errors.count, "error") %> prohibited this result_set from being saved:</h2>
+<div class="result-data">
+  <select class="form-control form-control-small form-select" name="addResultStatus" id="addResultStatus">
 
-      <ul>
-        <% @result_set.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+    <% @statuses.each_with_index do |current_status, index| %>
 
-<div class="container">
-  <div class="row">
-    <div class="page-header">
-      <h1 align="center">Change result set status</h1>
-    </div>
-    <div class="col-md-6 col-md-offset-3">
-      <%= form_for @result_set do |f| %>
-          <div class="change-block">
-            <div class="align_center">
-              <div class="align_center_to_left">
-                <div class="align_center_to_right">
-                  <% @statuses.not_disabled.each do |current_status| %>
-                      <div class="status-element <%= 'status-element-selected' if current_status.id == @result_set.status %>" style="background-color: <%= current_status.color %>" id=<%= current_status.id %>>
-                        <%= current_status.name %>
-                        <%= radio_button_tag('set_status', current_status.id, false, :class => "radio hidden") %>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            </div>
-          <%= text_area_tag :data, '', class: 'message-field' %>
-
-          <div class="active-inputs">
-            <a class="btn btn-primary" onclick="$('.edit_result_set').submit()">Add new result</a>
-            <a class="btn btn-default manual-botton" href=<%= run_result_sets_path(@result_set.run_id) %>>Cancel</a>
-            </div>
-      <% end %>
-    </div>
-  </div>
+        <option value=" <%= index %>"><%= current_status.name %></option>
+    <% end %>
+  </select>
+  <textarea class="result-comment">
+  </textarea>
+  <a class="btn btn-primary" onclick="$('.edit_result_set').submit()">Add new result</a>
+  <a class="btn btn-default manual-botton">Cancel</a>
 </div>
-<script>
-  $('.status-element').click(function () {
-    $(":input", this).prop('checked', true);
-    $(".status-element").removeClass("status-element-selected");
-    $(this).addClass("status-element-selected");
-  });
-</script>
