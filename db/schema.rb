@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161216080047) do
   create_table "custom_fields", force: :cascade do |t|
     t.text     "name"
     t.text     "description"
-    t.text     "type"
+    t.text     "data_type"
     t.text     "default"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
