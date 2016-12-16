@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :custom_fields
   get '/result_sets/edit' => 'result_sets#edit'
   post '/result_sets/edit' => 'result_sets#edit'
   resources :statuses
