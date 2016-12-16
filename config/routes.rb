@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/settings/products' => 'products#edit'
   get '/settings/custom_fields' => 'custom_fields#index'
   post '/settings/status_settings_title/:id' => 'statuses#disable'
+  post '/settings/custom_fields' => 'custom_fields#create'
+
   resources :statuses, path: '/settings/status_settings'
 
   get '/settings/tokens' => 'settings#tokens'
