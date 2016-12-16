@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1 align="center"><%= t('helpers.titles.status_settings_title') %></h1>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <label></label>
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation"><a class="navigation-link" href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
+          <li role="presentation"><a class="navigation-link" href="/settings/status_settings_title"><%= t('helpers.titles.status_settings_title') %></a></li>
+          <li role="presentation"><a class="navigation-link" href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li><a href="/settings/products" class="navigation-link">Change product image</a></li>
+          <li role="presentation" class="active"><a href="/settings/custom_fields" class="navigation-link">Custom result fields</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <label></label>
+        <!-- Modal -->
+<p>All data</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  a.navigation-link:visited{
+    color: #333333;
+  }
+</style>
