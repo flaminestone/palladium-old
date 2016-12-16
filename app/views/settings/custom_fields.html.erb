@@ -16,13 +16,33 @@
       </div>
     </div>
       <div class="col-md-9" >
-        <button class="new-field-button">Add new field</button>
+        <button class="new-field-button" data-toggle="modal" data-target="#modal">Add new field</button>
 
 
       </div>
   </div>
 </div>
 
+
+
+<div id="modal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-result-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="modal-result-close">&times;</span></button>
+        <h4 class="modal-title modal-result-title"><b>New custom field</b></h4>
+      </div>
+      <%= render partial: 'layouts/create_custom_field' %>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+
+</script>
 <style>
   a.navigation-link:visited{
     color: #333333;
