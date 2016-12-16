@@ -1,7 +1,8 @@
 <div class="result-data">
-  <%= form_tag('/result_sets/edit', method: :post, id: 'result-set-form') do %>
+  <%= form_tag('/settings/custom_fields', method: :post, id: 'result-set-form') do %>
+      <div class="block" style="display:inline-block"><%= text_field(:name, :text, :class => 'result-comment', placeholder: 'name') %></div>
       <div style="display:inline-block">
-        <%= select(:status, :status_id, [['Text', 1], ['Link', 2], ['Image', 3], ['Username', 4]], {}, {:class => 'form-control form-control-small form-select'}) %>
+        <%= select(:data_type, :status_id, [['Text', 'text'], ['Link', 'link'], ['Image', 'image'], ['Username', 'username']], {}, {:class => 'form-control form-control-small form-select'}) %>
       </div>
       <div class="block">
         <span><%= check_box_tag 'size' %>Big data</span>

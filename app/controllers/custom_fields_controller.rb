@@ -1,5 +1,6 @@
 class CustomFieldsController < ApplicationController
   def index
+    @custom_fields = CustomField.all
     render 'settings/custom_fields'
   end
 
