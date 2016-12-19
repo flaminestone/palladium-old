@@ -5,6 +5,7 @@ class CreateCustomFields < ActiveRecord::Migration[5.0]
       t.text :description
       t.text :data_type
       t.text :default
+      t.boolean :size
       t.timestamps
     end
   end
