@@ -7,37 +7,62 @@
       <div class="row">
         <label></label>
         <ul class="nav nav-pills nav-stacked">
-          <li role="presentation"><a class="navigation-link" href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
-          <li role="presentation"><a class="navigation-link" href="/settings/status_settings_title"><%= t('helpers.titles.status_settings_title') %></a></li>
-          <li role="presentation"><a class="navigation-link" href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
+          <li role="presentation">
+            <a class="navigation-link" href="/settings/admin"><%= t('helpers.titles.admin_settings_title') %></a></li>
+          <li role="presentation">
+            <a class="navigation-link" href="/settings/status_settings_title"><%= t('helpers.titles.status_settings_title') %></a>
+          </li>
+          <li role="presentation">
+            <a class="navigation-link" href="/settings/tokens"><%= t('helpers.titles.token_settings_title') %></a></li>
           <li><a href="/settings/products" class="navigation-link">Change product image</a></li>
-          <li role="presentation" class="active"><a href="/settings/custom_fields" class="navigation-link">Custom result fields</a></li>
+          <li role="presentation" class="active">
+            <a href="/settings/custom_fields" class="navigation-link">Custom result fields</a></li>
         </ul>
       </div>
     </div>
-      <div class="col-md-9" >
-        <button class="new-field-button" data-toggle="modal" data-target="#modal">Add new field</button>
+    <div class="col-md-9">
+      <button class="new-field-button" data-toggle="modal" data-target="#modal">Add new field</button>
+      <div class="result-main">
+        <table style="width:100%">
+          <tr>
+            <td class="small-data">
+              <div class="status-box" style="background-color: #ff5e4e"></div>
+              <span class="status-name">Failed</span>
+              <div class="data-box">
+                <div class="data-symbol-box"><span class="data-symbol">&#8986;</span></div>
+                <span>2016-12-15 13:38:59</span>
+              </div>
+            </td>
+            <td class="big-data">
+              <div class="text-data">
+                <span><h4><b>field_name</b><br/></h4></span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
+    </div>
   </div>
 </div>
 <div id="modal" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header modal-result-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="modal-result-close">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="modal-result-close">&times;</span></button>
         <h4 class="modal-title modal-result-title"><b>New custom field</b></h4>
       </div>
       <%= render partial: 'layouts/create_custom_field' %>
     </div>
   </div>
 </div>
-<div>
-
-</div>
-
-
 <style>
-  a.navigation-link:visited{
+  a.navigation-link:visited {
     color: #333333;
   }
 </style>

@@ -7,7 +7,7 @@ class ResultSetsController < ApplicationController
     @product = Product.find(@plan.product_id)
     @main_data = Run.get_run_status(params[:run_id]).to_json
     @result_sets = Hash[*@run.result_sets.pluck(:id, :name).flatten].to_json
-    @statuses = Status.all.pluck( :name, :id)
+    @statuses = Status.all.pluck(:name, :id)
   end
 
   # GET /result_sets/1
@@ -23,9 +23,9 @@ class ResultSetsController < ApplicationController
 
   # GET /result_sets/1/edit
   def edit
-      ids = params[:result_set_list].split(',').map{ |element| element.to_i}
-      ResultSet.add_multiplt_results({:id => ids, :comment => params[:comment][:text], :status => params[:status][:status_id], :author => current_user.email})
-      redirect_to :back
+    ids = params[:result_set_list].split(',').map { |element| element.to_i }
+    ResultSet.add_multiplt_results({:id => ids, :comment => params[:comment][:text], :status => params[:status][:status_id], :author => current_user.email})
+    redirect_to :back
   end
 
   # POST /result_sets
@@ -39,12 +39,12 @@ class ResultSetsController < ApplicationController
         run.result_sets << @result_set
         # format.html { redirect_to product_plan_run_result_set_path(product_find_by_id, set_plan, set_run, @result_set), notice: 'Result set was successfully created.' }
         # This string will be commented because creation can be only through API
-        format.json { render :json => {@result_set.id => {'name'=> @result_set.name,
-                                                   'version' => @result_set.version,
-                                                   'date' => @result_set.date,
-                                                   'product_id'=> @result_set.run_id,
-                                                   'created_at'=> @result_set.created_at,
-                                                   'updated_at'=> @result_set.updated_at}} }
+        format.json { render :json => {@result_set.id => {'name' => @result_set.name,
+                                                          'version' => @result_set.version,
+                                                          'date' => @result_set.date,
+                                                          'product_id' => @result_set.run_id,
+                                                          'created_at' => @result_set.created_at,
+                                                          'updated_at' => @result_set.updated_at}} }
       else
         format.html { render :new }
         format.json { render json: @result_set.errors, status: :unprocessable_entity }
@@ -57,18 +57,18 @@ class ResultSetsController < ApplicationController
   def update
     set_result_set
     status = Status.find(params['set_status'])
-     @result = Result.new(message: params['data'], author: current_user.email, status_id: status.id, plan_id: @result_set.plan_id, result_set_id: @result_set.id)
-      @result.errors.add(:status, 'Status is disable') if status.disabled
-      if @result.errors.empty?
-        if @result.save
-          @result_set.results << @result
-          status.results << @result
-          @result_set.update!(status: @result.status_id)
-          redirect_to run_result_sets_path(Run.find(@result_set.run_id)), notice: 'Status has changed'
-        else
-          render json: @result.errors, status: :unprocessable_entity
-        end
+    @result = Result.new(message: params['data'], author: current_user.email, status_id: status.id, plan_id: @result_set.plan_id, result_set_id: @result_set.id)
+    @result.errors.add(:status, 'Status is disable') if status.disabled
+    if @result.errors.empty?
+      if @result.save
+        @result_set.results << @result
+        status.results << @result
+        @result_set.update!(status: @result.status_id)
+        redirect_to run_result_sets_path(Run.find(@result_set.run_id)), notice: 'Status has changed'
+      else
+        render json: @result.errors, status: :unprocessable_entity
       end
+    end
   end
 
   # DELETE /result_sets/1

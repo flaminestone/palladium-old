@@ -18,7 +18,7 @@ class ResultSetsControllerTest < ActionController::TestCase
 
   test "should create result_set" do
     assert_difference('ResultSet.count') do
-      post :create, result_set: { date: @result_set.date, name: @result_set.name, status: @result_set.status, version: @result_set.version }
+      post :create, result_set: {date: @result_set.date, name: @result_set.name, status: @result_set.status, version: @result_set.version}
     end
 
     assert_redirected_to result_set_path(assigns(:result_set))
@@ -35,7 +35,7 @@ class ResultSetsControllerTest < ActionController::TestCase
   end
 
   test "should update result_set" do
-    patch :update, id: @result_set, result_set: { date: @result_set.date, name: @result_set.name, status: @result_set.status, version: @result_set.version }
+    patch :update, id: @result_set, result_set: {date: @result_set.date, name: @result_set.name, status: @result_set.status, version: @result_set.version}
     assert_redirected_to result_set_path(assigns(:result_set))
   end
 

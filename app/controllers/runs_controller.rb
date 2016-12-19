@@ -38,11 +38,11 @@ class RunsController < ApplicationController
         plan_for_runs.runs << @run
         # This string will be commented because creation can be only through API
         # format.html { redirect_to product_plan_run_path(product_find_by_id, plan_find_by_id, @run), notice: 'Run was successfully created.' }
-        format.json { render :json => {@run.id => {'name'=> @run.name,
-                                                    'version' => @run.version,
-                                                    'product_id'=> @run.plan_id,
-                                                    'created_at'=> @run.created_at,
-                                                    'updated_at'=> @run.updated_at}} }
+        format.json { render :json => {@run.id => {'name' => @run.name,
+                                                   'version' => @run.version,
+                                                   'product_id' => @run.plan_id,
+                                                   'created_at' => @run.created_at,
+                                                   'updated_at' => @run.updated_at}} }
       else
         render :json => @run.errors
       end
@@ -54,7 +54,7 @@ class RunsController < ApplicationController
   def update
     respond_to do |format|
       if @run.update(run_params)
-        format.json { render json: @run}
+        format.json { render json: @run }
         format.html { redirect_to action: 'show', id: set_run, notice: 'Run was successfully updated.' }
         format.json { render :show, status: :ok, location: @run }
       else
@@ -75,22 +75,22 @@ class RunsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_run
-      @run = Run.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_run
+    @run = Run.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def run_params
-      params.require(:run).permit(:name, :version)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def run_params
+    params.require(:run).permit(:name, :version)
+  end
 
-   def product_find_by_id
-     Product.find(params.require(:product_id))
-   end
+  def product_find_by_id
+    Product.find(params.require(:product_id))
+  end
 
   def plan_find_by_id
-     Product.find(product_find_by_id).plans.find(params.require(:plan_id))
+    Product.find(product_find_by_id).plans.find(params.require(:plan_id))
   end
 
   public

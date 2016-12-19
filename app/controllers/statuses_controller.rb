@@ -24,7 +24,7 @@ class StatusesController < ApplicationController
     respond_to do |format|
       if @status.save
         format.json { render :json => @status }
-        format.html { redirect_to '/settings/status_settings_title' , notice: 'Status was successfully created.' }
+        format.html { redirect_to '/settings/status_settings_title', notice: 'Status was successfully created.' }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }
@@ -58,24 +58,24 @@ class StatusesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_status
-      @status = Status.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_status
+    @status = Status.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def status_params
-      params.require(:status).permit(:name, :color)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def status_params
+    params.require(:status).permit(:name, :color)
+  end
 
   public
   def get_all_statuses
     status_json = {}
     Status.all.each do |current_status|
       status_json.merge!(current_status.id => {'name' => current_status.name,
-                                                'color' => current_status.color,
-                                                'created_at' => current_status.created_at,
-                                                'updated_at' => current_status.updated_at})
+                                               'color' => current_status.color,
+                                               'created_at' => current_status.created_at,
+                                               'updated_at' => current_status.updated_at})
     end
     render :json => status_json
   end
@@ -90,9 +90,9 @@ class StatusesController < ApplicationController
       statuses = [statuses] until statuses.is_a?(Array)
       statuses.each do |current_status|
         status_json.merge!(current_status.id => {'name' => current_status.name,
-                                                  'color' => current_status.color,
-                                                  'created_at' => current_status.created_at,
-                                                  'updated_at' => current_status.updated_at})
+                                                 'color' => current_status.color,
+                                                 'created_at' => current_status.created_at,
+                                                 'updated_at' => current_status.updated_at})
       end
       render :json => status_json
     end

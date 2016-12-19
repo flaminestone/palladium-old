@@ -14,4 +14,4 @@ class ResultSet < ActiveRecord::Base
       status.find(args.first[:status]).results << result
     end
   end
- end
+end
