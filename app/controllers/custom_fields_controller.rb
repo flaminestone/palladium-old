@@ -1,6 +1,6 @@
 class CustomFieldsController < ApplicationController
   def index
-    @custom_fields = CustomField.all
+    # @custom_fields = CustomField.get_like_json.to_json
     render 'settings/custom_fields'
   end
 

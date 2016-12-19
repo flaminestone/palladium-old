@@ -23,19 +23,20 @@
     <div class="col-md-9">
       <button class="new-field-button" data-toggle="modal" data-target="#modal">Add new field</button>
       <div class="result-main">
-        <table style="width:100%">
+        <table class="result-table">
           <tr>
-            <td class="small-data">
+            <td valign="top" class="small-data">
               <div class="status-box" style="background-color: #ff5e4e"></div>
               <span class="status-name">Failed</span>
               <div class="data-box">
                 <div class="data-symbol-box"><span class="data-symbol">&#8986;</span></div>
                 <span>2016-12-15 13:38:59</span>
               </div>
+              <div class="small-text-data"></div>
             </td>
             <td class="big-data">
               <div class="text-data">
-                <span><h4><b>field_name</b><br/></h4></span>
+                <span class="message"><h4><b>field_name</b><br/></h4></span>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -66,3 +67,76 @@
     color: #333333;
   }
 </style>
+
+<script>
+    $(function () {
+        fields = <%= CustomField.get_like_json.to_json.html_safe %>;
+        img = '<%= asset_path "logo.png" %>';
+        Object.entries(fields).forEach(function (item) {
+            console.log(item[1]['type']);
+            if (item[1]['size']) {
+                $(".text-data").append("<span class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><div class='data'></div></span>");
+                if (item[1]['type'] == 'text') {
+                    TextExample();
+                }
+                if (item[1]['type'] == 'image') {
+                    ImageExample();
+                }
+                if (item[1]['type'] == 'link') {
+                    LinkExample();
+                }
+                if (item[1]['type'] == 'username') {
+                    UsernameExample();
+                }
+            } else {
+                if (item[1]['type'] == 'text') {
+                    TextExampleS(item);
+                }
+                if (item[1]['type'] == 'image') {
+                    ImageExampleS(item);
+                }
+                if (item[1]['type'] == 'link') {
+                    LinkExampleS(item);
+                }
+                if (item[1]['type'] == 'username') {
+                    UsernameExampleS(item);
+                }
+            }
+        });
+    });
+
+    function TextExample() {
+        console.log('Add example text');
+        $(".text-data").append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+    }
+    function ImageExample() {
+        console.log('Add example image');
+        $(".text-data").append("<img class='data-image' src=" + img + "/>");
+    }
+    function LinkExample() {
+        console.log('Add example');
+        $(".text-data").append("<a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a>");
+    }
+    function UsernameExample() {
+        console.log('Add example username');
+        $(".text-data").append("<span class='inner-username'><p>&#10026; Username</p></a>");
+    }
+
+    function TextExampleS(item) {
+        console.log('Add example text Small');
+        $(".small-text-data").append("<br/><span class='message'><span class='result-name'>" + item[1]['name'] + "<br></span>Lorem ipsum<span></span>");
+    }
+    function ImageExampleS(item) {
+        console.log('Add example image');
+        $(".small-text-data").append("<br/><span class='message'><span class='result-name'><img class='data-image-small' src=" + img + "/><br></span>Lorem ipsum<span></span>");
+    }
+    function LinkExampleS(item) {
+        console.log('Add example');
+        $(".small-text-data").append("<br/><span class='message'><span class='result-name'><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a><br></span>Lorem ipsum<span></span>");
+
+    }
+    function UsernameExampleS(item) {
+        console.log('Add example username');
+        $(".small-text-data").append("<span class='inner-username-small'><p>&#10026; Username</p></a>");
+    }
+</script>

@@ -1,6 +1,14 @@
 class CustomField < ApplicationRecord
   validates :data_type, acceptance: {accept: %w(text link image username)}
 
+  def self.get_like_json
+    result = {}
+    CustomField.all.pluck(:id, :data_type, :size, :name, :description, :default).each do |current|
+      result.merge!({current.first => {:type => current[1], :size => current[2], :name => current[3], :description => current[4], :default => current[5]}})
+    end
+    result
+  end
+
   def self.add_field(params)
     custom_field = CustomField.new
     custom_field.data_type = params[:data_type][:status_id]
