@@ -17,7 +17,7 @@ class ResultSet < ActiveRecord::Base
 
   def self.compous_data(result_set)
     results = []
-    result_set.results.pluck(:id, :message, :author, :status_id, :created_at).reverse.each do |current_result|
+    result_set.results.order('id ASC').pluck(:id, :message, :author, :status_id, :created_at).reverse.each do |current_result|
       message = self.try_to_reformat_message(current_result[1])
       results << {:id => current_result[0],
                  :message => message,

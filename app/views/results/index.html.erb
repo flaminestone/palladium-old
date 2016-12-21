@@ -1,73 +1,159 @@
 <ol class="breadcrumb">
-  <div class="name-block-nav" title=<%= @product.name %>><li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %></a></li></div>
-  <div class="name-block-nav nav-separater"><li>&#9658;</li></div>
-  <div class="name-block-nav" title=<%= @plan.name %>> <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %></a></li></div>
-  <div class="name-block-nav nav-separater"><li>&#9658;</li></div>
-  <div class="name-block-nav" title=<%= @result_set.name %>> <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %></a></li></div>
+  <div class="name-block-nav" title=<%= @product.name %>>
+    <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %></a></li>
+  </div>
+  <div class="name-block-nav nav-separater">
+    <li>&#9658;</li>
+  </div>
+  <div class="name-block-nav" title=<%= @plan.name %>>
+    <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %></a></li>
+  </div>
+  <div class="name-block-nav nav-separater">
+    <li>&#9658;</li>
+  </div>
+  <div class="name-block-nav" title=<%= @result_set.name %>>
+    <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %></a></li>
+  </div>
 </ol>
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <h3><%= t('helpers.titles.results') %></h3>
-      <table class="table table-hover result_table">
-        <thead>
-        <tr>
-          <th>Status</th>
-          <th>Date</th>
-          <th>Author</th>
-          <th>Message</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @results.order(created_at: :desc).each do |result| %>
-            <tr class="clickable-row" style="padding: 0px;">
-              <td class="status-column">
-                <div class="block">
-                  <div class="status-box" style="background-color: <%= Status.find(result.status_id).color %>"></div>
-                  <span class="status-name"><%= Status.find(result.status_id).name %></span>
-                </div>
-              </td>
-              <td class="data-column">
-                <div class="date block"><%= result.created_at %></div>
-              </td>
-              <td class="author-column">
-                <div class="author block"><%= result.author %></div>
-              </td>
-              <td class="message-column">
-                <div class="message block">
-                  <a onclick="Open_modal(this.text);" class="message-link link">
-                    <%= result.message %>
-                  </a>
-                </div>
-              </td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-<div class="modal bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Resuls message</h4>
-      </div>
-      <div class="modal-body">
-        <div id="modal-data"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+      <div class="result-main">
+        <div class="named-group">
 
+        </div>
+        <div class="stock-group">
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
 <script>
-  function Open_modal(text) {
-    $('#modal-data').text(text);
-    $('#myModal').modal();
-  }
+    data = <%= @results.to_json.html_safe %>;
+    custom_fields = <%=  @custom_fields.to_json.html_safe %>;
+    statuses = <%= @statuses.to_json.html_safe %>;
+    $(function () {
+        console.log('Start-----------------------------');
+//        console.log(data);
+        if (!Object.keys(custom_fields).length) {
+            AddElementsLikeStack()
+        } else {
+            AddElementsToSelfField()
+        }
+    });
+
+    function AddElementsLikeStack() {
+//        console.log('AddElementsLikeStack------------------------------');
+        Object.entries(data).forEach(function (item) {
+            AddCommonResultTable(item);
+            Object.entries(item[1]['message']).forEach(function (message_item) {
+//                console.log(message_item);
+                AddDataToFieldStock(message_item, item[1]['id']);
+            });
+        })
+    }
+
+    function AddElementsToSelfField() {
+        Object.entries(data).forEach(function (item) {
+//            console.log('item------------------------------');
+            AddCommonResultTable(item);
+            Object.entries(item[1]['message']).forEach(function (data_for_field) {
+                field_if_exist = FieldisExist(data_for_field);
+                if (field_if_exist != false) {
+//                    console.log(data_for_field);
+//                    console.log(field_if_exist);
+                    AddDataToField(data_for_field, field_if_exist, item[1]['id']);
+                } else {
+                    AddDataToFieldStock(data_for_field, item[1]['id'])
+                }
+            });
+        });
+    }
+
+    function FieldisExist(user_field) {
+        var result = false;
+        Object.entries(custom_fields).forEach(function (field) {
+            if ((field[1]['name'] == user_field[0]) && result == false) {
+                result = field;
+            }
+        });
+        return (result)
+    }
+
+    function AddDataToField(data_for_field, field, id) {
+        if (field[1]['size']) {
+            if (field[1]['type'] == 'text') {
+                TextExample(data_for_field, id);
+            }
+            if (field[1]['type'] == 'image') {
+                ImageExample(data_for_field, id);
+            }
+            if (field[1]['type'] == 'link') {
+                LinkExample(data_for_field, id);
+            }
+            if (field[1]['type'] == 'username') {
+                UsernameExample(data_for_field, id);
+            }
+        } else {
+            if (field[1]['type'] == 'text') {
+                TextExampleS(data_for_field, id);
+            }
+            if (field[1]['type'] == 'image') {
+                ImageExampleS(data_for_field, id);
+            }
+            if (field[1]['type'] == 'link') {
+                LinkExampleS(data_for_field, id);
+            }
+            if (field[1]['type'] == 'username') {
+                UsernameExampleS(data_for_field, id);
+            }
+        }
+    }
+    function AddDataToFieldStock(data_for_stock, id) {
+        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_stock[0] + "</b><br>" + data_for_stock[1] + "</span><br>");
+
+    }
+
+    function AddCommonResultTable(data) {
+//        console.log('AddCommonResultTable------------------------------');
+        $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='"+data[1]['id']+"'></div></td><td class='big-data'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
+    }
+
+    function TextExample(data_for_field, id) {
+//        console.log('Add example text');
+        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_field[0] + "</b><br>" + data_for_field[1] + "</span><br>");
+    }
+    function ImageExample(data_for_field, id) {
+//        console.log('Add example image');
+        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_field[0] + "</b><br><img class='data-image' src=" + data_for_field[1] + "></span><br>");
+
+    }
+    function LinkExample(data_for_field, id) {
+//        console.log('Add example');
+        $('div[id="' + id + '"]').append("<a class='data-link link' href='" + data_for_field[1]  + "'>" + data_for_field[1] + "</a>");
+    }
+    function UsernameExample(data_for_field, id) {
+//        console.log('Add example username');
+        $('div[id="' + id + '"]').append("<span class='inner-username'>&#10026;" + data_for_field[1]  + "</span><br>");
+    }
+
+    function TextExampleS(data_for_field, id) {
+//        console.log('Add example text Small');
+        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'>" + data_for_field[1] + "<br></span><span></span>");
+    }
+    function ImageExampleS(data_for_field, id) {
+        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><img class='data-image-small' src=" + data_for_field[1] + "><br></span><span></span>");
+    }
+    function LinkExampleS(data_for_field, id) {
+//        console.log('Add example');
+        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><a class='data-link-small link' href='" + data_for_field[1]  + "'>" + data_for_field[1]  + "</a><br></span><span></span>");
+
+    }
+    function UsernameExampleS(data_for_field, id) {
+//        console.log('Add example username');
+        $('div[value="' + id + '"]').append("<span class='inner-username-small'>&#10026;" + data_for_field[1]  + "</span><br>");
+    }
 </script>
-
-
