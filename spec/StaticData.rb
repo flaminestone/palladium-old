@@ -1,6 +1,6 @@
 class StaticData
   HOST = 'localhost:3000'
-  LOGIN = '1337@g.com'
-  PASSWORD = '1337'
-  TOKEN = '9xsrggU3y6ppv2JZc7Fg'
+  LOGIN = '1@g.com'
+  PASSWORD = '111'
+  TOKEN = 'KpcZYMjp3kFr9D2zAA2N'
 end
