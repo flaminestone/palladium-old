@@ -51,7 +51,6 @@
         fields = <%= CustomField.get_like_json.to_json.html_safe %>;
         img = '<%= asset_path "logo.png" %>';
         $(".result-main").append("<table class='result-table'><tr><td valign='top' class='small-data'><p><div class='status-box' style='background-color: #96006e'></div><span class='status-name'>Status_name</span></p><div class='data-box'><div class='data-symbol-box'><p><span class='data-symbol'>&#8986;<span>2016/02/02</span></span></p></div></div><div class='small-text-data'></div></td><td class='big-data'><div class='text-data'></div></td></tr></table>");
-        $(".text-data").append("<div class='message'><p class='result-name-big'><b>Text fiels name</b></p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>");
 
         Object.entries(fields).forEach(function (item) {
             console.log(item[1]['type']);
@@ -86,18 +85,18 @@
     });
 
     function TextExample(item) {
-        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>");
+        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div><hr>");
     }
 
     function ImageExample(item) {
-        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><img class='data-image' src=" + img + "><div class='message'>");
+        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><img class='data-image' src=" + img + "><div class='message'><hr>");
 
     }
     function LinkExample(item) {
-        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p><a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div>");
+        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p><a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div><hr>");
     }
     function UsernameExample(item) {
-        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p><span class='inner-username'>&#10026;Username</span></p></div>");
+        $('.text-data').append("<div class='message'><p class='result-name-big'><b>" + item[1]['name'] + "</b></p><p><span class='inner-username'>&#10026;Username</span></p></div><hr>");
     }
 
     function TextExampleS(item) {
@@ -110,11 +109,11 @@
 
     function LinkExampleS(item) {
         console.log('Add example');
-        $(".small-text-data").append("<div class='message-small'><p class='result-name'>" + item[1]['name'] + "</span><br><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div>");
+        $(".small-text-data").append("<div class='message-small'><p class='result-name'>" + item[1]['name'] + "</p><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div>");
 
     }
     function UsernameExampleS(item) {
         console.log('Add example username');
-        $(".small-text-data").append("<div class='message-small'><p class='result-name'><p>&#10026; Username</p></p></div>");
+        $(".small-text-data").append("<div class='message-small'><p class='result-name'>" + item[1]['name'] + "</p><p class='result-name'><p>&#10026; Username</p></div>");
     }
 </script>
