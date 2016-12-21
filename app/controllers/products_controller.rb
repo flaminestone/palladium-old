@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
         data << [status_id, {'data' => data_array[1], 'name' => @status_names[status_id][:name], 'color' => @status_names[status_id][:color]}]
         all_data += data_array[1]
       end
-      temp = data.sort_by { |key|  key.first }.to_h # need for sorting
+      temp = data.sort_by { |key| key.first }.to_h # need for sorting
       @status_data.merge!(plan_id => {data: temp.values, all_data: result_sets.count[plan_id]})
     end
   end

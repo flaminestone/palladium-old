@@ -1,0 +1,77 @@
+// Place all the styles related to the CustomFields controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.new-field-button{
+  width: 170px;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: black;
+  border:1px #a0a0a0 solid;
+}
+.result-main{
+  margin-top: 10px;
+  border:1px #a0a0a0 solid;
+}
+.small-data{
+  background-color: #f5f5f5;
+  width: 170px;
+  padding: 18px 4px 4px 4px;
+  border-right: solid 1px #a0a0a0;
+}
+.large-data{
+  display: inline-block;
+  padding: 12px 5px;
+  border-left:1px #a0a0a0 solid;
+}
+.data-symbol{
+  font-size: 18px;
+}
+.text-data{
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+}
+.data-symbol-box{
+  display: inline-block;
+}
+.result-table{
+  width:100%;
+  border: solid 1px #a0a0a0;
+}
+.result-name{
+  color: #a0a0a0;
+}
+.result-name-big{
+  border-top: solid 1px #a0a0a0;
+  margin-top: 10px;
+  color: #a0a0a0;
+}
+.message{
+  padding-bottom: 5px;
+}
+.data-image{
+  width: 100%;
+}
+.inner-username{
+  font-size: 24px;
+}
+.inner-username-small{
+  font-size: 16px;
+
+}
+.data-link, .data-link:visited, .data-link:hover{
+  font-size: 24px;
+  color: #333333;
+}
+.data-image-small{
+  width: 100%;
+}
+.data-link-small, .data-link-small:visited, .data-link-small:hover{
+  font-size: 10px;
+  color: #333333;
+}

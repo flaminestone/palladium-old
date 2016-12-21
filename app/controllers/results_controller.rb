@@ -9,7 +9,9 @@ class ResultsController < ApplicationController
     @run = Run.find(@result_set.run_id)
     @plan = Plan.find(@run.plan_id)
     @product = Product.find(@plan.product_id)
-    @results = @result_set.results
+    @results = ResultSet.compous_data(@result_set)
+    @custom_fields = CustomField.get_like_json
+    @statuses = Status.get_statuses
   end
 
   # GET /results/1

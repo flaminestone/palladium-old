@@ -258,7 +258,7 @@ describe 'Unit tests' do
       expect(JSON.parse(response)['run_id']).not_to be_nil
       expect(JSON.parse(response)['created_at']).not_to be_nil
       expect(JSON.parse(response)['updated_at']).not_to be_nil
-      end
+    end
 
     it 'add_new_result_set with status' do
       params = {:result_set => {:name => "name#{Time.now.nsec}",
@@ -377,8 +377,8 @@ describe 'Unit tests' do
 
     it 'delete_result' do
       params_result_for_create = {:result => {:message => "message#{Time.now.nsec}",
-                                 :author => "author#{Time.now.nsec}"},
-                                 :result_set_id => @result_set_id}
+                                              :author => "author#{Time.now.nsec}"},
+                                  :result_set_id => @result_set_id}
       response_result_for_create = @api.add_new_result(params_result_for_create)
       result_id = (JSON.parse response_result_for_create)['id']
       params = {:id => result_id}

@@ -1,8 +1,7 @@
 <div class="result-data">
 
   <%= form_tag('/result_sets/edit', method: :post, id: 'result-set-form') do %>
-        <%= select(:status, :status_id, options_from_collection_for_select(Status.all, :id, :name), {}, { :class => 'form-control form-control-small form-select' })%>
-
+      <%= select(:status, :status_id, options_from_collection_for_select(Status.all, :id, :name), {}, { :class => 'form-control form-control-small form-select' })%>
       <%= hidden_field_tag(:result_set_list, "") %>
       <%= text_area(:comment, :text, :class => 'result-comment') %>
   <% end %>

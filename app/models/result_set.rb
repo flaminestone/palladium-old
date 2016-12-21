@@ -14,4 +14,27 @@ class ResultSet < ActiveRecord::Base
       status.find(args.first[:status]).results << result
     end
   end
- end
+
+  def self.compous_data(result_set)
+    results = []
+    result_set.results.order('id ASC').pluck(:id, :message, :author, :status_id, :created_at).reverse.each do |current_result|
+      message = self.try_to_reformat_message(current_result[1])
+      results << {:id => current_result[0],
+                 :message => message,
+                 :author => current_result[2],
+                 :status_id => current_result[3],
+                 :created_at => current_result[4].strftime("%Y-%m-%d|%H:%M")}
+    end
+    results
+  end
+
+  def self.try_to_reformat_message(message)
+    return {} if message.empty? || message.nil?
+    begin
+      result = JSON.parse(message)
+    rescue
+      {'message': message}
+    end
+  end
+end
+

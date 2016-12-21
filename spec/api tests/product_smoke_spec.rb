@@ -43,7 +43,7 @@ describe 'Unit tests' do
       response = @api.add_new_product(@product_params)
       id = JSON.parse(response)['id']
       params = {:product => {:name => "name_after_edit#{Time.now.nsec}",
-                :id => id}}
+                             :id => id}}
       response = @api.edit_product(params)
       response = JSON.parse(response)
       expect(response['name']).to eq(params[:product][:name])

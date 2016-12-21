@@ -18,7 +18,7 @@ class PlansControllerTest < ActionController::TestCase
 
   test "should create plan" do
     assert_difference('Plan.count') do
-      post :create, plan: { name: @plan.name, version: @plan.version }
+      post :create, plan: {name: @plan.name, version: @plan.version}
     end
 
     assert_redirected_to plan_path(assigns(:plan))
@@ -35,7 +35,7 @@ class PlansControllerTest < ActionController::TestCase
   end
 
   test "should update plan" do
-    patch :update, id: @plan, plan: { name: @plan.name, version: @plan.version }
+    patch :update, id: @plan, plan: {name: @plan.name, version: @plan.version}
     assert_redirected_to plan_path(assigns(:plan))
   end
 

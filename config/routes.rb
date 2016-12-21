@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :custom_fields
   get '/result_sets/edit' => 'result_sets#edit'
   post '/result_sets/edit' => 'result_sets#edit'
   resources :statuses
@@ -33,7 +34,10 @@ Rails.application.routes.draw do
   get '/settings/status_settings_title' => 'statuses#index'
   get '/settings/status_settings_title/:id/edit' => 'statuses#edit'
   get '/settings/products' => 'products#edit'
+  get '/settings/custom_fields' => 'custom_fields#index'
   post '/settings/status_settings_title/:id' => 'statuses#disable'
+  post '/settings/custom_fields' => 'custom_fields#create'
+
   resources :statuses, path: '/settings/status_settings'
 
   get '/settings/tokens' => 'settings#tokens'
