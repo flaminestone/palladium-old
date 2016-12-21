@@ -63,8 +63,6 @@
             Object.entries(item[1]['message']).forEach(function (data_for_field) {
                 field_if_exist = FieldisExist(data_for_field);
                 if (field_if_exist != false) {
-//                    console.log(data_for_field);
-//                    console.log(field_if_exist);
                     AddDataToField(data_for_field, field_if_exist, item[1]['id']);
                 } else {
                     AddDataToFieldStock(data_for_field, item[1]['id'])
@@ -113,8 +111,15 @@
         }
     }
     function AddDataToFieldStock(data_for_stock, id) {
-        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_stock[0] + "</b><br>" + data_for_stock[1] + "</span><br>");
+        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_stock[0] + "</b><br>" + urlify(data_for_stock[1]) + "</span><br>");
 
+    }
+
+    function urlify(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function(url) {
+            return '<a class="data-link link" href="' + url + '">' + url + '</a>';
+        });
     }
 
     function AddCommonResultTable(data) {
