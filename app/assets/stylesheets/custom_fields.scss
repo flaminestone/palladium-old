@@ -52,7 +52,6 @@
 }
 .message{
   padding-bottom: 5px;
-  border-bottom: solid 1px #a0a0a0;
 }
 .data-image{
   width: 100%;
@@ -70,4 +69,8 @@
 .data-link-small, .data-link-small:visited, .data-link-small:hover{
   font-size: 10px;
   color: #333333;
+}
+hr{
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
