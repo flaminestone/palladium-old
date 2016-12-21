@@ -20,13 +20,9 @@
     <div class="col-md-10 col-md-offset-1">
       <div class="result-main">
         <div class="named-group">
-
         </div>
         <div class="stock-group">
-
         </div>
-
-
       </div>
     </div>
   </div>
@@ -117,14 +113,14 @@
 
     function urlify(text) {
         var urlRegex = /(https?:\/\/[^\s]+)/g;
-        return text.replace(urlRegex, function(url) {
+        return text.replace(urlRegex, function (url) {
             return '<a class="data-link link" href="' + url + '">' + url + '</a>';
         });
     }
 
     function AddCommonResultTable(data) {
 //        console.log('AddCommonResultTable------------------------------');
-        $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='"+data[1]['id']+"'></div></td><td class='big-data'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
+        $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='" + data[1]['id'] + "'></div></td><td class='big-data'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
     }
 
     function TextExample(data_for_field, id) {
@@ -138,11 +134,11 @@
     }
     function LinkExample(data_for_field, id) {
 //        console.log('Add example');
-        $('div[id="' + id + '"]').append("<a class='data-link link' href='" + data_for_field[1]  + "'>" + data_for_field[1] + "</a>");
+        $('div[id="' + id + '"]').append("<a class='data-link link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a>");
     }
     function UsernameExample(data_for_field, id) {
 //        console.log('Add example username');
-        $('div[id="' + id + '"]').append("<span class='inner-username'>&#10026;" + data_for_field[1]  + "</span><br>");
+        $('div[id="' + id + '"]').append("<span class='inner-username'>&#10026;" + data_for_field[1] + "</span><br>");
     }
 
     function TextExampleS(data_for_field, id) {
@@ -154,11 +150,11 @@
     }
     function LinkExampleS(data_for_field, id) {
 //        console.log('Add example');
-        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><a class='data-link-small link' href='" + data_for_field[1]  + "'>" + data_for_field[1]  + "</a><br></span><span></span>");
+        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><a class='data-link-small link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a><br></span><span></span>");
 
     }
     function UsernameExampleS(data_for_field, id) {
 //        console.log('Add example username');
-        $('div[value="' + id + '"]').append("<span class='inner-username-small'>&#10026;" + data_for_field[1]  + "</span><br>");
+        $('div[value="' + id + '"]').append("<span class='inner-username-small'>&#10026;" + data_for_field[1] + "</span><br>");
     }
 </script>

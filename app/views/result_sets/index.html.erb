@@ -131,7 +131,7 @@
         $(".multi-result-change").addClass('disabled');
     }
     function SetResultMultiply(serult_set) {
-        if ($("input:checkbox:checked").length > 0){
+        if ($("input:checkbox:checked").length > 0 || serult_set != undefined){
         var result_ids = [];
         if (serult_set === undefined) {
             $('#modal').modal('show');
