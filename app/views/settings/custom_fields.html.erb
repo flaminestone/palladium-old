@@ -50,10 +50,8 @@
     $(function () {
         fields = <%= CustomField.get_like_json.to_json.html_safe %>;
         img = '<%= asset_path "logo.png" %>';
-        $(".result-main").append("<table class='result-table'><tr><td valign='top' class='small-data'><p><div class='status-box' style='background-color: #96006e'></div><span class='status-name'>Status_name</span></p><div class='data-box'><div class='data-symbol-box'><p><span class='data-symbol'>&#8986;<span>2016/02/02</span></span></p></div></div><div class='small-text-data'></div></td><td class='big-data'><div class='text-data'></div></td></tr></table>");
-
+        $(".result-main").append("<table class='result-table'><tr><td valign='top' class='small-data'><p><div class='status-box' style='background-color: #ffc0c0'></div><span class='status-name'>Status_name</span></p><div class='data-box'><div class='data-symbol-box'><p><span class='data-symbol'>&#8986;<span>2016/02/02</span></span></p></div></div><div class='small-text-data'></div></td><td class='big-data'><div class='text-data'></div></td></tr></table>");
         Object.entries(fields).forEach(function (item) {
-            console.log(item[1]['type']);
             if (item[1]['size']) {
                 if (item[1]['type'] == 'text') {
                     TextExample(item);
@@ -82,34 +80,66 @@
                 }
             }
         });
+
+        $('.message, .message-small').append("<div class='close-button inWaiting' onclick='DeletetThis(this)'>x</div>")
+        $('.message, .message-small').hover(function () {
+            jQuery(this).children(".inWaiting").css( "display", "block" );
+
+        }, function () {
+            jQuery(this).children(".inWaiting").css( "display", "none" );
+
+        })
     });
 
     function TextExample(item) {
-        $('.text-data').append("<div class='message'><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div><hr>");
+        $('.text-data').append("<div class='message' value=" + item[0] + " value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><hr></div>");
     }
 
     function ImageExample(item) {
-        $('.text-data').append("<div class='message'><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><img class='data-image' src=" + img + "><div class='message'><hr>");
+        $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><img class='data-image' src=" + img + "><hr></div>");
 
     }
     function LinkExample(item) {
-        $('.text-data').append("<div class='message'><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div><hr>");
+        $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a></p><hr></div>");
     }
     function UsernameExample(item) {
-        $('.text-data').append("<div class='message'><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><span class='inner-username'>&#10026;Username</span></p></div><hr>");
+        $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><span class='inner-username'>&#10026;Username</span></p><hr></div>");
     }
 
     function TextExampleS(item) {
-        $(".small-text-data").append("<div class='message-small'><p><span class='field-name'>" + item[1]['name'] + "</span><br>Lorem ipsum </p>");
+        $(".small-text-data").append("<div class='message' value=" + item[0] + "><p><span class='field-name'>" + item[1]['name'] + "</span><br>Lorem ipsum </p></div>");
     }
     function ImageExampleS(item) {
-        $(".small-text-data").append("<div class='message-small'><p class='field-name'><span class='field-name'>" + item[1]['name'] + "</span><br><img class='data-image-small' src=" + img + "/></p></div>");
+        $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'><span class='field-name'>" + item[1]['name'] + "</span><br><img class='data-image-small' src=" + img + "/></p></div>");
     }
 
     function LinkExampleS(item) {
-        $(".small-text-data").append("<div class='message-small'><p class='field-name'>" + item[1]['name'] + "</p><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a></p></div>");
+        $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'>" + item[1]['name'] + "</p><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a></div>");
     }
     function UsernameExampleS(item) {
-        $(".small-text-data").append("<div class='message-small'><p class='field-name'>" + item[1]['name'] + "</p><p class='field-name'><p>&#10026; Username</p></div>");
+        $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'>" + item[1]['name'] + "</p><p class='field-name'><p>&#10026; Username</p></div>");
+    }
+    function DeletetThis(ele){
+        SetInProgressStatus(ele);
+        message_element = $(ele).parent("div");
+        id_for_delete = message_element.attr('value');
+        $.post({
+            url: 'custom_fields/delete/' + id_for_delete,
+            type: 'DELETE',
+            dataType: "html",
+            success: function(result) {
+                message_element.remove()
+            }
+        });
+    }
+    function SetInProgressStatus(element) {
+        $(element).html("&#8987;");
+        $(element).removeClass("inWaiting");
+        $(element).addClass("inProgress");
     }
 </script>
+<style>
+  .message:hover,.message-small:hover {
+    box-shadow: 0px 0px 0px 3px #0f4071;
+  }
+</style>
