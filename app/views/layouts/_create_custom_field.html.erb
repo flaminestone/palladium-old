@@ -8,8 +8,8 @@
         <span><%= check_box_tag 'size' %>Big data</span>
       </div>
       <%= hidden_field_tag(:result_set_list) %>
-      <%= text_area(:description, :text, :class => 'result-comment', placeholder: 'Description') %>
-      <%= text_area(:default, :text, :class => 'result-comment', placeholder: 'Default value') %>
+      <%= text_area(:description, :text, :class => 'result-comment hidden', placeholder: 'Description') %>
+      <%= text_area(:default, :text, :class => 'result-comment hidden', placeholder: 'Default value') %>
   <% end %>
   <a class="btn btn-primary" onclick="$('#result-set-form').submit()">Add new result</a>
   <a class="btn btn-default manual-botton" data-dismiss="modal" aria-label="Close">Cancel</a>
