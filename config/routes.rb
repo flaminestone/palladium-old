@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get '/settings/custom_fields' => 'custom_fields#index'
   post '/settings/status_settings_title/:id' => 'statuses#disable'
   post '/settings/custom_fields' => 'custom_fields#create'
+  delete '/settings/custom_fields/delete/:id' => 'custom_fields#delete_custom_field'
 
   resources :statuses, path: '/settings/status_settings'
 

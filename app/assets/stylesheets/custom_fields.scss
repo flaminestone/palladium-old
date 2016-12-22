@@ -43,26 +43,25 @@
   width:100%;
   border: solid 1px #a0a0a0;
 }
-.result-name{
+.field-name{
   color: #a0a0a0;
+  margin-bottom: 0px;
 }
-.result-name-big{
-  border-top: solid 1px #a0a0a0;
+.field-name-big{
   margin-top: 10px;
   color: #a0a0a0;
 }
-.message{
+.field-data{
+}
+.message, .message-small{
   padding-bottom: 5px;
+  position: relative;
 }
 .data-image{
   width: 100%;
 }
 .inner-username{
   font-size: 24px;
-}
-.inner-username-small{
-  font-size: 16px;
-
 }
 .data-link, .data-link:visited, .data-link:hover{
   font-size: 24px;
@@ -74,4 +73,30 @@
 .data-link-small, .data-link-small:visited, .data-link-small:hover{
   font-size: 10px;
   color: #333333;
+}
+hr{
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.close-button{
+position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 1.2;
+  text-align: center;
+  color: #343434;
+  font-size: 22px;
+  font-weight: 700;
+  background: #ffc0c0;
+  border-radius: 50%;
+  border: solid 2px #343434;
+  display: none;
+  cursor: pointer;
+}
+.inProgress{
+  background: #d7ffbf;
+  display: block;
 }

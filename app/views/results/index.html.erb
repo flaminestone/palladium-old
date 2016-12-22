@@ -107,8 +107,7 @@
         }
     }
     function AddDataToFieldStock(data_for_stock, id) {
-        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_stock[0] + "</b><br>" + urlify(data_for_stock[1]) + "</span><br>");
-
+        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_stock[0] + "</p><span  class='field-data'>" + urlify(data_for_stock[1]) + "</span></div><hr>");
     }
 
     function urlify(text) {
@@ -119,42 +118,32 @@
     }
 
     function AddCommonResultTable(data) {
-//        console.log('AddCommonResultTable------------------------------');
-        $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='" + data[1]['id'] + "'></div></td><td class='big-data'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
+        $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='" + data[1]['id'] + "'></div></td><td class='big-data' valign='top'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
     }
 
     function TextExample(data_for_field, id) {
-//        console.log('Add example text');
-        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_field[0] + "</b><br>" + data_for_field[1] + "</span><br>");
+        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'>" + data_for_field[1] + "</span></div><hr>");
     }
     function ImageExample(data_for_field, id) {
-//        console.log('Add example image');
-        $('div[id="' + id + '"]').append("<span class='message'><b>" + data_for_field[0] + "</b><br><img class='data-image' src=" + data_for_field[1] + "></span><br>");
+        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'><img class='data-image' src=" + data_for_field[1] + "></span></div><hr>");
 
     }
     function LinkExample(data_for_field, id) {
-//        console.log('Add example');
-        $('div[id="' + id + '"]').append("<a class='data-link link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a>");
+        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'><a class='data-link link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a></span></div><hr>");
     }
     function UsernameExample(data_for_field, id) {
-//        console.log('Add example username');
-        $('div[id="' + id + '"]').append("<span class='inner-username'>&#10026;" + data_for_field[1] + "</span><br>");
+        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='inner-username'>&#10026;" + data_for_field[1] + "</span></div><hr>");
     }
-
     function TextExampleS(data_for_field, id) {
-//        console.log('Add example text Small');
-        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'>" + data_for_field[1] + "<br></span><span></span>");
+        $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'>" + data_for_field[1] + "</span>");
     }
     function ImageExampleS(data_for_field, id) {
-        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><img class='data-image-small' src=" + data_for_field[1] + "><br></span><span></span>");
+        $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'><img class='data-image-small' src=" + data_for_field[1] + "></span></div>");
     }
     function LinkExampleS(data_for_field, id) {
-//        console.log('Add example');
-        $('div[value="' + id + '"]').append("<br/><span class='message'><span class='result-name'><a class='data-link-small link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a><br></span><span></span>");
-
+        $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'><a class='data-link-small link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a></span></div>");
     }
     function UsernameExampleS(data_for_field, id) {
-//        console.log('Add example username');
-        $('div[value="' + id + '"]').append("<span class='inner-username-small'>&#10026;" + data_for_field[1] + "</span><br>");
+        $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'>&#10026;" + data_for_field[1] + "</span></div>");
     }
 </script>
