@@ -43,13 +43,15 @@
   width:100%;
   border: solid 1px #a0a0a0;
 }
-.result-name{
+.field-name{
   color: #a0a0a0;
   margin-bottom: 0px;
 }
-.result-name-big{
+.field-name-big{
   margin-top: 10px;
   color: #a0a0a0;
+}
+.field-data{
 }
 .message{
   padding-bottom: 5px;
@@ -74,4 +76,8 @@
 hr{
   margin-top: 0px;
   margin-bottom: 10px;
+}
+td{
+  valign: top;
+
 }
