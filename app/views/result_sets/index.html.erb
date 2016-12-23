@@ -64,36 +64,55 @@
     var main_data = <%=  @main_data.html_safe  %>;
     var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
-        if (!$("#legend-element").length) {
-            CreateChart();
-        }
+        if ($( ".line-block" ).length){return}
+
+        CreateChart();
         Object.entries(main_data).forEach(function (item) {
-            $(".runs-list").append("<div class='line-block' title=" + result_sets[item[0]] + " value=" + item[0] + ">" +
-                "<INPUT class='checkbox-element' type='checkbox' name='chkbox[]' onclick='blockOrunblock()'/>" +
-                "<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + item[0] + "/results'>" + result_sets[item[0]] + "</a></div>" +
-                "<div class='inline-block'>" +
-                "<div id='legend-element'>" +
-                "<div class='status-box' style='background-color: " + item[1]['color'] + "'></div>" +
-                "<span class='status-name'>" + item[1]['name'] + "</span></div>" + "</div>" +
-                "<a class='link edit-link' onclick='SetResultMultiply(" + item[0] + ")'><span class='edit-link-pict'>&#9998;</span></a></div>");
+            var id = item[0];
+            var name = result_sets[id];
+            var status = item[1];
+            var status_id = item[1]['id']
+            addEmptyResultSetLineBlock(name, id, status_id);
+            addResultSetCheckBox(id);
+            addResultSetName(name, id);
+            addResultSetStatus(status, id);
+            addResultSetEditLink(id);
         })
     });
-    function Filterit(obj, status) {
+    function addEmptyResultSetLineBlock(title, id, status_id) {
+        $(".runs-list").append("<div class='line-block' title='" + title + "' value='" + id + "' data='" + status_id + "'></div>")
+    }
+    function addResultSetCheckBox(id) {
+        $("div[class=line-block][value*=" + id + "]").append("<input class='checkbox-element' type='checkbox' onclick='blockOrunblock()'>")
+    }
+
+    function addResultSetName(name, id) {
+        $("div[class=line-block][value*=" + id + "]").append("<div class='name-block'><a class='link plan-name-link' href='/result_sets/" + id + "/results'>" + name + "</a></div>")
+    }
+
+    function addResultSetStatus(status, id) {
+        $("div[class=line-block][value*=" + id + "]").append("<div class='inline-block'><div id='legend-element'><div class='status-box' style='background-color:" + status['color'] + "'></div><span class='status-name'>" + status['name'] + "</span></div></div>")
+    }
+
+    function addResultSetEditLink(id) {
+        $("div[class=line-block][value*=" + id + "]").append("<a class='link edit-link' onclick='SetResultMultiply(" + id + ")'><span class='edit-link-pict'>&#9998;</span></a>")
+    }
+    function filterResultSetList(obj, status) {
+
         if (obj.getAttribute("value") == 1) {
+            console.log('1');
             $(".legend-data").attr('value', 0);
             $('#clearfix-selector').remove();
             ShowAll()
         } else {
+            console.log('2');
+
             $('#clearfix-selector').remove();
             $(".legend-data").attr('value', 0);
             $(obj).attr('value', 1);
             $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
-            HideAll();
-            Object.entries(main_data).forEach(function (item) {
-                if (status == item[1]['id']) {
-                    ShowElement(item[0]);
-                }
-            });
+            $("div[class=line-block][data!=" + status + "]").hide()
+            $("div[class=line-block][data=" + status + "]").show()
         }
     }
     function HideAll() {
@@ -101,7 +120,6 @@
         uncheckall();
     }
     function ShowAll() {
-        $('#clearfix-selector').remove();
         $("div[class=line-block]").show();
         uncheckall();
     }
@@ -131,6 +149,8 @@
         $(".multi-result-change").addClass('disabled');
     }
     function SetResultMultiply(serult_set) {
+        console.log(serult_set);
+
         if ($("input:checkbox:checked").length > 0 || serult_set != undefined){
         var result_ids = [];
         if (serult_set === undefined) {

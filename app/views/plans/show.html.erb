@@ -14,7 +14,7 @@
   $(function () {
         if (!$( "#legend-element" ).length){CreateChart();}
         Object.entries(main_data).forEach(function (item) {
-            $(".runs-list").append("<div class='line-block' value=" + item[0] + "><div class='block plan-name-block' title='" + runs[item[0]] +"'><a class='link plan-name-link' href='/runs/" + item[0] + "/result_sets'>" + runs[item[0]] + "</a></div>" +
+            $(".runs-list").append("<div class='line-block' value='" + item[0].toString + "'><div class='block plan-name-block' title='" + runs[item[0]] +"'><a class='link plan-name-link' href='/runs/" + item[0] + "/result_sets'>" + runs[item[0]] + "</a></div>" +
                 "<div class='block'>" + GenerateCurrentRunsStatus(item[1]) + "</div></div>")
         })
     });

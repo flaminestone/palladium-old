@@ -106,6 +106,7 @@
         $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_stock[0] + "</p><span  class='field-data'>" + urlify(data_for_stock[1]) + "</span></div><hr>");
     }
     function urlify(text) {
+        if (text == null){return}
         var urlRegex = /(https?:\/\/[^\s]+)/g;
         return text.replace(urlRegex, function (url) {
             return '<a class="data-link link" href="' + url + '">' + url + '</a>';
