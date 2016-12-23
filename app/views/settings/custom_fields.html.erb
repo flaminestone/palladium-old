@@ -48,6 +48,8 @@
 
 <script>
     $(function () {
+        if ($(".message").length) {return}
+
         fields = <%= CustomField.get_like_json.to_json.html_safe %>;
         img = '<%= asset_path "logo.png" %>';
         $(".result-main").append("<table class='result-table'><tr><td valign='top' class='small-data'><p><div class='status-box' style='background-color: #ffc0c0'></div><span class='status-name'>Status_name</span></p><div class='data-box'><div class='data-symbol-box'><p><span class='data-symbol'>&#8986;<span>2016/02/02</span></span></p></div></div><div class='small-text-data'></div></td><td class='big-data'><div class='text-data'></div></td></tr></table>");
