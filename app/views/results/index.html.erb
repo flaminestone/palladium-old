@@ -32,15 +32,14 @@
     custom_fields = <%=  @custom_fields.to_json.html_safe %>;
     statuses = <%= @statuses.to_json.html_safe %>;
     $(function () {
+        if ($(".message").length) {return}
         console.log('Start-----------------------------');
-//        console.log(data);
         if (!Object.keys(custom_fields).length) {
             AddElementsLikeStack()
         } else {
             AddElementsToSelfField()
         }
     });
-
     function AddElementsLikeStack() {
 //        console.log('AddElementsLikeStack------------------------------');
         Object.entries(data).forEach(function (item) {
@@ -51,7 +50,6 @@
             });
         })
     }
-
     function AddElementsToSelfField() {
         Object.entries(data).forEach(function (item) {
 //            console.log('item------------------------------');
@@ -66,7 +64,6 @@
             });
         });
     }
-
     function FieldisExist(user_field) {
         var result = false;
         Object.entries(custom_fields).forEach(function (field) {
@@ -76,7 +73,6 @@
         });
         return (result)
     }
-
     function AddDataToField(data_for_field, field, id) {
         if (field[1]['size']) {
             if (field[1]['type'] == 'text') {
@@ -109,18 +105,15 @@
     function AddDataToFieldStock(data_for_stock, id) {
         $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_stock[0] + "</p><span  class='field-data'>" + urlify(data_for_stock[1]) + "</span></div><hr>");
     }
-
     function urlify(text) {
         var urlRegex = /(https?:\/\/[^\s]+)/g;
         return text.replace(urlRegex, function (url) {
             return '<a class="data-link link" href="' + url + '">' + url + '</a>';
         });
     }
-
     function AddCommonResultTable(data) {
         $(".result-main").append("<table class='result-table' id='" + data[1]['id'] + "'><tr><td valign='top' class='small-data'><div class='status-box' style='background-color: " + statuses[data[1]['status_id']]['color'] + "'></div><span class='status-name'>" + statuses[data[1]['status_id']]['name'] + "</span><div class='data-box'><div class='data-symbol-box'><span class='data-symbol'>&#8986;</span></div><span>" + data[1]['created_at'] + "</span></div><div class='small-text-data' value='" + data[1]['id'] + "'></div></td><td class='big-data' valign='top'><div class='text-data' id='" + data[1]['id'] + "'></div></td></tr></table>")
     }
-
     function TextExample(data_for_field, id) {
         $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'>" + data_for_field[1] + "</span></div><hr>");
     }
