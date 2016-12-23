@@ -95,6 +95,7 @@ a.product-name:hover {
 
 .plan-name-link {
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .plan_name {
@@ -107,6 +108,7 @@ a.product-name:hover {
 a.plan-name-link {
   color: #333333;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .plan-name-link:hover {
@@ -120,6 +122,7 @@ a.plan-name-link {
 .plan-name-block {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .plan-data-block {
   height: 50px;
@@ -129,6 +132,7 @@ a.plan-name-link {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 a.file-upload {
