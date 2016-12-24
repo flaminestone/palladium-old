@@ -8,7 +8,7 @@
   <div class="row">
     <%= render partial: 'layouts/run_chart' %>
   </div>
-  <div class="row runs-list">
+  <div class="row result-set-list">
     <div id="sticky" class="sticky-element">
       <div class="sticky-anchor"></div>
       <div class="sticky-content container">
@@ -80,7 +80,7 @@
         })
     });
     function addEmptyResultSetLineBlock(title, id, status_id) {
-        $(".runs-list").append("<div class='line-block' title='" + title + "' value='" + id + "' data='" + status_id + "'></div>")
+        $(".result-set-list").append("<div class='line-block' title='" + title + "' value='" + id + "' data='" + status_id + "'></div>")
     }
     function addResultSetCheckBox(id) {
         $("div[class=line-block][value*=" + id + "]").append("<input class='checkbox-element' type='checkbox' onclick='blockOrunblock()'>")
