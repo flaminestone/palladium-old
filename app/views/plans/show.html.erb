@@ -12,44 +12,74 @@
   var runs = <%= @runs.html_safe %>;
   var main_data = <%=  @main_data.html_safe  %>;
   $(function () {
-        if (!$( "#legend-element" ).length){CreateChart();}
+      if ($( ".line-block" ).length){return}
+      CreateChart();
         Object.entries(main_data).forEach(function (item) {
-            $(".runs-list").append("<div class='line-block' value=" + item[0] + "><div class='block plan-name-block' title='" + runs[item[0]] +"'><a class='link plan-name-link' href='/runs/" + item[0] + "/result_sets'>" + runs[item[0]] + "</a></div>" +
-                "<div class='block'>" + GenerateCurrentRunsStatus(item[1]) + "</div></div>")
+            var id = item[0];
+            var name =  runs[id];
+            var status = item[1];
+            addEmptyRunLineBlock(id, name);
+            addRunNameBlock(name, id);
+            addStatusesBlock(status, id);
         })
     });
-    function GenerateCurrentRunsStatus(Status) {
-        var result = '';
-//        console.log(Status);
-        Object.entries(Status).forEach(function (item) {
-            result += "<li class='repository-lang-stats-numbers'><div class='status-attr'>";
-            result += "<span class='status-color-small' style='background-color:" + item[1]['color'] + ";'></span>";
-            result += "<span class='status-name-small'>" + item[1]['name'] + "</span>";
-            result += "<span>" + item[1]['count'] + "</span>";
-            result += "</div></li>";
-        });
-            return(result)
+
+  function addEmptyRunLineBlock(id) {
+      $(".runs-list").append("<div class='line-block' data='" + id+ "'></div>");
+  }
+
+  function addRunNameBlock(name, id) {
+      $("div[class=line-block][data*=" + id + "]").append("<div class='name-block'><a class='link plan-name-link' href='/runs/" + id + "/result_sets'>" + name + "</a></div>")
+  }
+
+  function addStatusesBlock(status, id) {
+      var line_block = $("div[class=line-block][data*=" + id + "]")
+      line_block.append("<div class='block' data='" + id+ "'></div>");
+      var clases = Object.keys(status).map(function(num) {
+          return "status_" + num
+      });
+      line_block.addClass(clases.join(' '));
+      Object.entries(status).forEach(function (item) {
+          addStatusToRunBlock(id, item);
+      })
+  }
+
+  function addStatusToRunBlock(id, status){
+      $("div[class=block][data*=" + id + "]").append("<li class='repository-lang-stats-numbers'><div class='status-attr' data='" + status[1]['id'] + "'><span class='status-color-small' style='background-color:" + status[1]['color'] + ";'></span><span class='status-name-small'>" + status[1]['name'] + "</span><span>" + status[1]['count'] + "</span></div></li>");
+  }
+
+  function filterRunList(obj, it) {
+
+      if (obj.getAttribute("value") == 1) {
+          console.log('1');
+          $(".legend-data").attr('value', 0);
+          $('#clearfix-selector').remove();
+          ShowAll()
+      } else {
+          console.log('2');
+
+          $('#clearfix-selector').remove();
+          $(".legend-data").attr('value', 0);
+          $(obj).attr('value', 1);
+          $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
+          HideAll();
+          $("div").find(".status_" + it).show();
+//          $("div[class=line-block]").hasClass("status_" + status).hide();
+//          $("div[class=line-block]").hide();
+//          $("div[class=status_" + status + "]").show();
+//          $("div[class=status_" + status + "]").show();
+      }
     }
-    function Filterit(obj, it) {
-        $('#clearfix-selector').remove();
-        $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
-        HideAll();
-        Object.entries(main_data).forEach(function (item) {
-            Object.keys(item[1]).forEach(function (sub_item) {
-                if (it == sub_item){
-                    ShowElement(item[0]);
-                }
-            })
-        });
-    }
+
+
     function ShowElement(value){
         $("div[class=line-block][value*=" + value + "]").show();
     }
     function HideAll() {
-        $("div[class=line-block]").hide();
+        $("div").find(".line-block").hide();
     }
     function ShowAll() {
         $('#clearfix-selector').remove();
-        $("div[class=line-block]").show();
+        $("div").find(".line-block").show()
     }
 </script>
