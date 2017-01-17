@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new({:name => product_params})
+    @product = Product.new({:name => product_params[:name]})
     respond_to do |format|
       if @product.save
         format.json { render json: @product }
@@ -63,12 +63,11 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     respond_to do |format|
-      if @product.update({:name => product_params})
+      if @product.update(product_params.to_hash)
         format.json { render json: @product }
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+        format.html { redirect_to :back, notice: 'Product was successfully updated.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to :back, notice: 'Product was not updated. Error' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -96,7 +95,7 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product)[:name]
+    params.require(:product)
   end
 
   public
