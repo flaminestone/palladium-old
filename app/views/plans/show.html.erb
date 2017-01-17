@@ -33,8 +33,8 @@
   }
 
   function addStatusesBlock(status, id) {
-      var line_block = $("div[class=line-block][data*=" + id + "]")
-      line_block.append("<div class='block' data='" + id+ "'></div>");
+      var line_block = $("div[class=line-block][data*=" + id + "]");
+      line_block.append("<div class='plan-block' data='" + id+ "'></div>");
       var clases = Object.keys(status).map(function(num) {
           return "status_" + num
       });
@@ -45,7 +45,7 @@
   }
 
   function addStatusToRunBlock(id, status){
-      $("div[class=block][data*=" + id + "]").append("<li class='repository-lang-stats-numbers'><div class='status-attr' data='" + status[1]['id'] + "'><span class='status-color-small' style='background-color:" + status[1]['color'] + ";'></span><span class='status-name-small'>" + status[1]['name'] + "</span><span>" + status[1]['count'] + "</span></div></li>");
+      $("div[class=plan-block][data*=" + id + "]").append("<li class='repository-lang-stats-numbers'><div class='status-attr' data='" + status[1]['id'] + "'><div class='status-box' style='background-color:" + status[1]['color'] + ";'></div><span class='status-name'>" + status[1]['name'] + "</span><span>" + status[1]['count'] + "</span></div></li>");
   }
 
   function filterRunList(obj, it) {
