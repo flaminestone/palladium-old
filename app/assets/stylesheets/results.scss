@@ -42,10 +42,13 @@ a.message-link{
 .history-block{
   float: right;
 }
-.history-link{
+.current-block{
+  float: left;
+}
+.history-link, .current-link{
   font-size: 13px;
   color: #333333;
 }
-.history-link:hover, .history-link:visited{
+.history-link:hover, .history-link:visited, .current-link:hover, .current-link:visited{
   color: #333333;
 }
