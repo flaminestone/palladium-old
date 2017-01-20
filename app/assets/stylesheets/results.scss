@@ -43,7 +43,7 @@ a.message-link{
   float: right;
 }
 .current-block{
-  float: left;
+  float: right;
 }
 .history-link, .current-link{
   font-size: 13px;
@@ -58,5 +58,10 @@ a.message-link{
   height: 20px;
   margin-left: 4%;
   margin-right: 3%;
-  margin-top: 100px;
+  margin-top: 50px;
+}
+a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visited  {
+  color: #333333;
+  cursor: pointer;
+  white-space: nowrap;
 }
