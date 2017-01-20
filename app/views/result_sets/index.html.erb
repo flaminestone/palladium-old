@@ -65,13 +65,12 @@
     var result_sets = <%= @result_sets.html_safe %>;
     $(function () {
         if ($( ".line-block" ).length){return}
-
         CreateChart();
         Object.entries(main_data).forEach(function (item) {
             var id = item[0];
             var name = result_sets[id];
             var status = item[1];
-            var status_id = item[1]['id']
+            var status_id = item[1]['id'];
             addEmptyResultSetLineBlock(name, id, status_id);
             addResultSetCheckBox(id);
             addResultSetName(name, id);
