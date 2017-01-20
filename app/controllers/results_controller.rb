@@ -19,9 +19,8 @@ class ResultsController < ApplicationController
     @run = Run.find(@result_set.run_id)
     @plan = Plan.find(@run.plan_id)
     @product = Product.find(@plan.product_id)
-    # @results = get_all_result_sets(@product.plans.pluck(:id), @result_set.name)
-    # @custom_fields = CustomField.get_like_json
-    # @statuses = Status.get_statuses
+    @result_sets_data = ResultSet.get_data_by_name_for_all_time(@result_set.name, @product, 50) # getting ONLY 50 RESULTS
+    @statuses = Status.get_statuses
   end
 
   # GET /results/1
