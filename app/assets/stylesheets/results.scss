@@ -65,3 +65,14 @@ a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visit
   cursor: pointer;
   white-space: nowrap;
 }
+.temp-status{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border: 1px #a0a0a0 solid;
+  margin-right: 3px;
+  cursor: pointer;
+}
+.temp-status:hover{
+  border: 1px #4d4d4d solid;
+}
