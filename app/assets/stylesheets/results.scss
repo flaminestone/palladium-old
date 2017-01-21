@@ -45,20 +45,21 @@ a.message-link{
 .current-block{
   float: right;
 }
-.history-link, .current-link{
+.link-advanced{
   font-size: 13px;
   color: #333333;
 }
-.history-link:hover, .history-link:visited, .current-link:hover, .current-link:visited{
+.link-advanced:hover, .link-advanced:visited, .link-advanced:hover, .link-advanced:visited{
   color: #333333;
 }
 //--------------------------------------history---------------------------------
 #bar{
   width: auto;
   height: 20px;
-  margin-left: 4%;
   margin-right: 3%;
   margin-top: 50px;
+  padding-left: 8px;
+  margin-bottom: 8px;
 }
 a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visited  {
   color: #333333;
@@ -78,7 +79,17 @@ a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visit
 }
 .all-results{
   border: 1px #a0a0a0 solid;
-  padding-right: 1px;
-  padding-left: 1px;
+  padding: 8px;
   cursor: pointer;
+}
+.all-runs{
+  border: 1px #a0a0a0 solid;
+  padding: 8px;
+  cursor: pointer;
+}
+.all-block{
+ margin: 10px;
+}
+.date-block{
+  float: right;
 }
