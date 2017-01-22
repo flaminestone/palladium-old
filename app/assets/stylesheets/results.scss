@@ -55,7 +55,7 @@ a.message-link{
 //--------------------------------------history---------------------------------
 #bar{
   width: auto;
-  height: 20px;
+  height: auto;
   margin-right: 3%;
   margin-top: 50px;
   padding-left: 8px;
@@ -78,9 +78,14 @@ a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visit
   border: 1px #4d4d4d solid;
 }
 .all-results{
+  width:100%;
+  max-width: 300px;
+  display: inline-block;
   border: 1px #a0a0a0 solid;
   padding: 8px;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .all-runs{
   border: 1px #a0a0a0 solid;
@@ -88,7 +93,9 @@ a.back-to-current-link, .back-to-current-link:hover, .back-to-current-link:visit
   cursor: pointer;
 }
 .all-block{
- margin: 10px;
+  display: inline-block;
+ margin-right: 3px;
+ margin-left: 3px;
 }
 .date-block{
   float: right;
