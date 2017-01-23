@@ -54,7 +54,7 @@ a{
     min-width: 815px;
 }
 .palladium-name-block{
-    margin-top: 12px;
+    margin-top: 8px;
     display:inline-block;
 }
 a.palladium-link{
@@ -106,7 +106,7 @@ a.link{
 .palladium-settings {
     width: 32px;
     height: 32px;
-    padding: 5px 4px 4px 4px;
+    padding: 2px 4px 4px 4px;
     margin-top: 5px;
     font-size: 20px;
     background-color: #033260;
