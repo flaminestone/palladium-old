@@ -13,13 +13,11 @@
               <% @status_data[current_plan.id][:data].each do |data| %>
                   <li class="repository-lang-stats-numbers">
                     <div class="status-attr">
-                      <span class="color-block" style="background-color:<%= data['color'] %>;"></span>
-                      <span class="lang"><%= data['name'] %></span>
-                    </div>
-                    <div class="status-attr">
-                      <span><%= data['data'] %></span>
-                      <span class="percent">(<%= (data['data'].to_f/@status_data[current_plan.id][:all_data]*100).round(2) %>
-                        %)</span>
+                      <div class="status-box" style="background-color:<%= data['color'] %>;"></div>
+                      <div class="lang"><%= data['name'] %></div>
+                      <div class="main-count"><%= data['data'] %></div>
+                      <div class="percent">(<%= (data['data'].to_f/@status_data[current_plan.id][:all_data]*100).round(2) %>
+                        %)</div>
                     </div>
                   </li>
               <% end %>
