@@ -12,7 +12,7 @@
     <li>&#9658;</li>
   </div>
   <div class="name-block-nav" title=<%= @result_set.name %>>
-    <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %></a></li>
+    <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @run.name %></a></li>
   </div>
   <div class="name-block-nav" title="Back to current" style="float:right;">
     <li><a href="<%= result_set_path(@result_set) %>/results" class="link-advanced link">Back to current</a></li>
