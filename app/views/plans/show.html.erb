@@ -49,29 +49,20 @@
   }
 
   function filterRunList(obj, it) {
-
       if (obj.getAttribute("value") == 1) {
           console.log('1');
           $(".legend-data").attr('value', 0);
           $('#clearfix-selector').remove();
           ShowAll()
       } else {
-          console.log('2');
-
           $('#clearfix-selector').remove();
           $(".legend-data").attr('value', 0);
           $(obj).attr('value', 1);
           $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
           HideAll();
           $("div").find(".status_" + it).show();
-//          $("div[class=line-block]").hasClass("status_" + status).hide();
-//          $("div[class=line-block]").hide();
-//          $("div[class=status_" + status + "]").show();
-//          $("div[class=status_" + status + "]").show();
       }
     }
-
-
     function ShowElement(value){
         $("div[class=line-block][value*=" + value + "]").show();
     }
