@@ -61,7 +61,7 @@
         $("div[class=line-block][value=" + id + "]").append("<div class='all-block' data= "+ id +"><div id='legend-element'><div class='status-box' style='background-color:" + statuses[status]['color'] + "'></div><span class='status-name'>" + statuses[status]['name'] + "</span></div></div>")
     }
     function addResultSetResultsLink(id){
-        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/result_sets/" + id + "/results'><div class='all-results' value=" + id + ">all results</div></a>")
+        $("div[class=line-block][value=" + id + "]").append("<div class='all-block' value=" + id + "><a class='link-advanced' href='/result_sets/" + id + "/results'>all results</a></div>")
     }
     function addResultSetRunLink(id, run_id){
         $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/runs/" + run_id + "/result_sets'><div class='all-results' value=" + id + ">" + data_runs[run_id] + '' + "</div></a>")

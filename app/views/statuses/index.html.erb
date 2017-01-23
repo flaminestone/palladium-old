@@ -30,10 +30,9 @@
           <tbody>
           <% @statuses.where(disabled: false).each do |status| %>
               <tr class="row">
-                <td><%= status.name %></td>
+                <td><div class="status-name" title="<%= status.name %>"><%= status.name %></div></td>
                 <td>
                   <div class="status-box" style="background-color: <%= status.color %>"></div>
-
                 </td>
                 <td><%= link_to 'Edit', "/settings/status_settings_title/#{status.id}/edit", class: 'action-link link' %>
                   <%= link_to t('.disable', :default => t("helpers.links.disable")),

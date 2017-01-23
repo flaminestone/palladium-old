@@ -45,33 +45,24 @@
   }
 
   function addStatusToRunBlock(id, status){
-      $("div[class=plan-block][data*=" + id + "]").append("<li class='repository-lang-stats-numbers'><div class='status-attr' data='" + status[1]['id'] + "'><div class='status-box' style='background-color:" + status[1]['color'] + ";'></div><span class='status-name'>" + status[1]['name'] + "</span><span>" + status[1]['count'] + "</span></div></li>");
+      $("div[class=plan-block][data*=" + id + "]").append("<div class='repository-lang-stats-numbers'><div class='status-attr' data='" + status[1]['id'] + "'><div class='status-box' style='background-color:" + status[1]['color'] + ";'></div><div class='status-count'>" + status[1]['count'] + "</div><div class='status-name'>" + status[1]['name'] + "</div></div></div>");
   }
 
   function filterRunList(obj, it) {
-
       if (obj.getAttribute("value") == 1) {
           console.log('1');
           $(".legend-data").attr('value', 0);
           $('#clearfix-selector').remove();
           ShowAll()
       } else {
-          console.log('2');
-
           $('#clearfix-selector').remove();
           $(".legend-data").attr('value', 0);
           $(obj).attr('value', 1);
           $(obj).append("<span id ='clearfix-selector'>&#9668;</span>");
           HideAll();
           $("div").find(".status_" + it).show();
-//          $("div[class=line-block]").hasClass("status_" + status).hide();
-//          $("div[class=line-block]").hide();
-//          $("div[class=status_" + status + "]").show();
-//          $("div[class=status_" + status + "]").show();
       }
     }
-
-
     function ShowElement(value){
         $("div[class=line-block][value*=" + value + "]").show();
     }
