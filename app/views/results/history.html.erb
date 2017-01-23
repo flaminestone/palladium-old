@@ -61,13 +61,13 @@
         $("div[class=line-block][value=" + id + "]").append("<div class='all-block' data= "+ id +"><div id='legend-element'><div class='status-box' style='background-color:" + statuses[status]['color'] + "'></div><span class='status-name'>" + statuses[status]['name'] + "</span></div></div>")
     }
     function addResultSetResultsLink(id){
-        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/result_sets/" + id + "/results'><div class='all-block all-results' value=" + id + ">all results</div></a>")
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/result_sets/" + id + "/results'><div class='all-results' value=" + id + ">all results</div></a>")
     }
     function addResultSetRunLink(id, run_id){
-        $("div[class=line-block][value=" + id + "]").append("<span>in</span><a class='link-advanced link all-block' href='/runs/" + run_id + "/result_sets'><div class='all-block all-results' value=" + id + "><span>in </span>" + data_runs[run_id] + '' + "</div></a>")
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/runs/" + run_id + "/result_sets'><div class='all-results' value=" + id + ">" + data_runs[run_id] + '' + "</div></a>")
     }
     function addResultSetPlanLink(id, plan_id){
-        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/products/" + product_id + "/plans/" + plan_id + "'><div class='all-block all-results' value=" + id + ">" + data_plans[plan_id] + '' + "</div></a>")
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/products/" + product_id + "/plans/" + plan_id + "'><div class='all-results' value=" + id + ">" + data_plans[plan_id] + '' + "</div></a>")
     }
     function addResultDate(id, date){
         $("div[class=line-block][value=" + id + "]").append("<div class='all-block date-block' value=" + id + ">" + date + '' + "</div>")
