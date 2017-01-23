@@ -14,6 +14,10 @@
   <div class="name-block-nav" title=<%= @result_set.name %>>
     <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %></a></li>
   </div>
+
+  <div class="name-block-nav" title="Back to current" style="float:right;">
+    <li><a href="results/history" class="link-advanced link">History</a></li>
+  </div>
 </ol>
 <div class="container">
   <div class="row">
@@ -28,6 +32,7 @@
   </div>
 </div>
 <script>
+    $( document ).ready(function() {
     data = <%= @results.to_json.html_safe %>;
     custom_fields = <%=  @custom_fields.to_json.html_safe %>;
     statuses = <%= @statuses.to_json.html_safe %>;
@@ -140,4 +145,5 @@
     function UsernameExampleS(data_for_field, id) {
         $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'>&#10026;" + data_for_field[1] + "</span></div>");
     }
+    });
 </script>

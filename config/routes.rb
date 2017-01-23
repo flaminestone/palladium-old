@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'result_sets/:id/results/history' => 'results#history'
+  post 'result_sets/:id/results/history' => 'results#history'
   resources :custom_fields
   get '/result_sets/edit' => 'result_sets#edit'
   post '/result_sets/edit' => 'result_sets#edit'

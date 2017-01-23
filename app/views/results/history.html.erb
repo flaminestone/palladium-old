@@ -1,0 +1,75 @@
+<ol class="breadcrumb">
+  <div class="name-block-nav" title=<%= @product.name %>>
+    <li><a href="<%= product_path(@product) %>" class="plan-name-link link"> <%= @product.name %></a></li>
+  </div>
+  <div class="name-block-nav nav-separater">
+    <li>&#9658;</li>
+  </div>
+  <div class="name-block-nav" title=<%= @plan.name %>>
+    <li><a href="<%= product_plan_path(@product, @plan) %>" class="plan-name-link link"> <%= @plan.name %></a></li>
+  </div>
+  <div class="name-block-nav nav-separater">
+    <li>&#9658;</li>
+  </div>
+  <div class="name-block-nav" title=<%= @result_set.name %>>
+    <li><a href="<%= run_result_sets_path(@run) %>" class="plan-name-link link"> <%= @result_set.name %></a></li>
+  </div>
+  <div class="name-block-nav" title="Back to current" style="float:right;">
+    <li><a href="<%= result_set_path(@result_set) %>/results" class="link-advanced link">Back to current</a></li>
+  </div>
+</ol>
+<div class="container">
+  <div class="row">
+    <div id="bar"></div>
+  </div>
+  <div class="row result-set-list">
+    </div>
+</div>
+
+<script>
+    $('#bar').empty();
+    $('.result-set-list').empty();
+    var statuses = <%= @statuses.to_json.html_safe %>;
+    $(document).ready(function () {
+        data = <%= @result_sets_data[0].to_json.html_safe %>;
+        product_id = <%= @product.id %>;
+        data_plans = <%= @result_sets_data[1].to_json.html_safe %>;
+        data_runs = <%= @result_sets_data[2].to_json.html_safe %>;
+        statuses = <%= @statuses.to_json.html_safe %>;
+        addTempStatusbox(data);
+        addResults(data);
+    });
+    function addTempStatusbox(data) {
+        Object.entries(data).forEach(function (current_data) {
+            $('#bar').append("<a class='link-advanced link' href='/result_sets/" + current_data[1]['id']  + "/results'><div class='temp-status' style='background-color:" + statuses[current_data[1]['status_id']]['color'] + "' value=" + current_data[1]['id'] + "></div></a>");
+        });
+    }
+    function addResults(data){
+        Object.entries(data).forEach(function (current_data) {
+            addEmptyResultSetLineBlock(current_data[1]['id']);
+            addResultSetStatus(current_data[1]['status_id'], current_data[1]['id']);
+            addResultSetResultsLink(current_data[1]['id']);
+            addResultSetRunLink(current_data[1]['id'], current_data[1]['run_id']);
+            addResultSetPlanLink(current_data[1]['id'], current_data[1]['plan_id']);
+            addResultDate(current_data[1]['id'], current_data[1]['updated_at'])
+        });
+    }
+    function addEmptyResultSetLineBlock(id) {
+        $(".result-set-list").append("<div class='line-block'  value='" + id + "'></div>")
+    }
+    function addResultSetStatus(status, id) {
+        $("div[class=line-block][value=" + id + "]").append("<div class='all-block' data= "+ id +"><div id='legend-element'><div class='status-box' style='background-color:" + statuses[status]['color'] + "'></div><span class='status-name'>" + statuses[status]['name'] + "</span></div></div>")
+    }
+    function addResultSetResultsLink(id){
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/result_sets/" + id + "/results'><div class='all-results' value=" + id + ">all results</div></a>")
+    }
+    function addResultSetRunLink(id, run_id){
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/runs/" + run_id + "/result_sets'><div class='all-results' value=" + id + ">" + data_runs[run_id] + '' + "</div></a>")
+    }
+    function addResultSetPlanLink(id, plan_id){
+        $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/products/" + product_id + "/plans/" + plan_id + "'><div class='all-results' value=" + id + ">" + data_plans[plan_id] + '' + "</div></a>")
+    }
+    function addResultDate(id, date){
+        $("div[class=line-block][value=" + id + "]").append("<div class='all-block date-block' value=" + id + ">" + date + '' + "</div>")
+    }
+</script>

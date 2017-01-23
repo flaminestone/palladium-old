@@ -28,6 +28,27 @@ class ResultSet < ActiveRecord::Base
     results
   end
 
+  # getting all result sets with one name and belongs to one product
+  def self.get_data_by_name_for_all_time(result_set_name, product, count)
+    results = []
+    plans_t = []
+    runs_t = []
+    ResultSet.where(name: result_set_name).where(plan_id: product.plans.pluck(:id)).order('updated_at ASC').take(count).pluck(:id, :status, :updated_at, :run_id, :plan_id).reverse.each do |current_result|
+      results << {:id => current_result[0],
+                  :status_id => current_result[1],
+                  :updated_at => current_result[2].strftime("%Y-%m-%d %H:%M"),
+                  :run_id => current_result[3],
+                  :plan_id => current_result[4]}
+      runs_t <<  current_result[3]
+      plans_t <<  current_result[4]
+    end
+    plans = {}
+    Plan.where(id: plans_t).pluck(:id, :name).map{ |current_plan| plans.merge!({current_plan[0] => current_plan[1]})}
+    runs = {}
+    Run.where(id: runs_t).pluck(:id, :name).map{ |current_run| runs.merge!({current_run[0] => current_run[1]})}
+    [results, plans, runs]
+  end
+
   def self.try_to_reformat_message(message)
     return {} if message.empty? || message.nil?
     begin

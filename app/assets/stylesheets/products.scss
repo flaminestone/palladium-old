@@ -105,18 +105,10 @@ a.product-name:hover {
   padding-left: 24px;
 }
 
-a.plan-name-link {
+a.plan-name-link, .plan-name-link:hover, .plan-name-link:visited  {
   color: #333333;
   cursor: pointer;
   white-space: nowrap;
-}
-
-.plan-name-link:hover {
-  color: #333333;
-}
-
-.plan-name-link:visited {
-  color: #333333;
 }
 
 .plan-name-block {

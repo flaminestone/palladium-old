@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
   # before_action :set_result, only: [:show, :edit, :update, :destroy]
   acts_as_token_authentication_handler_for User
-
+  include ResultsHelper
   # GET /results
   # GET /results.json
   def index
@@ -11,6 +11,15 @@ class ResultsController < ApplicationController
     @product = Product.find(@plan.product_id)
     @results = ResultSet.compous_data(@result_set)
     @custom_fields = CustomField.get_like_json
+    @statuses = Status.get_statuses
+  end
+
+  def history
+    @result_set = ResultSet.find_by_id(params.require(:id))
+    @run = Run.find(@result_set.run_id)
+    @plan = Plan.find(@run.plan_id)
+    @product = Product.find(@plan.product_id)
+    @result_sets_data = ResultSet.get_data_by_name_for_all_time(@result_set.name, @product, 50) # getting ONLY 50 RESULTS
     @statuses = Status.get_statuses
   end
 
