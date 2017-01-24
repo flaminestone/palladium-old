@@ -230,6 +230,7 @@ a.setting-link:hover{
 }
 .status-name{
     max-width: 150px;
+    font-weight:bold;
 }
 .status-count{
     max-width: 100px;
