@@ -61,9 +61,6 @@
                 if (item[1]['type'] == 'image') {
                     ImageExample(item);
                 }
-                if (item[1]['type'] == 'link') {
-                    LinkExample(item);
-                }
                 if (item[1]['type'] == 'username') {
                     UsernameExample(item);
                 }
@@ -73,9 +70,6 @@
                 }
                 if (item[1]['type'] == 'image') {
                     ImageExampleS(item);
-                }
-                if (item[1]['type'] == 'link') {
-                    LinkExampleS(item);
                 }
                 if (item[1]['type'] == 'username') {
                     UsernameExampleS(item);
@@ -101,9 +95,6 @@
         $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><img class='data-image' src=" + img + "><hr></div>");
 
     }
-    function LinkExample(item) {
-        $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><a class='data-link link' href='https://www.google.ru/'>https://www.google.ru/</a></p><hr></div>");
-    }
     function UsernameExample(item) {
         $('.text-data').append("<div class='message' value=" + item[0] + "><p class='field-name-big'><b>" + item[1]['name'] + "</b></p><p><span class='inner-username'>&#10026;Username</span></p><hr></div>");
     }
@@ -113,10 +104,6 @@
     }
     function ImageExampleS(item) {
         $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'><span class='field-name'>" + item[1]['name'] + "</span><br><img class='data-image-small' src=" + img + "/></p></div>");
-    }
-
-    function LinkExampleS(item) {
-        $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'>" + item[1]['name'] + "</p><a class='data-link-small link' href='https://www.google.ru/'>https://www.google.ru/</a></div>");
     }
     function UsernameExampleS(item) {
         $(".small-text-data").append("<div class='message' value=" + item[0] + "><p class='field-name'>" + item[1]['name'] + "</p><p class='field-name'><p>&#10026; Username</p></div>");

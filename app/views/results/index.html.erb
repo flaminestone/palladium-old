@@ -86,9 +86,6 @@
             if (field[1]['type'] == 'image') {
                 ImageExample(data_for_field, id);
             }
-            if (field[1]['type'] == 'link') {
-                LinkExample(data_for_field, id);
-            }
             if (field[1]['type'] == 'username') {
                 UsernameExample(data_for_field, id);
             }
@@ -98,9 +95,6 @@
             }
             if (field[1]['type'] == 'image') {
                 ImageExampleS(data_for_field, id);
-            }
-            if (field[1]['type'] == 'link') {
-                LinkExampleS(data_for_field, id);
             }
             if (field[1]['type'] == 'username') {
                 UsernameExampleS(data_for_field, id);
@@ -127,9 +121,6 @@
         $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'><img class='data-image' src=" + data_for_field[1] + "></span></div><hr>");
 
     }
-    function LinkExample(data_for_field, id) {
-        $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='field-data'><a class='data-link link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a></span></div><hr>");
-    }
     function UsernameExample(data_for_field, id) {
         $('div[id="' + id + '"]').append("<div class='message'><p class='field-name-big'>" + data_for_field[0] + "</p><span class='inner-username'>&#10026;" + data_for_field[1] + "</span></div><hr>");
     }
@@ -138,9 +129,6 @@
     }
     function ImageExampleS(data_for_field, id) {
         $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'><img class='data-image-small' src=" + data_for_field[1] + "></span></div>");
-    }
-    function LinkExampleS(data_for_field, id) {
-        $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'><a class='data-link-small link' href='" + data_for_field[1] + "'>" + data_for_field[1] + "</a></span></div>");
     }
     function UsernameExampleS(data_for_field, id) {
         $('div[value="' + id + '"]').append("<div class='message-small'><p class='field-name'>" + data_for_field[0] + "</p><span class='field-data'>&#10026;" + data_for_field[1] + "</span></div>");
