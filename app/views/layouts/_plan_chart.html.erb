@@ -69,7 +69,7 @@
 
         Object.entries(data).forEach(function (item) {
 //            console.log(item[0]);
-            $(".legend-block").append("<div id='legend-element'><a class='link legend-data' onclick='filterRunList(this, " + item[0] + ")'><div class='status-box' style='background-color: " + item[1]['color'] + "'></div><span class='status-count'>" + item[1]['y'] + "</span><span class='status-name'>" + item[1]['name'] + "</span><span class='status-persent'>" + (Math.round((item[1]['y'] / all_result_count * 100) * 100) / 100 ) + "%</span></a></div>");
+            $(".legend-block").append("<div id='legend-element'><a class='link legend-data' onclick='filterRunList(this, " + item[0] + ")'><div class='status-box' style='background-color: " + item[1]['color'] + "'></div><span class='status-name'>" + item[1]['name'] + "</span><span class='status-count'>" + item[1]['y'] + "</span><span class='status-persent'>(" + (Math.round((item[1]['y'] / all_result_count * 100) * 100) / 100 ) + "%)</span></a></div>");
         });
         // End Add legends block
     }
