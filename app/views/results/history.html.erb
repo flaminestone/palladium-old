@@ -23,7 +23,7 @@
     <div id="bar"></div>
   </div>
   <div class="row result-set-list">
-    </div>
+  </div>
 </div>
 
 <script>
@@ -41,10 +41,10 @@
     });
     function addTempStatusbox(data) {
         Object.entries(data).forEach(function (current_data) {
-            $('#bar').append("<a class='link-advanced link' href='/result_sets/" + current_data[1]['id']  + "/results'><div class='temp-status' style='background-color:" + statuses[current_data[1]['status_id']]['color'] + "' value=" + current_data[1]['id'] + "></div></a>");
+            $('#bar').append("<a class='link-advanced link' href='/result_sets/" + current_data[1]['id'] + "/results'><div class='temp-status' style='background-color:" + statuses[current_data[1]['status_id']]['color'] + "' value=" + current_data[1]['id'] + "></div></a>");
         });
     }
-    function addResults(data){
+    function addResults(data) {
         Object.entries(data).forEach(function (current_data) {
             addEmptyResultSetLineBlock(current_data[1]['id']);
             addResultSetStatus(current_data[1]['status_id'], current_data[1]['id']);
@@ -58,18 +58,18 @@
         $(".result-set-list").append("<div class='line-block'  value='" + id + "'></div>")
     }
     function addResultSetStatus(status, id) {
-        $("div[class=line-block][value=" + id + "]").append("<div class='all-block' data= "+ id +"><div id='legend-element'><div class='status-box' style='background-color:" + statuses[status]['color'] + "'></div><span class='status-name'>" + statuses[status]['name'] + "</span></div></div>")
+        $("div[class=line-block][value=" + id + "]").append("<div class='all-block' data= " + id + "><div id='legend-element'><div class='status-box' style='background-color:" + statuses[status]['color'] + "'></div><span class='status-name'>" + statuses[status]['name'] + "</span></div></div>")
     }
-    function addResultSetResultsLink(id){
+    function addResultSetResultsLink(id) {
         $("div[class=line-block][value=" + id + "]").append("<div class='all-block' value=" + id + "><a class='link-advanced' href='/result_sets/" + id + "/results'>all results</a></div>")
     }
-    function addResultSetRunLink(id, run_id){
+    function addResultSetRunLink(id, run_id) {
         $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/runs/" + run_id + "/result_sets'><div class='all-results' value=" + id + ">" + data_runs[run_id] + '' + "</div></a>")
     }
-    function addResultSetPlanLink(id, plan_id){
+    function addResultSetPlanLink(id, plan_id) {
         $("div[class=line-block][value=" + id + "]").append("<a class='link-advanced link all-block' href='/products/" + product_id + "/plans/" + plan_id + "'><div class='all-results' value=" + id + ">" + data_plans[plan_id] + '' + "</div></a>")
     }
-    function addResultDate(id, date){
+    function addResultDate(id, date) {
         $("div[class=line-block][value=" + id + "]").append("<div class='all-block date-block' value=" + id + ">" + date + '' + "</div>")
     }
 </script>

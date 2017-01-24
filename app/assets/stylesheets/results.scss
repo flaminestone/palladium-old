@@ -33,23 +33,16 @@ a.message-link{
   color: #333333;
   cursor: pointer;
 }
-.message-link:hover{
+.message-link:hover, .message-link:visited{
   color: #333333;
 }
-.message-link:visited{
-  color: #333333;
-}
-.history-block{
-  float: right;
-}
-.current-block{
+.history-block, .current-block{
   float: right;
 }
 .link-advanced{
   font-size: 13px;
-  color: #333333;
 }
-.link-advanced:hover, .link-advanced:visited, .link-advanced:hover, .link-advanced:visited{
+.link-advanced, .link-advanced:hover, .link-advanced:visited, .link-advanced:hover, .link-advanced:visited{
   color: #333333;
 }
 //--------------------------------------history---------------------------------
