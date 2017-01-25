@@ -54,7 +54,9 @@ class ResultsController < ApplicationController
       if @result.errors.empty?
         if @result.save && @result.errors.empty?
           if params['status_id'].nil?
-            Status.find_by_main_status(true).results << @result
+            Status.find_or_create_by(main_status: true) do |user|
+              user.name = 'Untested'
+            end
           else
             Status.find_by_id(params['status_id']).results << @result
           end
