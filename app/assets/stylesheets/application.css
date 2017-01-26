@@ -191,7 +191,7 @@ a.setting-link:hover{
 }
 
 .repository-lang-stats-numbers{
-    display: inline-table;
+    display: inline-block;
     padding: 5px;
     text-align: center;
     white-space: nowrap;
@@ -220,8 +220,7 @@ a.setting-link:hover{
     border: 1px #a0a0a0 solid;
     margin-right: 3px;
 }
-.status-name, .status-count{
-    /*font-size: 18px;*/
+div.status-name, div.status-count{
     margin-right: 3px;
     display: inline-block;
     overflow: hidden;
