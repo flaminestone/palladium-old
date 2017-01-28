@@ -5,10 +5,10 @@ describe 'Multiplication' do
     (1..10).to_a.each do |i|
       describe 'Correct' do
         (1..100).to_a.each do |current_element_second|
-          it "#{current_element_second}CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1CSE1" do
-            @palladium = PalladiumApiShell.new(product_name: "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
-                                               plan_name: "plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_plan_#{j}",
-                                               run_name: "Multiplication Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_Tests_#{i}",
+          it "#{current_element_second}" do
+            @palladium = PalladiumApiShell.new(product_name: "CSE1",
+                                               plan_name: "plan_#{j}",
+                                               run_name: "Multiplication Tests_#{i}",
                                                host: StaticData::HOST,
                                                login: StaticData::LOGIN,
                                                token: StaticData::TOKEN)
